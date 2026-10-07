@@ -451,6 +451,13 @@
     --fx-rule:color-mix(in srgb, var(--line) 55%, transparent);
     --fx-label:var(--ink-meta);
     --fx-value:var(--ink-note);
+    /* THANG CHỮ FOOTER — 3 bậc, dùng CHUNG biến với thân trang → tự co trên điện thoại:
+       • Bậc 1 (nội dung: lời ngỏ, giá trị, tên, nút)  = --fs-note  13px  (đt 12.5)
+       • Bậc 2 (phụ: nhãn, dòng phụ, email, hàng cuối) = --fs-meta  12.5px (đt 12)
+       • Eyebrow in hoa = 12px, cùng cỡ nhãn "Ngũ Chi Phương" phía trên.
+       Độ đậm chỉ 2 mức: 400 thường · 600 cho tên người & tiêu đề nút. */
+    --fx-fs-1:var(--fs-note);
+    --fx-fs-2:var(--fs-meta);
     max-width:var(--wrap);margin:96px auto 0;padding:0 20px;
     color:var(--fx-value);
   }
@@ -461,11 +468,11 @@
   }
   /* — Cột trái: lời ngỏ + nút góp ý — */
   .fx-eyebrow{
-    margin:0 0 12px;font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    margin:0 0 12px;font-size:12px;line-height:1.4;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
     color:var(--gold-ink);
   }
   .fx-lead{
-    margin:0;max-width:38em;font-size:14px;line-height:1.7;color:var(--ink-soft);text-wrap:pretty;
+    margin:0;max-width:38em;font-size:var(--fx-fs-1);line-height:1.7;color:var(--ink-soft);text-wrap:pretty;
   }
   .fx-cta{
     display:inline-flex;align-items:center;gap:12px;margin-top:24px;padding:10px 16px 10px 14px;
@@ -475,8 +482,8 @@
   }
   .fx-cta svg{flex:none;color:var(--blue);}
   .fx-cta > span{display:flex;flex-direction:column;line-height:1.35;min-width:0;}
-  .fx-cta b{font-size:13px;font-weight:600;color:var(--ink-name);}
-  .fx-mail{font-size:12.5px;color:var(--fx-label);overflow-wrap:anywhere;}
+  .fx-cta b{font-size:var(--fx-fs-1);font-weight:600;color:var(--ink-name);}
+  .fx-mail{font-size:var(--fx-fs-2);color:var(--fx-label);overflow-wrap:anywhere;}
   .fx-cta:hover{border-color:var(--blue2);background:var(--blue-bg);}
   .fx-cta:focus-visible{outline:2px solid var(--blue2);outline-offset:2px;}
   /* — Cột phải: nhãn | giá trị — */
@@ -485,10 +492,10 @@
   .fx-meta dt,.fx-meta dd{padding:12px 0;border-bottom:1px solid var(--fx-rule);}
   .fx-row:first-child dt,.fx-row:first-child dd{padding-top:0;}
   .fx-row:last-child dt,.fx-row:last-child dd{border-bottom:0;padding-bottom:0;}
-  .fx-meta dt{padding-right:32px;font-size:12.5px;line-height:1.6;font-weight:500;color:var(--fx-label);}
-  .fx-meta dd{margin:0;min-width:0;font-size:13.5px;line-height:1.6;color:var(--fx-value);font-variant-numeric:tabular-nums;}
+  .fx-meta dt{padding-right:32px;font-size:var(--fx-fs-2);line-height:1.6;font-weight:400;color:var(--fx-label);}
+  .fx-meta dd{margin:0;min-width:0;font-size:var(--fx-fs-1);line-height:1.6;color:var(--fx-value);font-variant-numeric:tabular-nums;}
   .fx-strong{display:block;font-weight:600;color:var(--ink-name);}
-  .fx-sub{display:block;font-size:12.5px;line-height:1.55;color:var(--fx-label);text-wrap:pretty;}
+  .fx-sub{display:block;font-size:var(--fx-fs-2);line-height:1.55;color:var(--fx-label);text-wrap:pretty;}
   .fx-sub + .fx-sub{margin-top:2px;}
   .fx-list{list-style:none;margin:0;padding:0;}
   .fx-list li + li{margin-top:2px;}
@@ -496,9 +503,8 @@
   .fx-bar{
     display:flex;flex-wrap:wrap;justify-content:space-between;column-gap:24px;row-gap:4px;
     border-top:1px solid var(--fx-rule);padding:20px 0 0;
-    font-size:12px;line-height:1.6;color:var(--fx-label);
+    font-size:var(--fx-fs-2);line-height:1.6;color:var(--fx-label);
   }
-  .fx-bar span:first-child{font-weight:500;letter-spacing:.02em;}
   @media (max-width:820px){
     .fx-top{grid-template-columns:minmax(0,1fr);}
   }
@@ -518,11 +524,11 @@
       background:var(--chi-bg);border-radius:16px;border-top:0;
       padding:24px 16px 20px;row-gap:24px;
     }
-    .fx-lead{font-size:13.5px;text-wrap:balance;}
+    .fx-lead{text-wrap:balance;}
     .fx-cta{display:flex;margin-top:20px;}
     /* điện thoại: nhãn nằm trên, giá trị nằm dưới */
     .fx-meta{grid-template-columns:minmax(0,1fr);border-top:1px solid var(--fx-rule);}
-    .fx-meta dt{padding:14px 0 4px;padding-right:0;border-bottom:0;font-size:12px;}
+    .fx-meta dt{padding:14px 0 4px;padding-right:0;border-bottom:0;}
     .fx-meta dd{padding:0 0 14px;}
     .fx-row:first-child dt{padding-top:14px;}
     .fx-row:last-child dt{padding-bottom:4px;}  /* quy tắc desktop xoá đệm dưới dòng cuối — trả lại cho nhãn */
