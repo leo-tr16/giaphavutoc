@@ -510,8 +510,14 @@
        • Dòng phụ & lời ngỏ ngắt dòng để lại 1–2 chữ mồ côi → text-wrap:balance.
        • Nhãn dt quá sát giá trị → nhịp 12 / 4 / 12px.
        • Hàng cuối dán sát mép dưới, bị thanh địa chỉ Safari/Zalo che → chừa safe-area. */
-    .site-foot{margin-top:40px;padding:0 16px calc(8px + env(safe-area-inset-bottom,0px));}
-    .fx-top{padding:28px 0 32px;row-gap:28px;}
+    /* Lề trái/phải: footer dùng CHUNG ngôn ngữ với các khối Chi phía trên —
+       một tấm nền mờ bo góc, mép ngoài cách màn hình 6px (= mép khối Chi),
+       chữ bên trong lùi 16px; hàng cuối nằm ngoài tấm nền nhưng thẳng cùng trục chữ. */
+    .site-foot{margin:50px 6px 0;padding:0 0 calc(8px + env(safe-area-inset-bottom,0px));}
+    .fx-top{
+      background:var(--chi-bg);border-radius:16px;border-top:0;
+      padding:24px 16px 20px;row-gap:24px;
+    }
     .fx-lead{font-size:13.5px;text-wrap:balance;}
     .fx-cta{display:flex;margin-top:20px;}
     /* điện thoại: nhãn nằm trên, giá trị nằm dưới */
@@ -520,7 +526,7 @@
     .fx-meta dd{padding:0 0 14px;}
     .fx-row:first-child dt{padding-top:14px;}
     .fx-row:last-child dt{padding-bottom:4px;}  /* quy tắc desktop xoá đệm dưới dòng cuối — trả lại cho nhãn */
-    .fx-bar{flex-direction:column;row-gap:2px;padding-top:16px;}
+    .fx-bar{flex-direction:column;row-gap:2px;padding:16px 16px 0;border-top:0;}
   }
 
   /* ===== Mobile (iPhone): cùng thang chữ, thụt lề gọn hơn ===== */
