@@ -214,7 +214,10 @@
     min-height:var(--top-h);
   }
   /* KHÔNG bao giờ xuống hàng → mọi thẻ thu gọn cao đúng bằng nhau. Thiếu chỗ thì chip co lại (tên chip "…"). */
-  .card-head > .card-top{flex:1 1 200px;min-width:0;}
+  .card-head > .card-top{flex:1 1 auto;min-width:0;}
+  /* có chip vợ/chồng: tên + dòng meta của chủ thẻ giữ đủ bề ngang tự nhiên, phần còn lại dành cho chip */
+  .card-top:has(~ .sp-chips){min-width:max-content;}
+  .card-body.sp-hide .card-top{min-width:0;}
   /* Dòng 1: tên. Dòng 2: Đời · năm · số con — chữ thường, ngăn bằng dấu chấm giữa (không dùng pill
      để dòng phụ không tranh chỗ với tên). */
   .card-top{
@@ -351,12 +354,14 @@
     font-style:normal;font-weight:600;line-height:1.6;
   }
 
-  /* ===== Vợ/chồng = chip gọn ở góc phải tầng tiêu đề =====
-     Chỉ tên + năm, một dòng. Ghi chú của vợ/chồng nằm trong khối ghi chú bên dưới.
-     ≥ 2 người: các chip đứng cạnh nhau, đánh số 1·2…; thiếu chỗ thì xuống dòng. */
-  .sp-chips{display:flex;flex-wrap:nowrap;justify-content:flex-end;gap:6px;flex:0 1 auto;min-width:0;max-width:48%;}
+  /* ===== Vợ/chồng = chip gọn ở góc phải hàng tiêu đề =====
+     Tên + năm, một dòng; ≥ 2 người: các chip đứng cạnh nhau, đánh số 1·2…
+     TÊN vợ/chồng KHÔNG BAO GIỜ bị cắt "…". Chip chiếm hết khoảng trống còn lại của hàng; nếu vẫn thiếu
+     chỗ thì (JS đo thực tế, đúng với mọi font/màn hình): ① bỏ năm sinh–mất trên chip (.sp-compact),
+     ② vẫn thiếu → ẩn chip, dấu ⚭ chuyển vào nút Chi tiết (.sp-hide) — tên xem trong phần chi tiết. */
+  .sp-chips{display:flex;flex-wrap:nowrap;justify-content:flex-start;gap:6px;flex:0 1 auto;min-width:0;overflow:hidden;margin-left:auto;}
   .sp-chip{
-    display:inline-flex;align-items:center;gap:7px;min-width:0;max-width:100%;flex:0 1 auto;
+    display:inline-flex;align-items:center;gap:7px;flex:none;
     height:32px;padding:0 12px 0 10px;border-radius:999px;
     background:var(--spouse-bg);border:1px solid var(--card-line);
   }
@@ -364,17 +369,18 @@
   .sp-num{font-size:11px;font-weight:600;color:var(--gold-ink);font-variant-numeric:tabular-nums;margin-left:-3px;}
   .sp-name{
     font-family:'Lora',serif;font-weight:600;font-size:14px;color:var(--ink-name);
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;
+    white-space:nowrap;
   }
   .sp-chip.unk .sp-name{font-style:italic;font-weight:500;color:var(--ink-meta);}
   .sp-years{font-size:12px;color:var(--ink-meta);white-space:nowrap;font-variant-numeric:tabular-nums;}
-  .sp-chip .sp-name{flex:0 1 auto;}
-  /* thẻ vừa: bỏ năm trên chip để tên vợ/chồng còn chỗ */
-  @container card (max-width:700px){ .sp-years{display:none;} }
+  .card-body.sp-compact .sp-years{display:none;}
+  .card-body.sp-hide .sp-chips{display:none;}
+  .card-body.sp-hide .more-sp{display:inline-flex;}
   /* thẻ hẹp (điện thoại, đời sâu, cột Ngành trưởng): chip KHÔNG xuống hàng mới mà ẩn đi;
      nút Chi tiết chỉ còn icon ⌄, kèm dấu ⚭ nếu có vợ/chồng → bấm vào xem "Vợ · tên — ghi chú". */
   @container card (max-width:560px){
     .sp-chips{display:none;}
+    .card-top:has(~ .sp-chips){min-width:0;}
     .card-head{column-gap:8px;}
     .card-body .more{min-width:32px;height:32px;padding:0 6px;justify-content:center;gap:1px;}
     .card-body .more .more-t{display:none;}
@@ -457,8 +463,8 @@
   .ncp-gloss .g-term{font-family:'Lora',serif;font-style:italic;font-weight:500;color:var(--ink-note);}
   .ncp-gloss .g-han{font-family:'Noto Serif TC','Songti TC','PMingLiU',serif;font-weight:500;}
   .ncp-title .tx{display:block;margin-top:6px;font-family:'Lora',serif;font-weight:600;font-size:15px;line-height:1.6;color:var(--ink);}
-  @media (max-width:640px){
-    /* Đời 7 trên điện thoại: hai ANH EM cùng rẽ ra từ MỘT đường dọc đi xuống từ thẻ Cụ Thiệu (cha)
+  @media (max-width:860px){
+    /* Đời 7 trên điện thoại & tablet dọc (cột Ngành trưởng chia đôi sẽ quá hẹp cho tên): hai ANH EM cùng rẽ ra từ MỘT đường dọc đi xuống từ thẻ Cụ Thiệu (cha)
        — đúng ký hiệu "cùng cha" của cây Chi bên dưới. Trước đây xếp chồng lệch mép, đường nối lại
        mọc ra từ nút ▸ của Cụ Thạc nên trông như Cụ Thạc là cha của Cụ Mậu.
        • đường dọc ở x = 10px, nối thẳng lên mép dưới thẻ Cụ Thiệu (vượt qua vạch ngăn Đời 6/7: 25px);
@@ -2149,6 +2155,19 @@ var GP_SEARCH=(function(){
     /* bấm vào chữ trong phần chi tiết (để đọc / bôi đen) không làm đóng-mở nhánh */
     if(e.target.closest('.notes-wrap') && e.target.closest('summary')) e.preventDefault();
   },true);
+  /* Chip vợ/chồng: đo chỗ trống THỰC TẾ (đúng với mọi font, mọi màn hình) — không bao giờ cắt tên:
+     thiếu chỗ → bỏ năm trên chip; vẫn thiếu → ẩn chip, dấu ⚭ hiện trên nút Chi tiết. */
+  function fitChips(){
+    document.querySelectorAll('.card-body.has-sp').forEach(function(c){
+      var ch=c.querySelector('.sp-chips'); if(!ch) return;
+      c.classList.remove('sp-compact','sp-hide');
+      if(!ch.offsetParent) return;                       /* đang ẩn (nhánh đóng / thẻ hẹp) */
+      if(ch.scrollWidth>ch.clientWidth+1){
+        c.classList.add('sp-compact');
+        if(ch.scrollWidth>ch.clientWidth+1) c.classList.add('sp-hide');
+      }
+    });
+  }
   /* Đời 7: hai thẻ Cụ Thạc | Cụ Mậu cao bằng nhau (khi cả hai đang thu gọn, màn đủ rộng) */
   function eq(){
     var cs=document.querySelectorAll('.fork-col'); if(cs.length<2) return;
@@ -2157,11 +2176,12 @@ var GP_SEARCH=(function(){
     if(window.innerWidth<=640||(d&&d.open)||a.classList.contains('is-open')||b.classList.contains('is-open')) return;
     var h=Math.max(a.offsetHeight,b.offsetHeight); a.style.minHeight=b.style.minHeight=h+'px';
   }
-  var t; function later(){ clearTimeout(t); t=setTimeout(eq,260); }
+  function fit(){ fitChips(); eq(); }
+  var t; function later(){ clearTimeout(t); t=setTimeout(fit,120); }
   document.addEventListener('toggle',later,true);
   window.addEventListener('resize',later);
-  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(eq);
-  if(document.readyState!=='loading') eq(); else document.addEventListener('DOMContentLoaded',eq);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
+  if(document.readyState!=='loading') fit(); else document.addEventListener('DOMContentLoaded',fit);
 })();
 </script>
 </body>
