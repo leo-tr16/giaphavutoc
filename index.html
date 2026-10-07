@@ -40,14 +40,15 @@
     --gold:#b08a3c;
     --gold-bg:#f8f0dc;
     --bio-bg:#fbf7ef;     /* tiểu sử: ngà ấm, như trang giấy */
-    --header-top:#e9eef5; /* đầu trang: xanh sương chuyển dần về nền */
+    --header-top:#efebe2; /* đầu trang: ngà ấm chuyển dần về nền — hợp bộ than + vàng đồng của footer */
+    --charcoal:#1f242c;   /* MỘT màu than cho cả trang: viền gáy đầu trang, nhãn Đời 1→7, footer */
     --quote-bg:#fdfbf6;
     --chi-bg:rgba(255,255,255,.45); /* dải nền nhẹ cho từng Chi */
     --sticky-bg:rgba(242,243,241,.88);
     --gold-ink:#86622a;   /* vàng đậm cho chữ nhỏ — AA trên nền trắng */
     --gold-rule:#d5bd8a;
     --pin-ink:#5b4513;
-    --chip-ink-bg:#2a2f38; --chip-ink-fg:#ffffff;   /* nhãn "Đời 1 → Đời 7" */
+    --chip-ink-bg:var(--charcoal); --chip-ink-fg:#ffffff;   /* nhãn "Đời 1 → Đời 7" */
     --chip-green-bg:#2e6e50; --chip-green-fg:#ffffff; /* nhãn CHI, Ngành thứ */
     --dot-sep:#b3b9c3;
     --tag-bg:rgba(255,255,255,.8);
@@ -112,7 +113,8 @@
       --gold:#c7a45a;
       --gold-bg:#2b2517;
       --bio-bg:#221f19;
-      --header-top:#1a2029;
+      --header-top:#1c1b18;
+      --charcoal:#0c0e12;
       --quote-bg:#1e1f22;
       --chi-bg:rgba(255,255,255,.02);
       --sticky-bg:rgba(20,23,28,.88);
@@ -152,6 +154,13 @@
     background:linear-gradient(180deg,var(--header-top),var(--page-bg));
     border-bottom:1px solid var(--line);
   }
+  /* "Gáy sách" đầu trang: dải than 4px + vạch vàng đồng — cặp với footer than ở cuối trang */
+  body::before{
+    content:'';display:block;height:4px;background:var(--charcoal);
+    border-bottom:1px solid var(--gold-rule);
+  }
+  /* hoa văn dưới tiêu đề — cùng hình với dấu "Hết phần phả hệ" → mở đầu & kết thúc thành một cặp */
+  .h-orn{display:flex;justify-content:center;margin:-4px 0 20px;}
   .eyebrow{letter-spacing:4px;font-size:12px;color:var(--gold-ink);font-weight:600;text-transform:uppercase;}
   h1{font-size:30px;font-weight:600;color:var(--ink);margin:14px 0 18px;letter-spacing:0.6px;text-wrap:balance;}
   /* Đoạn giới thiệu: mép trái/phải trùng đúng mép thẻ Đời 1 bên dưới
@@ -391,11 +400,32 @@
   .ncp-gloss .g-han{font-family:'Noto Serif TC','Songti TC','PMingLiU',serif;font-weight:500;}
   .ncp-title .tx{display:block;margin-top:6px;font-family:'Lora',serif;font-weight:600;font-size:15px;line-height:1.6;color:var(--ink);}
   @media (max-width:640px){
-    .fork-cols{flex-direction:column;}
-    .fork-col + .fork-col{margin-left:0;margin-top:18px;}
-    .fork-wrap{padding-top:4px;}
-    .fork-wrap::before,.fork-cols::before,.fork-col::before{display:none;}
-    .trunk-item.fork-item .gen-badge{padding-top:calc(33px + 11px + var(--top-h) / 2 - 9px);}
+    /* Đời 7 trên điện thoại: hai ANH EM cùng rẽ ra từ MỘT đường dọc đi xuống từ thẻ Cụ Thiệu (cha)
+       — đúng ký hiệu "cùng cha" của cây Chi bên dưới. Trước đây xếp chồng lệch mép, đường nối lại
+       mọc ra từ nút ▸ của Cụ Thạc nên trông như Cụ Thạc là cha của Cụ Mậu.
+       • đường dọc ở x = 10px, nối thẳng lên mép dưới thẻ Cụ Thiệu (vượt qua vạch ngăn Đời 6/7: 25px);
+       • mỗi người một nhánh ngang; nút ▸ của Cụ Thạc nằm TRÊN nhánh ngang, không nằm trên đường dọc;
+       • hai thẻ cùng mép trái, cùng bề rộng; nhãn rút còn 1 dòng.
+       --ft-y = cao nhãn (22) + khoảng (8) + đệm trên thẻ (11) + nửa vùng tên. */
+    .fork-wrap{padding-top:0;}
+    .fork-wrap::before,.fork-cols::before{display:none;}
+    .fork-cols{flex-direction:column;align-items:stretch;--ft-y:calc(30px + 11px + var(--top-h) / 2);}
+    .fork-col{display:block;padding-left:20px;}
+    .fork-col + .fork-col{margin-left:0;padding-top:20px;}
+    .fork-col::before{
+      display:block;left:10px;margin-left:-1px;width:2px;height:auto;
+      top:-25px;bottom:0;
+    }
+    .fork-col + .fork-col::before{top:0;bottom:auto;height:calc(20px + var(--ft-y));}
+    .fork-col::after{
+      content:'';position:absolute;left:10px;width:calc(10px + var(--card-gap));height:2px;background:var(--line);
+      top:calc(var(--ft-y) - 1px);
+    }
+    .fork-col + .fork-col::after{top:calc(20px + var(--ft-y) - 1px);}
+    .fork-tag{margin:0 0 8px var(--card-gap);height:22px;line-height:16px;white-space:nowrap;}
+    .fork-tag .ft-b{display:none;}
+    .fork-col .trunk-content{padding-left:var(--card-gap);}
+    .trunk-item.fork-item .gen-badge{padding-top:calc(30px + 11px + var(--top-h) / 2 - 9px);}
     .fork-col .desc-children{padding-left:12px;--li-pad:14px;}
   }
 
@@ -463,7 +493,7 @@
      • phần CHỮ bên trong vẫn canh cột --wrap để thẳng hàng với nội dung phía trên. */
   body{padding-bottom:0;}
   .site-foot{
-    --fx-bg:#1f242c;
+    --fx-bg:var(--charcoal);
     --fx-ink:#ece8df;        /* chữ chính — ngà nhạt, 13:1 trên nền */
     --fx-soft:#b3b8c1;       /* chữ phụ — 7.4:1 */
     --fx-dim:#8d939d;        /* chữ mờ nhất — 4.6:1 (AA) */
@@ -474,7 +504,7 @@
     padding:56px calc(max(0px, (100% - var(--wrap)) / 2) + 20px) calc(28px + env(safe-area-inset-bottom,0px));
   }
   @media (prefers-color-scheme: dark){
-    .site-foot{--fx-bg:#0c0e12;border-top:1px solid var(--gold-rule);}
+    .site-foot{border-top:1px solid var(--gold-rule);}
   }
   .fx-in{font-size:13px;line-height:1.7;}
   .fx-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr) minmax(0,.85fr);column-gap:56px;row-gap:36px;}
@@ -729,6 +759,7 @@
 <header>
   <div class="eyebrow">Gia Phả</div>
   <h1>VŨ TỘC · THÁI BÌNH</h1>
+  <div class="h-orn" aria-hidden="true"><span class="te-mark"><i></i><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 15 9 22 12 15 15 12 22 9 15 2 12 9 9Z" fill="currentColor"/></svg><i></i></span></div>
   <div class="sub">Từ thế kỷ XVII, Cụ Thủy Tổ Vũ Đạo Chính khai cơ lập nghiệp trên đất Thụy Chính, Thái Thụy, Thái Bình, gây dựng nên dòng họ Vũ nơi đây. Qua bảy đời nối tiếp, đến Cụ Vũ Đức Mậu sinh hạ năm người con trai đều thành đạt, lập thành năm Chi — đời sau gọi là &quot;Ngũ Chi Phương&quot;. Trang này ghi lại phả hệ năm Chi ấy, để con cháu xa gần cùng tìm về cội nguồn</div>
   <div class="legend">
     <span><i class="dot dot-male"></i>Con trai</span>
@@ -776,7 +807,7 @@
       <div class="fork-wrap">
         <div class="fork-cols">
 <div class="fork-col">
-<span class="fork-tag">Con trưởng · Ngành trưởng — dòng chính của họ</span>
+<span class="fork-tag">Con trưởng · Ngành trưởng<span class="ft-b"> — dòng chính của họ</span></span>
 <ul class="desc-root">
 <li>
       <details>
@@ -830,7 +861,7 @@
 </ul>
 </div>
 <div class="fork-col">
-<span class="fork-tag main">Con thứ · Ngành thứ — Ngũ Chi Phương</span>
+<span class="fork-tag main">Con thứ · Ngành thứ<span class="ft-b"> — Ngũ Chi Phương</span></span>
 <div class="trunk-content"><div class="card-body c-green male has-sp" id="P025"><div class="card-head"><div class="card-top"><span class="avatar" role="img" aria-label="Nam"><svg class="sex-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="10" cy="14" r="5"/><path d="M13.6 10.4 19 5M14 5h5v5"/></svg></span><span class="name">Vũ Đức Mậu</span><span class="meta"><span class="years">1805 – 1889</span></span></div><span class="sp-chips"><span class="sp-chip female unk" id="P026" title="vợ/chồng"><span class="knot" title="vợ chồng"><svg viewBox="0 0 24 14" width="16" height="10" fill="none"><circle cx="9" cy="7" r="5.5" stroke="currentColor" stroke-width="2"/><circle cx="15" cy="7" r="5.5" stroke="currentColor" stroke-width="2"/></svg></span><span class="sp-num">1</span><span class="sp-name">(chưa rõ tên thật)</span></span><span class="sp-chip female" id="P346" title="vợ/chồng"><span class="knot" title="vợ chồng"><svg viewBox="0 0 24 14" width="16" height="10" fill="none"><circle cx="9" cy="7" r="5.5" stroke="currentColor" stroke-width="2"/><circle cx="15" cy="7" r="5.5" stroke="currentColor" stroke-width="2"/></svg></span><span class="sp-num">2</span><span class="sp-name">Dương Thị Chỉ</span></span></span></div><div class="notes-wrap"><div class="card-notes"><div class="note">Trung Hòa — con thứ Cụ Thiệu. Cụ Tổ Ngũ Chi Phương: sinh 5 con trai, mỗi người lập một Chi. Sinh năm 1805 Ất Sửu (đời Gia Long 4), mất năm 1889 (đời Thành Thái 1). Gia phả dòng họ hay ghi là cụ Vũ Đức Hòa</div><div class="note sp-note"><span class="sp-lab">1. Vợ:</span> Chính thất — con gái Cụ Tú Đường, họ Nguyễn; mẹ của cả 5 con trai</div><div class="note sp-note"><span class="sp-lab">2. Dương Thị Chỉ:</span> Kế thất — người Đồng Sâm, Kiến Xương, không có con</div></div><button type="button" class="more" hidden aria-expanded="false"><span class="more-t">Xem thêm</span></button></div></div></div>
 </div>
         </div>
