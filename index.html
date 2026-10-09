@@ -852,6 +852,196 @@
   .fx-alt a{color:var(--fx-soft);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--fx-rule);overflow-wrap:anywhere;}
   .fx-alt a:hover{color:var(--fx-gold);}
   .sp-y{font-weight:400;color:var(--ink-meta);white-space:nowrap;font-variant-numeric:tabular-nums;}
+
+  /* ════════ THANH TAB ĐIỀU HƯỚNG CHÍNH (3 KHÔNG GIAN) ════════ */
+  .gp-tabs-wrap{
+    max-width:var(--wrap);margin:24px auto 0;padding:0 20px;
+    display:flex;justify-content:center;
+  }
+  .gp-tabs{
+    display:inline-flex;background:var(--card-line);padding:4px;border-radius:14px;gap:4px;
+    box-shadow:inset 0 1px 2px rgba(0,0,0,.06);max-width:100%;overflow-x:auto;
+  }
+  .gp-tab-btn{
+    display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:10px;
+    border:0;background:transparent;color:var(--ink-soft);
+    font-family:'Be Vietnam Pro',sans-serif;font-size:14px;font-weight:600;
+    cursor:pointer;white-space:nowrap;transition:all .18s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .gp-tab-btn:hover{color:var(--ink);background:rgba(255,255,255,.5);}
+  .gp-tab-btn.active{
+    background:var(--paper);color:var(--charcoal);
+    box-shadow:0 2px 8px rgba(0,0,0,.08);font-weight:700;
+  }
+  .gp-tab-btn svg{width:17px;height:17px;flex:none;color:inherit;}
+  .gp-tab-btn.active svg{color:var(--gold-ink);}
+
+  /* Ẩn hiện Tab Panel */
+  .gp-tab-panel{display:none;}
+  .gp-tab-panel.active{display:block;animation:fadeIn .25s ease;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+  /* Thanh dính: tích hợp Tab chuyển đổi */
+  .chi-sticky .sticky-tabs{display:flex;gap:4px;margin-right:auto;}
+  .chi-sticky .sticky-tab-btn{
+    height:34px;padding:0 12px;border-radius:999px;border:1px solid transparent;background:transparent;
+    font-size:13px;font-weight:600;color:var(--ink-soft);white-space:nowrap;cursor:pointer;
+  }
+  .chi-sticky .sticky-tab-btn:hover{background:var(--blue-bg);color:var(--blue);}
+  .chi-sticky .sticky-tab-btn.active{background:var(--charcoal);color:#fff;}
+
+  /* ════════ KHÔNG GIAN: LỊCH SỬ VŨ TỘC & TRUYỀN THỐNG ════════ */
+  .history-wrap, .events-wrap{
+    max-width:var(--wrap);margin:24px auto 0;padding:0 20px;
+  }
+  .hist-hero{
+    background:var(--bio-bg);border:1px solid var(--gold-rule);border-radius:16px;
+    padding:28px 24px;margin-bottom:28px;text-align:center;
+  }
+  .hist-hero-title{
+    font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--gold-ink);margin:0 0 10px;
+  }
+  .hist-hero-sub{
+    font-size:14.5px;line-height:1.65;color:var(--ink-body);max-width:760px;margin:0 auto;text-wrap:pretty;
+  }
+
+  .hist-sec{
+    background:var(--paper);border:1px solid var(--card-line);border-radius:16px;
+    padding:28px;margin-bottom:28px;box-shadow:var(--shadow);
+  }
+  .hist-sec-title{
+    font-family:'Lora',serif;font-size:19px;font-weight:700;color:var(--blue);
+    margin:0 0 20px;padding-bottom:12px;border-bottom:1px solid var(--card-line);
+    display:flex;align-items:center;gap:10px;
+  }
+  .hist-block{margin-bottom:24px;}
+  .hist-block:last-child{margin-bottom:0;}
+  .hist-h3{
+    font-family:'Lora',serif;font-size:16px;font-weight:600;color:var(--ink-name);
+    margin:0 0 10px;display:flex;align-items:center;gap:8px;
+  }
+  .hist-p{
+    font-size:14px;line-height:1.7;color:var(--ink-body);margin:0 0 10px;text-wrap:pretty;
+  }
+  .hist-p:last-child{margin-bottom:0;}
+  .hist-p strong{color:var(--ink-name);font-weight:600;}
+
+  /* Trích đoạn Tộc ước / Giao ước cổ */
+  .hist-quote{
+    background:var(--quote-bg);border-left:4px solid var(--gold);padding:14px 18px;
+    border-radius:0 12px 12px 0;margin:14px 0;font-style:italic;font-size:14.5px;line-height:1.7;
+    color:var(--gold-ink);box-shadow:var(--shadow);position:relative;
+  }
+  .hist-bullet-item{
+    display:flex;align-items:baseline;gap:10px;margin:8px 0;font-size:14px;line-height:1.65;
+    color:var(--ink-body);
+  }
+  .hist-bullet-dot{
+    color:var(--gold);font-size:11px;flex-shrink:0;line-height:1;
+  }
+  .hist-bullet-txt{flex:1;}
+  .hist-num-item{
+    display:flex;align-items:baseline;gap:10px;margin:10px 0;font-size:14px;line-height:1.65;
+    color:var(--ink-body);
+  }
+  .hist-num-badge{
+    display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;
+    border-radius:50%;background:var(--blue-bg);color:var(--blue);font-size:12px;
+    font-weight:700;flex-shrink:0;
+  }
+  .hist-num-txt{flex:1;}
+
+  /* Thẻ danh sách đời / Chi họ */
+  .hist-grid{
+    display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:14px;margin-top:14px;
+  }
+  .hist-card{
+    background:var(--page-bg);border:1px solid var(--card-line);border-radius:12px;
+    padding:16px;display:flex;flex-direction:column;gap:8px;
+  }
+  .hist-card-head{
+    display:flex;align-items:baseline;justify-content:space-between;gap:8px;
+  }
+  .hist-card-name{
+    font-family:'Lora',serif;font-size:15.5px;font-weight:600;color:var(--ink-name);
+  }
+  .hist-card-badge{
+    font-size:11.5px;font-weight:700;color:var(--blue);background:var(--blue-bg);
+    padding:2px 8px;border-radius:999px;white-space:nowrap;
+  }
+  .hist-card-desc{font-size:13px;line-height:1.6;color:var(--ink-note);margin:0;}
+  
+  /* Nút nhảy sang cây phả hệ */
+  .btn-goto-tree{
+    display:inline-flex;align-items:center;gap:6px;margin-top:auto;padding-top:6px;
+    font-size:12.5px;font-weight:600;color:var(--blue);background:none;border:0;
+    cursor:pointer;padding-left:0;-webkit-tap-highlight-color:transparent;
+  }
+  .btn-goto-tree:hover{text-decoration:underline;color:var(--blue2);}
+  .btn-goto-tree svg{width:14px;height:14px;}
+
+  /* ════════ TRỤC DÒNG THỜI GIAN (TIMELINE) ════════ */
+  .timeline-list{
+    position:relative;padding-left:26px;margin:20px 0 0 8px;list-style:none;
+    border-left:2px solid var(--gold-rule);
+  }
+  .timeline-item{position:relative;margin-bottom:24px;}
+  .timeline-item:last-child{margin-bottom:0;}
+  .timeline-item::before{
+    content:'';position:absolute;left:-32px;top:4px;width:12px;height:12px;border-radius:50%;
+    background:var(--gold);border:2px solid var(--paper);box-shadow:0 0 0 2px var(--gold-rule);
+  }
+  .timeline-year{
+    display:inline-block;font-size:12.5px;font-weight:700;color:var(--gold-ink);
+    background:var(--gold-bg);padding:2px 10px;border-radius:999px;margin-bottom:6px;
+  }
+  .timeline-title{
+    font-family:'Lora',serif;font-size:15px;font-weight:600;color:var(--ink-name);margin:0 0 4px;
+  }
+  .timeline-desc{font-size:13.5px;line-height:1.6;color:var(--ink-body);margin:0;}
+
+  /* ════════ KHÔNG GIAN: LỊCH GIỖ & NGÀY HỌ ════════ */
+  .event-notice{
+    background:var(--gold-bg);border:1px solid var(--gold-rule);border-radius:14px;
+    padding:20px;margin-bottom:24px;
+  }
+  .event-notice-head{
+    display:flex;align-items:center;gap:10px;font-family:'Lora',serif;font-size:16.5px;
+    font-weight:700;color:var(--gold-ink);margin-bottom:10px;
+  }
+  .event-notice-p{font-size:14px;line-height:1.65;color:var(--pin-ink);margin:0 0 8px;}
+  .event-notice-p:last-child{margin-bottom:0;}
+  .event-notice-p strong{color:#3d2c09;}
+
+  /* Bảng ngày mất */
+  .table-responsive{overflow-x:auto;margin-top:14px;border-radius:12px;border:1px solid var(--card-line);}
+  .death-table{
+    width:100%;border-collapse:collapse;font-size:13.5px;text-align:left;
+  }
+  .death-table th{
+    background:var(--page-bg);color:var(--ink-name);font-weight:600;padding:12px 14px;
+    border-bottom:1px solid var(--card-line);white-space:nowrap;
+  }
+  .death-table td{
+    padding:12px 14px;border-bottom:1px solid var(--card-line);color:var(--ink-body);
+    vertical-align:middle;
+  }
+  .death-table tr:last-child td{border-bottom:0;}
+  .death-table tr:hover td{background:rgba(0,0,0,.015);}
+  .dt-gen{
+    display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;
+    background:var(--blue-bg);color:var(--blue);white-space:nowrap;
+  }
+  .dt-name{font-family:'Lora',serif;font-weight:600;color:var(--ink-name);font-size:14px;}
+  .dt-date{color:var(--gold-ink);font-weight:600;}
+
+  @media (max-width:640px){
+    .gp-tab-btn{padding:8px 12px;font-size:13px;}
+    .hist-sec{padding:18px 14px;}
+    .hist-hero{padding:20px 14px;}
+    .death-table th, .death-table td{padding:10px 8px;font-size:12.5px;}
+  }
 </style>
 </head>
 <body>
@@ -867,15 +1057,24 @@
     <span><i class="dot dot-ring"></i>Dâu / Rể (kết hôn vào)</span>
   </div>
   <div class="chi-nav">
-    <button type="button" onclick="document.getElementById('chi1').scrollIntoView({behavior:'smooth',block:'start'});">Chi 1</button><button type="button" onclick="document.getElementById('chi2').scrollIntoView({behavior:'smooth',block:'start'});">Chi 2</button><button type="button" onclick="document.getElementById('chi3').scrollIntoView({behavior:'smooth',block:'start'});">Chi 3</button><button type="button" onclick="document.getElementById('chi4').scrollIntoView({behavior:'smooth',block:'start'});">Chi 4</button><button type="button" onclick="document.getElementById('chi5').scrollIntoView({behavior:'smooth',block:'start'});">Chi 5</button>
+    <button type="button" onclick="window.switchTab('panel-genealogy',false);document.getElementById('chi1').scrollIntoView({behavior:'smooth',block:'start'});">Chi 1</button><button type="button" onclick="window.switchTab('panel-genealogy',false);document.getElementById('chi2').scrollIntoView({behavior:'smooth',block:'start'});">Chi 2</button><button type="button" onclick="window.switchTab('panel-genealogy',false);document.getElementById('chi3').scrollIntoView({behavior:'smooth',block:'start'});">Chi 3</button><button type="button" onclick="window.switchTab('panel-genealogy',false);document.getElementById('chi4').scrollIntoView({behavior:'smooth',block:'start'});">Chi 4</button><button type="button" onclick="window.switchTab('panel-genealogy',false);document.getElementById('chi5').scrollIntoView({behavior:'smooth',block:'start'});">Chi 5</button>
   </div>
   <div class="gp-slot"><div class="gp-box" data-gp><div class="gp-field"><svg class="gp-ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg><input class="gp-in" type="search" placeholder="Tìm tên người — gõ không dấu cũng được" autocomplete="off" spellcheck="false" enterkeyhint="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="gp-res-h" aria-label="Tìm tên người trong gia phả"><kbd class="gp-kbd" data-kbd>Ctrl K</kbd><button type="button" class="gp-x" data-gp-close aria-label="Đóng tìm kiếm">Đóng</button></div><div class="gp-drop" hidden><div class="gp-sec" aria-live="polite"></div><ul class="gp-res" id="gp-res-h" role="listbox" aria-label="Kết quả tìm kiếm"></ul><div class="gp-foot" aria-hidden="true"><span><kbd>↑</kbd><kbd>↓</kbd> chọn</span><span><kbd>↵</kbd> mở</span><span><kbd>Esc</kbd> đóng</span></div></div></div></div>
   <div class="hint">Bấm mũi tên ▸ ở mỗi người để mở xem con cháu của nhánh đó.</div>
   <div class="h-report"><a href="https://docs.google.com/forms/d/e/1FAIpQLSe9aXljUi011en7IK9iODC7ZKtOyqwLN68F51CzWOKvKKe6GQ/viewform" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg><span>Báo tin, cập nhật · Đính chính gia phả</span></a></div>
+<div class="gp-tabs-wrap">
+  <nav class="gp-tabs" aria-label="Không gian dòng họ">
+    <button type="button" class="gp-tab-btn active" data-tab="panel-genealogy"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22v-7"/><path d="M9 12a3 3 0 0 1 6 0v3H9v-3Z"/><path d="M4 6a2 2 0 0 1 4 0v3H4V6Z"/><path d="M16 6a2 2 0 0 1 4 0v3h-4V6Z"/><path d="M6 9v3a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V9"/></svg><span>Phả Hệ Dòng Họ</span></button>
+    <button type="button" class="gp-tab-btn" data-tab="panel-history"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Lịch Sử Vũ Tộc</span></button>
+    <button type="button" class="gp-tab-btn" data-tab="panel-events"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Lịch Giỗ & Ngày Họ</span></button>
+  </nav>
+</div>
+
 </header>
 
 <nav class="chi-sticky" aria-label="Điều hướng nhanh"><button type="button" class="brand" onclick="window.scrollTo({top:0,behavior:'smooth'});">VŨ TỘC · THÁI BÌNH</button><div class="chis"><button type="button" data-chi="chi1" onclick="document.getElementById('chi1').scrollIntoView({behavior:'smooth',block:'start'});">Chi 1</button><button type="button" data-chi="chi2" onclick="document.getElementById('chi2').scrollIntoView({behavior:'smooth',block:'start'});">Chi 2</button><button type="button" data-chi="chi3" onclick="document.getElementById('chi3').scrollIntoView({behavior:'smooth',block:'start'});">Chi 3</button><button type="button" data-chi="chi4" onclick="document.getElementById('chi4').scrollIntoView({behavior:'smooth',block:'start'});">Chi 4</button><button type="button" data-chi="chi5" onclick="document.getElementById('chi5').scrollIntoView({behavior:'smooth',block:'start'});">Chi 5</button></div><div class="gp-box find" data-gp><div class="gp-field"><svg class="gp-ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg><input class="gp-in" type="search" placeholder="Tìm tên người…" autocomplete="off" spellcheck="false" enterkeyhint="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="gp-res-b" aria-label="Tìm tên người trong gia phả"><kbd class="gp-kbd" data-kbd>Ctrl K</kbd><button type="button" class="gp-x" data-gp-close aria-label="Đóng tìm kiếm">Đóng</button></div><div class="gp-drop" hidden><div class="gp-sec" aria-live="polite"></div><ul class="gp-res" id="gp-res-b" role="listbox" aria-label="Kết quả tìm kiếm"></ul><div class="gp-foot" aria-hidden="true"><span><kbd>↑</kbd><kbd>↓</kbd> chọn</span><span><kbd>↵</kbd> mở</span><span><kbd>Esc</kbd> đóng</span></div></div></div><button type="button" class="find-btn" data-gp-open aria-label="Tìm tên người"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg></button><button type="button" class="up" aria-label="Lên đầu trang" onclick="window.scrollTo({top:0,behavior:'smooth'});"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button></nav>
 
+<div id="panel-genealogy" class="gp-tab-panel active" role="tabpanel" aria-labelledby="tab-genealogy">
 <div class="trunk-wrap">
   <span class="trunk-title">ĐỜI 1 → ĐỜI 7</span>
   <ul class="trunk-list">
@@ -2131,6 +2330,191 @@
 </section>
 <div class="tree-end" role="separator" aria-label="Hết phần phả hệ"><span class="te-mark"><i></i><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2 15 9 22 12 15 15 12 22 9 15 2 12 9 9Z" fill="currentColor"/></svg><i></i></span><span class="te-txt">Hết phần phả hệ · 14 đời kế truyền · 424 người (trong đó 351 nam)</span></div>
 
+</div><!-- /#panel-genealogy -->
+
+<div id="panel-history" class="gp-tab-panel" role="tabpanel" aria-labelledby="tab-history">
+  <div class="history-wrap">
+    <div class="hist-hero">
+      <h2 class="hist-hero-title">Lịch Sử Vũ Tộc Thái Bình</h2>
+      <p class="hist-hero-sub">Ghi lại cội nguồn phát tích từ Cụ Thủy Tổ Vũ Đạo Chính (thế kỷ XVII), sự nghiệp rạng rỡ của Ngũ Chi Phương và những gia phong, tộc ước truyền đời của dòng họ Vũ Thái Bình.</p>
+    </div>
+    <section class="hist-sec">
+      <h3 class="hist-sec-title">🏛️ PHẦN I: CỘI NGUỒN VŨ TỘC &amp; NGÀNH TRƯỞNG</h3>
+      <div class="hist-block"><h4 class="hist-h3">1. Khởi tích Tiên Tổ &amp; Nghi vấn lịch sử chưa có lời giải đáp</h4><p class="hist-p"><strong>Thời điểm khai cơ</strong>: Cụ Thủy Tổ <strong>Vũ Đạo Chính</strong> cùng Cụ bà hiệu <strong>Từ Nhân</strong> về khai hoang lập nghiệp tại thôn Lềnh, tổng An Tiêm, huyện Đồng Quan, phủ Thái Bình cũ (nay là thôn Miếu, xã Thụy Chính, huyện Thái Thụy, tỉnh Thái Bình). Dựa vào khoảng cách thế hệ và đối chiếu <em>Niên biểu Việt Nam</em>, Cụ sinh vào khoảng 1625 – 1630 (thời vua Lê Thần Tông, chúa Trịnh Tráng ở Đàng Ngoài và chúa Nguyễn Phúc Lan ở Đàng Trong).</p><p class="hist-p"><strong>Bí ẩn 4 đời đầu phải giấu tên thật</strong>: Trong gia phả cổ, suốt 4 đời đầu tiên con cháu <strong>tuyệt nhiên không ghi họ tên thật hay tên tự, tên hiệu</strong>, mà chỉ ghi tên cúng (Khuyến Chánh, Đôn Thục, Lương Thác) cùng ngày mất và vị trí mộ phần. Nguyên nhân lịch sử được các bậc tiền bối ghi nhận trong gia phả: Cụ Thủy Tổ sinh sống vào thời Trịnh – Nguyễn phân tranh, chúa Trịnh lấn át vua Lê. Bấy giờ nhiều nhân sĩ trung thần nặng lòng phù Lê bị chúa Trịnh truy lùng ráo riết. Cụ Thủy Tổ rất có thể là một nhân sĩ buộc phải lánh về vùng duyên hải hẻo lánh này. Để <strong>bảo toàn huyết mạch gia tộc trước họa diệt thân</strong>, Cụ và con cháu 3–4 đời đầu phải mai danh ẩn tích. Phải hơn 70 năm sau, khi thời cuộc yên ổn, gia phả mới bắt đầu ghi họ tên thật.</p><p class="hist-p"><strong>Cuộc khảo cứu năm 1985 tại làng Ngọc Chi (Hải Dương) và kết luận</strong>: Theo một luồng truyền khẩu trong họ, Cụ Thủy Tổ vốn người làng Ngọc Chi, huyện Ninh Giang, tỉnh Hải Dương. Năm 1985, hai ông <strong>Vũ Quý Ca</strong> và <strong>Vũ Đức Phồn</strong> đã cất công về tận làng Ngọc Chi, nhờ chính quyền xã kết nối gặp gỡ các cụ già 80 – 90 tuổi và ông trưởng họ Vũ tại đây. Kết quả xác minh: họ Vũ ở làng Ngọc Chi mới chuyển đến ngụ cư được 3 đời, tra cứu gia phả của họ cũng không hề có manh mối.</p><p class="hist-p"><strong>Kết luận chính thức</strong>: <em>Cho đến nay, không có căn cứ xác thực để khẳng định Cụ Thủy Tổ đến từ Ngọc Chi. Cội nguồn sâu xa trước khi Cụ Vũ Đạo Chính về đất Thụy Chính vẫn là một dấu hỏi lịch sử chưa có lời giải đáp chính thức.</em></p></div>
+      <div class="hist-block"><h4 class="hist-h3">2. Mạch nguồn truyền nối qua các đời đầu</h4><div class="hist-grid"><div class="hist-card">
+  <div class="hist-card-head"><span class="hist-card-name">Cụ Thủy Tổ Vũ Đạo Chính</span><span class="hist-card-badge">Đời 1</span></div>
+  <p class="hist-card-desc">Người đặt nền móng dòng họ tại Thái Bình. Cụ bà hiệu Từ Nhân.</p>
+  <button type="button" class="btn-goto-tree" data-goto="P001"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem trên Phả Hệ</span></button>
+</div><div class="hist-card">
+  <div class="hist-card-head"><span class="hist-card-name">Cụ Khuyến Chánh</span><span class="hist-card-badge">Đời 2</span></div>
+  <p class="hist-card-desc">Giữ gìn cơ nghiệp buổi ban sơ. Cụ bà họ Lê (tên cúng Từ Thục).</p>
+  <button type="button" class="btn-goto-tree" data-goto="P003"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem trên Phả Hệ</span></button>
+</div><div class="hist-card">
+  <div class="hist-card-head"><span class="hist-card-name">Cụ Đôn Thục</span><span class="hist-card-badge">Đời 3</span></div>
+  <p class="hist-card-desc">Giữ gìn cơ nghiệp buổi ban sơ. Cụ bà họ Nguyễn.</p>
+  <button type="button" class="btn-goto-tree" data-goto="P005"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem trên Phả Hệ</span></button>
+</div><div class="hist-card">
+  <div class="hist-card-head"><span class="hist-card-name">Cụ Vũ Đức Bạn (Lương Thác)</span><span class="hist-card-badge">Đời 4</span></div>
+  <p class="hist-card-desc">Con thứ thay quyền con trưởng gánh vác việc họ sau khi anh cả mất sớm. Cụ bà là Nguyễn Thị Tấu (Từ Trang).</p>
+  <button type="button" class="btn-goto-tree" data-goto="P007"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem trên Phả Hệ</span></button>
+</div><div class="hist-card">
+  <div class="hist-card-head"><span class="hist-card-name">Cụ Vũ Đức Kế (Trung Ngôn)</span><span class="hist-card-badge">Đời 5</span></div>
+  <p class="hist-card-desc">1726 – 1787, thọ 62 tuổi. Sinh thời vua Lê Dụ Tông, mất năm Chiêu Thống thứ 1. Cụ bà là Đỗ Thị Điều (1737 – 1788).</p>
+  <button type="button" class="btn-goto-tree" data-goto="P008"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem trên Phả Hệ</span></button>
+</div><div class="hist-card">
+  <div class="hist-card-head"><span class="hist-card-name">Cụ Vũ Đức Thiệu (Cẩn Thành)</span><span class="hist-card-badge">Đời 6</span></div>
+  <p class="hist-card-desc">1770 – 1854, thọ 85 tuổi. Từng giữ chức Xã trưởng. Năm 1789 (thời vua Quang Trung), Cụ đi học nghề đục đá mỹ nghệ tại Đông Triều rồi về truyền dạy lại cho con cháu, được tôn xưng là <strong>Tổ nghề đục đá</strong> của họ. Cụ bà là Chu Thị Quyến (1780 – 1868, thọ 89 tuổi, hiệu Từ Trai).</p>
+  <button type="button" class="btn-goto-tree" data-goto="P009"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem trên Phả Hệ</span></button>
+</div></div></div>
+      <div class="hist-block"><h4 class="hist-h3">3. Ngành Trưởng — Gánh vác hương hỏa Từ đường Thủy Tổ</h4><p class="hist-p">Cụ Vũ Đức Thiệu (Đời 6) sinh hai người con trai rường cột: Con trưởng là <strong>Cụ Vũ Đức Thạc (1797 – 1842)</strong> khởi lập <strong>Ngành Trưởng</strong>; Con thứ là <strong>Cụ Vũ Đức Mậu (1805 – 1889)</strong> khởi lập <strong>Ngũ Chi Phương</strong>.</p><p class="hist-p">Nhánh Ngành Trưởng nối tiếp qua các đời (Cụ Vũ Đức Cơ làm thầy đồ/hương thân, Cụ Vũ Đức Đợt cất giấu bảo vệ gia phả qua bom đạn chiến tranh, đến ông Trưởng họ Vũ Đức Hà) luôn giữ trọng trách đại diện dòng họ: Trông nom Từ đường Thờ Tổ chung của toàn họ Vũ Thái Bình và chủ trì đại lễ Thanh Minh, giỗ Tổ chung cho toàn thể con cháu nội ngoại.</p></div>
+    </section>
+    <section class="hist-sec">
+      <h3 class="hist-sec-title">🌿 PHẦN II: NGŨ CHI PHƯƠNG (Năm Cành Quế Thơm)</h3>
+      <div class="hist-block"><h4 class="hist-h3">1. Cụ Tổ Đời 7 — Cụ Vũ Đức Mậu (1805 – 1889)</h4><p class="hist-p"><strong>Thân thế</strong>: Con trai thứ hai của Cụ Xã trưởng Vũ Đức Thiệu. Cụ sinh năm Ất Sửu (1805, niên hiệu Gia Long thứ 4) và mất năm Kỷ Sửu (1889, niên hiệu Thành Thái thứ 1), đại thọ 85 tuổi. Tên cúng là Trung Hòa (giấy tờ cổ ghi Vũ Đức Hòa).</p><p class="hist-p"><strong>Chính thất Cụ bà</strong>: Ái nữ của Cụ Bái Đường (họ Nguyễn — làm quan trong Ty Lâm Cục của triều đình). Cụ bà là thân mẫu sinh thành dưỡng dục cả 5 người con trai rường cột của Ngũ Chi Phương.</p><p class="hist-p"><strong>Kế thất Cụ bà</strong>: Dương Thị Chỉ, quê làng Đồng Sâm (phủ Kiến Xương), không sinh được con. Tháng Giêng năm Ất Hợi, cụ bà công đức 50 quan tiền và 5 sào ruộng chịu hậu. Dòng họ giao ước chu cấp mừng lễ chu tất trong các tiết Đoan Dương, Tết Nguyên Đán, Đông Chí và phụng cúng ngày giỗ hậu muôn đời.</p><p class="hist-p"><strong>Ý nghĩa danh xưng</strong>: <em>&quot;Ngũ Chi Phương&quot;</em> (五枝芳) — thành ngữ chữ Hán nghĩa là &quot;Năm cành quế ngát hương thơm&quot;, ngợi ca 5 người con trai của Cụ Mậu đều đỗ đạt, tài giỏi và thành danh.</p><button type="button" class="btn-goto-tree" data-goto="P025"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem Cụ Vũ Đức Mậu trên Phả Hệ</span></button></div>
+      <div class="hist-block"><h4 class="hist-h3">2. Sự nghiệp Năm Chi họ Đời 8</h4><div class="hist-grid"><div class="hist-card">
+  <div class="hist-card-head"><span class="hist-card-name">Cụ Vũ Đức Rương (Chánh Rương)</span><span class="hist-card-badge">Chi 1</span></div>
+  <p class="hist-card-desc">Giữ chức Chánh tổng. Thời bấy giờ gia đình nề nếp quản lý hiển hách: Cha làm Chánh tổng, các con trai (ông Phong, ông Phiêu) làm Phó tổng và Lý trưởng, con rể (ông Cần) làm Phó tổng chính thức; tạo dựng Chi 1 đông đúc, rường cột.</p>
+  <button type="button" class="btn-goto-tree" data-goto="P027"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem trên Phả Hệ</span></button>
+</div><div class="hist-card">
+  <div class="hist-card-head"><span class="hist-card-name">Cụ Vũ Đức Tiên (Cụ Bá Tiên)</span><span class="hist-card-badge">Chi 2</span></div>
+  <p class="hist-card-desc">Đậu Nhị trường khoa thi Hương triều Nguyễn, giữ phẩm hàm Bá hộ. Cụ là bậc Nho học uyên bác, đức độ, có công đức lớn cúng kiệu mộc sơn son thếp bạc vào Từ đường dòng họ.</p>
+  <button type="button" class="btn-goto-tree" data-goto="P093"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem trên Phả Hệ</span></button>
+</div><div class="hist-card">
+  <div class="hist-card-head"><span class="hist-card-name">Cụ Vũ Đức Khiêm (Cụ Phó Khiêm)</span><span class="hist-card-badge">Chi 3</span></div>
+  <p class="hist-card-desc">Từng giữ chức Phó tổng / Phó lý. Cụ nhiệt tâm cúng tiến đất vườn và bát hương lớn thờ phụng tại bàn thờ trên Từ đường họ trong dịp lập giao ước năm 1885.</p>
+  <button type="button" class="btn-goto-tree" data-goto="P192"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem trên Phả Hệ</span></button>
+</div><div class="hist-card">
+  <div class="hist-card-head"><span class="hist-card-name">Cụ Vũ Đức Khoa (Cụ Đội Khoa)</span><span class="hist-card-badge">Chi 4</span></div>
+  <p class="hist-card-desc">Giữ chức Đội trong quân vụ triều đình. Hậu duệ phát huy nghiệp học (Đẩu Khóa Hy đậu Khóa sinh) và mở mang nghề y bốc thuốc Bắc cứu người có tiếng trong vùng.</p>
+  <button type="button" class="btn-goto-tree" data-goto="P247"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem trên Phả Hệ</span></button>
+</div><div class="hist-card">
+  <div class="hist-card-head"><span class="hist-card-name">Cụ Vũ Đức Ry (Cụ Tuần Ry / Tổng Ry)</span><span class="hist-card-badge">Chi 5</span></div>
+  <p class="hist-card-desc">Từng giữ chức Tuần ty. Khởi sinh truyền thống Nho học, khoa bảng rạng rỡ cho Chi 5 (con trai là Vũ Khai Nguyên đỗ Tú tài khoa thi 1902 và Vũ Thiên Kiều là bậc Tổng sư dạy học).</p>
+  <button type="button" class="btn-goto-tree" data-goto="P290"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem trên Phả Hệ</span></button>
+</div></div></div>
+      <div class="hist-block"><h4 class="hist-h3">3. Tộc Ước Cổ Truyền: &quot;Lấy chữ HÒA làm trọng&quot; (Giao ước Ất Dậu 1885 &amp; Bổ sung)</h4><p class="hist-p">Năm 1885 (Ất Dậu), toàn họ họp tại nhà Cụ Vũ Đức Cơ lập Bản Giao Ước xây Từ Đường, mua 4 sào ruộng hương hỏa (xứ đồng Đồng Đầm, Vườn Lão) và ban hành tộc ước nghiêm cẩn.</p><p class="hist-p"><strong>Quy tắc hòa thuận &amp; Xử lý mâu thuẫn</strong>:</p><div class="hist-quote">"Nghiêm cấm người trong họ đánh chửi, gây gổ lẫn nhau. Nếu xảy ra mâu thuẫn hoặc có sự ức hiếp, phải lập tức trình báo lên Trưởng họ. Trưởng họ sẽ mời các bậc hương lão, huynh trưởng về Từ đường phân xử công minh nhằm giữ gìn thuần phong mỹ tục. Nghiêm cấm con cháu xúi giục, kích động dẫn đến kiện tụng, xúc phạm lẫn nhau. Mọi quy định đặt ra cốt giữ trật tự trên dưới, lấy chữ HÒA làm trọng."</div><p class="hist-p"><strong>Kỷ cương tế lễ &amp; Danh dự thủ lợn</strong>:</p><div class="hist-bullet-item"><span class="hist-bullet-dot">▪</span><div class="hist-bullet-txt">Người biện lễ cúng tế sơ suất, làm ẩu bị phạt 3 tiền trầu rượu tạ tội trước bàn thờ tổ (bổ sung năm 1920 bởi Cụ Tú tài Vũ Khai Nguyên và Cụ Vũ Đức Rũng).</div></div><div class="hist-bullet-item"><span class="hist-bullet-dot">▪</span><div class="hist-bullet-txt">Phần &quot;Thủ lợn tế tổ&quot; dành cho các bậc lão trượng, người đỗ đạt khoa bảng, quan chức Chánh/Phó tổng có lễ yết kiến Từ đường. Ai còn nợ giữ tiền công của họ không trả đúng hạn thì dù là bậc lão trượng cũng bị truất quyền dự hưởng phần này (bổ sung năm 1899).</div></div><div class="hist-bullet-item"><span class="hist-bullet-dot">▪</span><div class="hist-bullet-txt"><strong>Nghĩa tình thời khó khăn (1933)</strong>: Năm 1933 (Bảo Đại thứ 8), khi giá thóc lúa sụt giảm người cấy ruộng họ bị lỗ, đại diện các Chi (Vũ Lợi Thiệp, Vũ Thiên Kiều, Vũ Đức Kính...) đã cùng họp thương tình giảm mức khoán nộp thóc để đỡ gánh nặng cho người canh tác.</div></div></div>
+      <div class="hist-block"><h4 class="hist-h3">4. Dấu mốc Lịch sử 1991: Đổi mới Phả hệ &amp; Thành lập Mạng lưới Liên lạc</h4><p class="hist-p">Ngày Thanh Minh năm Tân Mùi (ngày 21/2 âm lịch, tức <strong>ngày 5/4/1991</strong>), dưới sự chủ trì của cụ cao niên Vũ Quý Ca và Trưởng họ Vũ Đức Hà, toàn họ đã họp và thông qua các nghị quyết mang tính bước ngoặt:</p><div class="hist-num-item"><span class="hist-num-badge">1</span><div class="hist-num-txt"><strong>Hoàn thành công trình gia phả</strong>: Ông <strong>Vũ Đức Phồn</strong> biên tập bản chép tay, ông <strong>Vũ Đình Ngội</strong> dịch trọn vẹn văn bia, giao ước Hán Nôm cổ sau quá trình đi khảo sát thực tế và phỏng vấn các bô lão 80–90 tuổi.</div></div><div class="hist-num-item"><span class="hist-num-badge">2</span><div class="hist-num-txt"><strong>Quy tắc ghi chép tiến bộ</strong>: Ghi chép bình đẳng cả con trai và con gái; ghi nhận đầy đủ học hàm, học vị (Tiến sĩ, Kỹ sư, Bác sĩ...), quân hàm sĩ quan và các đóng góp trong hai cuộc kháng chiến vệ quốc.</div></div><div class="hist-num-item"><span class="hist-num-badge">3</span><div class="hist-num-txt"><strong>Thành lập mạng lưới Ban Liên Lạc Dòng Họ tại các đô thị lớn (1991)</strong> để gắn kết con cháu làm ăn xa:</div></div><div class="hist-bullet-item"><span class="hist-bullet-dot">▪</span><div class="hist-bullet-txt"><strong>Tại Hà Nội</strong>: Trụ sở tại nhà ông Vũ Đức Khản (Đời 11, Chi 2; nguyên Giám đốc Khu triển lãm Vân Hồ — số 45 Lê Đại Hành / Khu TT Xí nghiệp Cầu đường 208, Hai Bà Trưng).</div></div><div class="hist-bullet-item"><span class="hist-bullet-dot">▪</span><div class="hist-bullet-txt"><strong>Tại TP. Hồ Chí Minh</strong>: Trụ sở tại nhà ông Vũ Đức Phồn (Đời 11, Chi 2 — đường Nguyễn Văn Trỗi, quận Phú Nhuận).</div></div><div class="hist-bullet-item"><span class="hist-bullet-dot">▪</span><div class="hist-bullet-txt"><strong>Tại Hải Phòng</strong>: Trụ sở tại nhà ông Vũ Đình Ngội (Đời 11, Chi 2; Đại tá Quân đội — Căn 9A3, Khu TT Hải Quan, phường Vạn Mỹ, quận Ngô Quyền).</div></div><div class="hist-num-item"><span class="hist-num-badge">4</span><div class="hist-num-txt"><strong>Kiến thiết Quỹ họ &amp; Trùng tu Lăng mộ Thủy Tổ (1991 – 1992)</strong>: Mỗi hộ gia đình tại quê đóng góp 3kg thóc gây vốn ban đầu, con cháu thoát ly công đức tiền mặt; đến năm 1992 hoàn thành đại tu lăng mộ Cụ Thủy Tổ Vũ Đạo Chính.</div></div></div>
+    </section>
+    <section class="hist-sec">
+      <h3 class="hist-sec-title">⏳ TRỤC DÒNG THỜI GIAN LỊCH SỬ</h3>
+      <ul class="timeline-list"><li class="timeline-item">
+  <span class="timeline-year">Thế kỷ XVII · ~1625–1630</span>
+  <h4 class="timeline-title">Khai cơ lập nghiệp</h4>
+  <p class="timeline-desc">Cụ Thủy Tổ Vũ Đạo Chính cùng Cụ bà Từ Nhân di cư về đất Thụy Chính (Thái Thụy, Thái Bình) khai hoang lập ấp, đặt nền móng trường tồn cho dòng họ.</p>
+</li><li class="timeline-item">
+  <span class="timeline-year">Năm 1789 · Kỷ Dậu</span>
+  <h4 class="timeline-title">Tổ nghề truyền thống</h4>
+  <p class="timeline-desc">Cụ Xã trưởng Vũ Đức Thiệu (Đời 6) theo học nghề đục đá mỹ nghệ tại Đông Triều dưới thời vua Quang Trung rồi mang về truyền dạy lại cho con cháu.</p>
+</li><li class="timeline-item">
+  <span class="timeline-year">Thế kỷ XIX · 1805–1889</span>
+  <h4 class="timeline-title">Khởi dựng Ngũ Chi Phương</h4>
+  <p class="timeline-desc">Cụ Vũ Đức Mậu (Đời 7) cùng Chính thất sinh hạ 5 người con trai đều đỗ đạt, thành danh, được người xưa tôn vinh danh hiệu &#x27;Ngũ Chi Phương&#x27; (Năm cành quế ngát hương).</p>
+</li><li class="timeline-item">
+  <span class="timeline-year">Tháng 12/1885 · Ất Dậu</span>
+  <h4 class="timeline-title">Đồng thuận lập Bản Giao Ước Từ Đường</h4>
+  <p class="timeline-desc">Toàn họ họp tại nhà Cụ Vũ Đức Cơ nhân tiết Tảo Mộ, hiến đất, dựng Từ đường gỗ, mua 4 sào ruộng hương hỏa và ban bố quy ước lấy chữ &#x27;HÒA&#x27; làm trọng.</p>
+</li><li class="timeline-item">
+  <span class="timeline-year">Năm 1991 · Tân Mùi</span>
+  <h4 class="timeline-title">Công trình dịch thuật &amp; Chép phả dòng họ</h4>
+  <p class="timeline-desc">Ông Vũ Đức Phồn dày công biên tập bản Gia phả chép tay, cùng ông Vũ Đình Ngội dịch trọn vẹn các văn bia, giao ước Hán Nôm cổ sang chữ Quốc ngữ.</p>
+</li><li class="timeline-item">
+  <span class="timeline-year">Năm 2026 · Bính Ngọ</span>
+  <h4 class="timeline-title">Số hóa Phả Hệ Dòng Họ</h4>
+  <p class="timeline-desc">Xây dựng không gian gia phả điện tử đa nền tảng, hoàn thiện tra cứu phả hệ trực quan và lưu trữ truyền đời phục vụ kết nối con cháu nội ngoại khắp muôn nơi.</p>
+</li></ul>
+    </section>
+  </div>
+</div>
+
+<div id="panel-events" class="gp-tab-panel" role="tabpanel" aria-labelledby="tab-events">
+  <div class="events-wrap">
+    <div class="hist-hero">
+      <h2 class="hist-hero-title">Lịch Thanh Minh &amp; Ngày Giỗ Tiên Tổ</h2>
+      <p class="hist-hero-sub">Tra cứu các ngày đại lễ tập trung toàn tộc và ngày mất của các bậc Tiên Tổ được trích lục trực tiếp từ gia phả cổ để con cháu tiện dâng hương tri ân.</p>
+    </div>
+    <div class="event-notice">
+      <div class="event-notice-head"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>I. ĐẠI LỄ TẾT THANH MINH &amp; TỤ HỌP TOÀN TỘC</span></div>
+      <p class="event-notice-p"><strong>Thời gian:</strong> Hàng năm vào dịp Tiết Thanh Minh (tháng 3 Âm lịch)</p>
+      <div style="margin:12px 0;"><p class="event-notice-p"><strong>Ngày tụ họp cụ thể hàng năm sẽ được dòng họ thống nhất và thông báo trước một thời gian</strong> để bà con, con cháu các nơi chủ động thu xếp công việc về dự.</p><p class="event-notice-p">Con cháu các gia đình <strong>chủ động đăng ký trước số lượng người về tham dự</strong> để <strong>Trưởng họ (hiện tại là ông Vũ Đức Hà)</strong> cùng ban khánh tiết tiện tính toán mua sắm lễ vật, nấu cỗ và tổ chức ăn uống, gặp mặt đầm ấm tại Từ đường.</p></div>
+      <div><strong>Các hoạt động chính:</strong>
+<p class="event-notice-p">1. Toàn họ tề tựu ra <strong>Khu Lăng mộ Tiên Tổ</strong> (xã Thụy Chính, huyện Thái Thụy) dọn dẹp, thắp hương viếng mộ từ Cụ Thủy Tổ đến các phần mộ tổ của các Ngành, Chi.</p><p class="event-notice-p">2. Về <strong>Từ đường họ Vũ</strong> làm lễ bái lạy Tổ tiên, báo cáo tình hình dòng họ, giao lưu gắn kết con cháu và liên hoan đồng tộc.</p></div>
+    </div>
+    <section class="hist-sec">
+      <h3 class="hist-sec-title">📜 BẢNG NGÀY MẤT CÁC CỤ TIÊN TỔ (Trích nguyên văn Gia phả cổ)</h3>
+      <div class="table-responsive">
+        <table class="death-table">
+          <thead>
+            <tr>
+              <th>Đời</th>
+              <th>Danh xưng / Thân nhân</th>
+              <th>Ngày mất Âm lịch (trong sổ chép tay)</th>
+              <th>Ghi chú</th>
+              <th>Phả hệ</th>
+            </tr>
+          </thead>
+          <tbody>
+<tr>
+  <td><span class="dt-gen">Đời 1</span></td>
+  <td><div class="dt-name">Cụ Thủy Tổ Vũ Đạo Chính</div><div class="fx-alt">Cụ bà Từ Nhân</div></td>
+  <td><span class="dt-date">Gia phả ghi: Không rõ ngày mất</span></td>
+  <td>Thờ tại Từ đường họ Vũ Thái Bình</td>
+  <td><button type="button" class="btn-goto-tree" data-goto="P001"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem</span></button></td>
+</tr><tr>
+  <td><span class="dt-gen">Đời 2</span></td>
+  <td><div class="dt-name">Cụ Khuyến Chánh</div><div class="fx-alt">Cụ bà Từ Thục (họ Lê)</div></td>
+  <td><span class="dt-date">Cụ ông: Ngày 02/6 ÂL · Cụ bà: Ngày 10/12 ÂL</span></td>
+  <td>Giữ gìn cơ nghiệp ban sơ</td>
+  <td><button type="button" class="btn-goto-tree" data-goto="P003"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem</span></button></td>
+</tr><tr>
+  <td><span class="dt-gen">Đời 3</span></td>
+  <td><div class="dt-name">Cụ Đôn Thục</div><div class="fx-alt">Cụ bà (họ Nguyễn)</div></td>
+  <td><span class="dt-date">Cụ ông: Ngày 28/9 ÂL · Cụ bà: Ngày 02/3 ÂL</span></td>
+  <td>Giữ gìn cơ nghiệp ban sơ</td>
+  <td><button type="button" class="btn-goto-tree" data-goto="P005"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem</span></button></td>
+</tr><tr>
+  <td><span class="dt-gen">Đời 4</span></td>
+  <td><div class="dt-name">Cụ Vũ Đức Bạn (Lương Thác)</div><div class="fx-alt">Cụ bà Nguyễn Thị Tấu (Từ Trang)</div></td>
+  <td><span class="dt-date">Cụ ông: Ngày 13/8 ÂL · Cụ bà: Ngày 12/10 ÂL</span></td>
+  <td>Gánh vác việc họ sau anh cả</td>
+  <td><button type="button" class="btn-goto-tree" data-goto="P007"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem</span></button></td>
+</tr><tr>
+  <td><span class="dt-gen">Đời 5</span></td>
+  <td><div class="dt-name">Cụ Vũ Đức Kế (Trung Ngôn)</div><div class="fx-alt">Cụ bà Đỗ Thị Điều</div></td>
+  <td><span class="dt-date">Cụ ông: Ngày 07/12 năm Đinh Mùi (1787) · Cụ bà: Ngày 07/2 năm Mậu Thân (1788)</span></td>
+  <td>Niên hiệu Chiêu Thống 1 &amp; Quang Trung 2</td>
+  <td><button type="button" class="btn-goto-tree" data-goto="P008"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem</span></button></td>
+</tr><tr>
+  <td><span class="dt-gen">Đời 6</span></td>
+  <td><div class="dt-name">Cụ Vũ Đức Thiệu (Cẩn Thành)</div><div class="fx-alt">Cụ bà Chu Thị Quyến (Từ Trai)</div></td>
+  <td><span class="dt-date">Cụ ông: Ngày 26/5 năm Giáp Dần (1854) · Cụ bà: Ngày 04/11 năm Mậu Ngọ (1868)</span></td>
+  <td>Tổ nghề đục đá mỹ nghệ (Tự Đức thứ 7 &amp; 20)</td>
+  <td><button type="button" class="btn-goto-tree" data-goto="P009"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem</span></button></td>
+</tr><tr>
+  <td><span class="dt-gen">Đời 7</span></td>
+  <td><div class="dt-name">Cụ Vũ Đức Thạc (Ngành Trưởng)</div><div class="fx-alt">Cụ bà Chu Thị Vũ</div></td>
+  <td><span class="dt-date">Cụ ông: Ngày 09/3 năm Nhâm Dần (1842)</span></td>
+  <td>Cụ Tổ Ngành Trưởng (Thiệu Trị thứ 2)</td>
+  <td><button type="button" class="btn-goto-tree" data-goto="P011"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem</span></button></td>
+</tr><tr>
+  <td><span class="dt-gen">Đời 7</span></td>
+  <td><div class="dt-name">Cụ Vũ Đức Mậu (Ngũ Chi Phương)</div><div class="fx-alt">Chính thất &amp; Kế thất Dương Thị Chỉ</div></td>
+  <td><span class="dt-date">Mất năm Kỷ Sửu (1889 - Thành Thái thứ 1)</span></td>
+  <td>Cụ Tổ Ngũ Chi Phương</td>
+  <td><button type="button" class="btn-goto-tree" data-goto="P025"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem</span></button></td>
+</tr><tr>
+  <td><span class="dt-gen">Đời 8</span></td>
+  <td><div class="dt-name">Cụ Vũ Đức Tiên (Cụ Bá Tiên - Chi 2)</div><div class="fx-alt">Cụ bà Chu Thị Liên</div></td>
+  <td><span class="dt-date">Cụ ông: Ngày 15/2 năm Nhâm Thìn (1912) · Cụ bà: Ngày 10/5 ÂL</span></td>
+  <td>Cụ Tổ Chi 2 (Duy Tân thứ 6)</td>
+  <td><button type="button" class="btn-goto-tree" data-goto="P093"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem</span></button></td>
+</tr>
+</tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
+
 <footer class="site-foot" aria-labelledby="fx-h"><div class="fx-in"><div class="fx-grid"><section class="fx-col fx-about"><p class="fx-eyebrow" id="fx-h">Về bản gia phả</p><p class="fx-lead">Trải qua thời gian thăng trầm, tư liệu xưa lưu truyền khó tránh khỏi những thiếu sót. Bà con nội ngoại gần xa khi có tin hiếu, tin hỷ, tin nhà sinh thêm con cháu, hoặc phát hiện thông tin chưa chuẩn xác, hãy bấm nút &quot;Báo tin&quot; (ở đầu trang hoặc trong mục Chi tiết của từng người) để người biên soạn cập nhật — cùng chung tay giúp gia phả dòng họ ngày càng đầy đủ và vẹn toàn.</p></section><section class="fx-col"><p class="fx-eyebrow">Biên soạn</p><p class="fx-strong">Vũ Phi Trường</p><p class="fx-sub">Đời 11 · Ngành III, Chi 2 · con trưởng ông Vũ Đức Linh</p><p class="fx-sub">Tính đến thời điểm biên soạn, ông Linh là người cháu nội còn tại thế duy nhất của Cụ Bá Tiên (Cụ Tổ Chi 2)</p><dl class="fx-facts"><div><dt>Khởi soạn</dt><dd>Tháng 9 năm 2026</dd></div></dl></section><section class="fx-col"><p class="fx-eyebrow">Tư liệu</p><ul class="fx-list"><li>Gia phả viết tay dòng họ do ông Vũ Đức Phồn (Đời 11 · Ngành II, Chi 2 · con thứ ba ông Vũ Thế Mỹ) biên tập và chép tay năm 1991</li><li>Bản dịch gia phả và các bản giao ước từ chữ Hán Nôm sang chữ Quốc ngữ của ông Vũ Đình Ngội (Đời 11 · Ngành II, Chi 2 · con trưởng ông Vũ Thế Mỹ)</li><li>Văn bia Cụ Thủy Tổ &amp; các bản giao ước Hán Nôm cổ truyền</li><li>Lời kể và tư liệu khảo cứu từ các bậc cao niên trong họ</li></ul></section></div><div class="fx-bar"><div class="fx-bar-t"><span>Vũ Tộc · Ngũ Chi Phương · Thái Bình</span><span>Thứ tự: theo thân mẫu (chính thất → kế thất), rồi theo thứ tự sinh</span></div><button type="button" class="fx-up" onclick="window.scrollTo({top:0,behavior:'smooth'});"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg><span>Lên đầu trang</span></button></div></div></footer>
 
 
@@ -2191,6 +2575,7 @@ var GP_SEARCH=(function(){
   function mk(tag,cls,txt){var x=document.createElement(tag); if(cls) x.className=cls; if(txt!=null) x.textContent=txt; return x;}
   function mobile(){ return window.matchMedia && matchMedia('(max-width:640px)').matches; }
   function go(id){
+    if(window.switchTab) window.switchTab('panel-genealogy', false);
     var t=document.getElementById(id); if(!t) return;
     for(var n=t.parentElement;n;n=n.parentElement){
       if(n.tagName==='DETAILS'){ var sm=n.querySelector(':scope > summary'); if(!(sm&&sm.contains(t))) n.open=true; }
@@ -2319,6 +2704,73 @@ var GP_SEARCH=(function(){
   window.addEventListener('resize',later);
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
   if(document.readyState!=='loading') fit(); else document.addEventListener('DOMContentLoaded',fit);
+})();
+</script>
+<script>
+(function(){
+  function switchTab(tabId, scroll){
+    var btns = document.querySelectorAll('.gp-tab-btn, .sticky-tab-btn');
+    var panels = document.querySelectorAll('.gp-tab-panel');
+    panels.forEach(function(p){
+      var on = (p.id === tabId);
+      p.classList.toggle('active', on);
+    });
+    btns.forEach(function(b){
+      var on = (b.getAttribute('data-tab') === tabId);
+      b.classList.toggle('active', on);
+      if(on) b.setAttribute('aria-selected', 'true'); else b.removeAttribute('aria-selected');
+    });
+    if(scroll){
+      var tabsWrap = document.querySelector('.gp-tabs-wrap');
+      if(tabsWrap) tabsWrap.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  }
+  window.switchTab = switchTab;
+
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest('.gp-tab-btn, .sticky-tab-btn');
+    if(btn){
+      e.preventDefault();
+      var tabId = btn.getAttribute('data-tab');
+      if(tabId){
+        switchTab(tabId, false);
+        if(tabId === 'panel-history') try{ history.replaceState(null,'','#lich-su'); }catch(ex){}
+        else if(tabId === 'panel-events') try{ history.replaceState(null,'','#lich-gio'); }catch(ex){}
+        else try{ history.replaceState(null,'','#pha-he'); }catch(ex){}
+      }
+      return;
+    }
+    var gotoBtn = e.target.closest('[data-goto]');
+    if(gotoBtn){
+      e.preventDefault();
+      var pid = gotoBtn.getAttribute('data-goto');
+      if(pid){
+        switchTab('panel-genealogy', false);
+        setTimeout(function(){
+          var t = document.getElementById(pid);
+          if(t){
+            for(var n=t.parentElement;n;n=n.parentElement){
+              if(n.tagName==='DETAILS'){ var sm=n.querySelector(':scope > summary'); if(!(sm&&sm.contains(t))) n.open=true; }
+            }
+            t.scrollIntoView({behavior:'smooth', block:'center'});
+            t.classList.remove('gp-hit'); void t.offsetWidth; t.classList.add('gp-hit');
+            setTimeout(function(){t.classList.remove('gp-hit');},2400);
+            try{ history.replaceState(null,'','#'+pid); }catch(ex){}
+          }
+        }, 50);
+      }
+    }
+  });
+
+  function handleHash(){
+    var h = location.hash.slice(1);
+    if(h === 'lich-su') switchTab('panel-history', false);
+    else if(h === 'lich-gio') switchTab('panel-events', false);
+    else if(h === 'pha-he' || /^P\d+$/.test(h) || /^chi\d+$/.test(h)) switchTab('panel-genealogy', false);
+  }
+  window.addEventListener('hashchange', handleHash);
+  if(document.readyState!=='loading') setTimeout(handleHash, 30);
+  else document.addEventListener('DOMContentLoaded', function(){ setTimeout(handleHash, 30); });
 })();
 </script>
 </body>
