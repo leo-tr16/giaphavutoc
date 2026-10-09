@@ -887,11 +887,120 @@
   .gp-tab-panel.active{display:block;animation:fadeIn .25s ease;}
   @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
 
-  /* Công cụ phả hệ (chú thích, chi 1-5, tìm kiếm) nằm gọn trong Tab Phả Hệ */
-  .genealogy-tools{
-    text-align:center;
-    padding:0 calc(max(0px, (100% - var(--wrap)) / 2) + var(--col-r)) 10px
-            calc(max(0px, (100% - var(--wrap)) / 2) + var(--col-l));
+  /* ════════ KHUNG ĐIỀU KHIỂN PHẢ HỆ HỢP NHẤT (PHƯƠNG ÁN A) ════════ */
+  .genealogy-toolbar{
+    max-width:min(640px, calc(100% - 32px));
+    margin:20px auto 24px;
+    padding:14px 16px;
+    background:var(--paper);
+    border:1px solid var(--card-line);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .gt-search-row .gp-slot{
+    margin:0;
+    max-width:100%;
+  }
+  .gt-chi-grid{
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    gap:6px;
+    width:100%;
+  }
+  .gt-chi-btn{
+    height:38px;
+    padding:0;
+    border-radius:999px;
+    border:1px solid var(--card-line);
+    background:var(--page-bg);
+    color:var(--blue);
+    font-family:inherit;
+    font-size:13.5px;
+    font-weight:600;
+    cursor:pointer;
+    transition:all .15s ease;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .gt-chi-btn:hover{
+    background:var(--blue-bg);
+    border-color:var(--blue2);
+  }
+  .gt-meta-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding-top:6px;
+    border-top:1px solid var(--card-line);
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .gt-legend{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .gt-legend span{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .gt-report-link{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-weight:600;
+    font-size:12.5px;
+    color:var(--gold-ink);
+    text-decoration:none;
+    white-space:nowrap;
+    padding:4px 8px;
+    border-radius:6px;
+    transition:background .15s ease;
+  }
+  .gt-report-link:hover{
+    background:var(--gold-bg);
+    text-decoration:underline;
+  }
+  .gt-report-link svg{
+    width:14px;
+    height:14px;
+  }
+
+  @media (max-width:640px){
+    .genealogy-toolbar{
+      margin:14px 10px 18px;
+      padding:12px 10px;
+      border-radius:14px;
+      gap:10px;
+    }
+    .gt-chi-grid{
+      gap:4px;
+    }
+    .gt-chi-btn{
+      height:36px;
+      font-size:13px;
+    }
+    .gt-meta-row{
+      flex-wrap:wrap;
+      gap:8px;
+      padding-top:8px;
+    }
+    .gt-legend{
+      gap:10px;
+      font-size:12px;
+    }
+    .gt-report-link{
+      margin-left:auto;
+      font-size:12px;
+    }
   }
 
   /* Khi ở Tab Lịch sử hoặc Tab Lịch giỗ: tinh giản thanh dính */
@@ -1083,19 +1192,23 @@
 <nav class="chi-sticky" aria-label="Điều hướng nhanh"><button type="button" class="brand" onclick="window.scrollTo({top:0,behavior:'smooth'});">VŨ TỘC · THÁI BÌNH</button><div class="chis"><button type="button" data-chi="chi1" onclick="document.getElementById('chi1').scrollIntoView({behavior:'smooth',block:'start'});">Chi 1</button><button type="button" data-chi="chi2" onclick="document.getElementById('chi2').scrollIntoView({behavior:'smooth',block:'start'});">Chi 2</button><button type="button" data-chi="chi3" onclick="document.getElementById('chi3').scrollIntoView({behavior:'smooth',block:'start'});">Chi 3</button><button type="button" data-chi="chi4" onclick="document.getElementById('chi4').scrollIntoView({behavior:'smooth',block:'start'});">Chi 4</button><button type="button" data-chi="chi5" onclick="document.getElementById('chi5').scrollIntoView({behavior:'smooth',block:'start'});">Chi 5</button></div><div class="gp-box find" data-gp><div class="gp-field"><svg class="gp-ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg><input class="gp-in" type="search" placeholder="Tìm tên người…" autocomplete="off" spellcheck="false" enterkeyhint="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="gp-res-b" aria-label="Tìm tên người trong gia phả"><kbd class="gp-kbd" data-kbd>Ctrl K</kbd><button type="button" class="gp-x" data-gp-close aria-label="Đóng tìm kiếm">Đóng</button></div><div class="gp-drop" hidden><div class="gp-sec" aria-live="polite"></div><ul class="gp-res" id="gp-res-b" role="listbox" aria-label="Kết quả tìm kiếm"></ul><div class="gp-foot" aria-hidden="true"><span><kbd>↑</kbd><kbd>↓</kbd> chọn</span><span><kbd>↵</kbd> mở</span><span><kbd>Esc</kbd> đóng</span></div></div></div><button type="button" class="find-btn" data-gp-open aria-label="Tìm tên người"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg></button><button type="button" class="up" aria-label="Lên đầu trang" onclick="window.scrollTo({top:0,behavior:'smooth'});"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button></nav>
 
 <div id="panel-genealogy" class="gp-tab-panel active" role="tabpanel" aria-labelledby="tab-genealogy">
-  <div class="genealogy-tools">
-    <div class="legend">
-      <span><i class="dot dot-male"></i>Con trai</span>
-      <span><i class="dot dot-female"></i>Con gái</span>
-      <span><i class="dot dot-ring"></i>Dâu / Rể (kết hôn vào)</span>
-    </div>
-    <div class="chi-nav">
-      <button type="button" onclick="document.getElementById('chi1').scrollIntoView({behavior:'smooth',block:'start'});">Chi 1</button><button type="button" onclick="document.getElementById('chi2').scrollIntoView({behavior:'smooth',block:'start'});">Chi 2</button><button type="button" onclick="document.getElementById('chi3').scrollIntoView({behavior:'smooth',block:'start'});">Chi 3</button><button type="button" onclick="document.getElementById('chi4').scrollIntoView({behavior:'smooth',block:'start'});">Chi 4</button><button type="button" onclick="document.getElementById('chi5').scrollIntoView({behavior:'smooth',block:'start'});">Chi 5</button>
-    </div>
+
+<div class="genealogy-toolbar">
+  <div class="gt-search-row">
   <div class="gp-slot"><div class="gp-box" data-gp><div class="gp-field"><svg class="gp-ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg><input class="gp-in" type="search" placeholder="Tìm tên người — gõ không dấu cũng được" autocomplete="off" spellcheck="false" enterkeyhint="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="gp-res-h" aria-label="Tìm tên người trong gia phả"><kbd class="gp-kbd" data-kbd>Ctrl K</kbd><button type="button" class="gp-x" data-gp-close aria-label="Đóng tìm kiếm">Đóng</button></div><div class="gp-drop" hidden><div class="gp-sec" aria-live="polite"></div><ul class="gp-res" id="gp-res-h" role="listbox" aria-label="Kết quả tìm kiếm"></ul><div class="gp-foot" aria-hidden="true"><span><kbd>↑</kbd><kbd>↓</kbd> chọn</span><span><kbd>↵</kbd> mở</span><span><kbd>Esc</kbd> đóng</span></div></div></div></div>
-    <div class="hint">Bấm mũi tên ▸ ở mỗi người để mở xem con cháu của nhánh đó.</div>
-  <div class="h-report"><a href="https://docs.google.com/forms/d/e/1FAIpQLSe9aXljUi011en7IK9iODC7ZKtOyqwLN68F51CzWOKvKKe6GQ/viewform" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg><span>Báo tin, cập nhật · Đính chính gia phả</span></a></div>
-  </div><!-- /.genealogy-tools -->
+  </div>
+  <div class="gt-chi-row">
+    <div class="gt-chi-grid"><button type="button" class="gt-chi-btn" onclick="document.getElementById('chi1').scrollIntoView({behavior:'smooth',block:'start'});">Chi 1</button><button type="button" class="gt-chi-btn" onclick="document.getElementById('chi2').scrollIntoView({behavior:'smooth',block:'start'});">Chi 2</button><button type="button" class="gt-chi-btn" onclick="document.getElementById('chi3').scrollIntoView({behavior:'smooth',block:'start'});">Chi 3</button><button type="button" class="gt-chi-btn" onclick="document.getElementById('chi4').scrollIntoView({behavior:'smooth',block:'start'});">Chi 4</button><button type="button" class="gt-chi-btn" onclick="document.getElementById('chi5').scrollIntoView({behavior:'smooth',block:'start'});">Chi 5</button></div>
+  </div>
+  <div class="gt-meta-row">
+    <div class="gt-legend">
+      <span><i class="dot dot-male"></i>Trai</span>
+      <span><i class="dot dot-female"></i>Gái</span>
+      <span><i class="dot dot-ring"></i>Dâu / Rể</span>
+    </div>
+    <div class="gt-actions"><a class="gt-report-link" href="https://docs.google.com/forms/d/e/1FAIpQLSe9aXljUi011en7IK9iODC7ZKtOyqwLN68F51CzWOKvKKe6GQ/viewform" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg><span>Báo tin, cập nhật · Đính chính gia phả</span></a></div>
+  </div>
+</div>
 
 <div class="trunk-wrap">
   <span class="trunk-title">ĐỜI 1 → ĐỜI 7</span>
