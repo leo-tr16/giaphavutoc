@@ -263,11 +263,10 @@
   .note{
     font-size:var(--fs-note);font-weight:400;font-style:normal;color:var(--ink-note);
     line-height:var(--lh-note);text-wrap:pretty;overflow-wrap:break-word;
+    text-align:justify;text-justify:inter-word;hyphens:none;
   }
   .note strong{font-weight:600;color:var(--ink-name);}
-  /* Bỏ trần cứng 68ch (làm ghi chú ngắt dòng giữa chừng dù thẻ còn trống ~30% bề ngang);
-     trần độ dài dòng giờ đặt theo bố cục 2 cột ở trên. */
-  .note{max-width:var(--note-cap);}
+  .note{max-width:none;}
   /* Thẻ hẹp (đời sâu, cột Ngành trưởng): bỏ thụt lề dưới avatar để chữ dùng trọn bề ngang,
      tránh ghi chú bị bóp thành cột 4–5 dòng. */
 
@@ -287,15 +286,17 @@
   }
   .notes-in{min-height:0;overflow:hidden;}
   .notes-body{
-    margin:10px 0 0 calc(var(--av) + 12px);padding-top:10px;
+    margin:10px 0 0 0;padding-top:10px;
     border-top:1px solid var(--card-line);cursor:auto;
   }
   .card-body.male .notes-body{border-top-color:var(--card-m-line);}
   .card-body.female .notes-body{border-top-color:var(--card-f-line);}
-  @container card (max-width:440px){ .notes-body{margin-left:0;} }
 
   /* ghi chú của chủ thẻ: mỗi ghi chú một đoạn */
-  .card-notes{font-size:var(--fs-note);line-height:var(--lh-note);color:var(--ink-note);}
+  .card-notes{
+    font-size:var(--fs-note);line-height:var(--lh-note);color:var(--ink-note);
+    text-align:justify;text-justify:inter-word;
+  }
   .card-notes > .note,.card-notes > blockquote.bio{margin:0;padding:0;}
   .card-notes > * + *{margin-top:4px;}
 
