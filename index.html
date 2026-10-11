@@ -993,7 +993,9 @@
   .gt-report:hover .gt-bell{animation:none;}
   .gt-report:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
 
-  /* Nút nổi "Báo tin" (phương án F) — góc phải dưới, chỉ hiện khi đã cuộn qua khung tìm kiếm & đang ở tab Phả hệ. */
+  /* Nút nổi "Báo tin": góc phải dưới màn hình.
+     - Tab Phả hệ: hiện khi đã cuộn qua khung tìm kiếm.
+     - Tab Lịch sử & Lịch giỗ: luôn nổi/hiển thị. */
   .gp-fab{
     position:fixed;z-index:25;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));
     display:inline-flex;align-items:center;gap:7px;height:44px;padding:0 16px 0 14px;border-radius:999px;
@@ -1005,8 +1007,10 @@
     -webkit-tap-highlight-color:transparent;
   }
   .gp-fab svg{flex:none;width:16px;height:16px;}
-  .gp-bar-on body.is-tab-genealogy .gp-fab{opacity:1;visibility:visible;transform:none;transition:opacity .2s ease,transform .2s ease,background-color .15s ease;}
-  .gp-foot-on .gp-fab,.gp-msearch .gp-fab{opacity:0!important;visibility:hidden!important;}
+  .gp-bar-on body.is-tab-genealogy .gp-fab,
+  body.is-tab-history .gp-fab,
+  body.is-tab-events .gp-fab{opacity:1;visibility:visible;transform:none;transition:opacity .2s ease,transform .2s ease,background-color .15s ease;}
+  .gp-foot-on body.is-tab-genealogy .gp-fab,.gp-msearch .gp-fab{opacity:0!important;visibility:hidden!important;}
   .gp-fab:hover{background:var(--gold-bg);border-color:var(--gold);}
   .gp-fab:active{transform:scale(.96);}
   .gp-fab:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
@@ -1310,9 +1314,9 @@
   <div class="sub">Từ thế kỷ XVII, Cụ Thủy Tổ Vũ Đạo Chính khai cơ lập nghiệp trên đất Thụy Chính, Thái Thụy, Thái Bình, gây dựng nên dòng họ Vũ nơi đây. Qua bảy đời nối tiếp, đến Cụ Vũ Đức Mậu sinh hạ năm người con trai đều thành đạt, lập thành năm Chi — đời sau gọi là &quot;Ngũ Chi Phương&quot;. Trang này ghi lại phả hệ năm Chi ấy, để con cháu xa gần cùng tìm về cội nguồn</div>
 <div class="gp-tabs-wrap">
   <nav class="gp-tabs" aria-label="Không gian dòng họ">
-    <button type="button" class="gp-tab-btn active" data-tab="panel-genealogy" id="tab-genealogy" aria-selected="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22v-7"/><path d="M9 12a3 3 0 0 1 6 0v3H9v-3Z"/><path d="M4 6a2 2 0 0 1 4 0v3H4V6Z"/><path d="M16 6a2 2 0 0 1 4 0v3h-4V6Z"/><path d="M6 9v3a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V9"/></svg><span class="tab-label">Phả Hệ Dòng Họ</span><span class="tab-label-m">Phả Hệ</span></button>
-    <button type="button" class="gp-tab-btn" data-tab="panel-history" id="tab-history"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span class="tab-label">Lịch Sử Vũ Tộc</span><span class="tab-label-m">Lịch Sử</span></button>
-    <button type="button" class="gp-tab-btn" data-tab="panel-events" id="tab-events"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span class="tab-label">Lịch Giỗ & Ngày Họ</span><span class="tab-label-m">Lịch Giỗ</span></button>
+    <button type="button" class="gp-tab-btn active" data-tab="panel-genealogy" id="tab-genealogy" aria-selected="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22v-7"/><path d="M9 12a3 3 0 0 1 6 0v3H9v-3Z"/><path d="M4 6a2 2 0 0 1 4 0v3H4V6Z"/><path d="M16 6a2 2 0 0 1 4 0v3h-4V6Z"/><path d="M6 9v3a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V9"/></svg><span class="tab-label">PHẢ HỆ</span><span class="tab-label-m">PHẢ HỆ</span></button>
+    <button type="button" class="gp-tab-btn" data-tab="panel-history" id="tab-history"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span class="tab-label">LỊCH SỬ</span><span class="tab-label-m">LỊCH SỬ</span></button>
+    <button type="button" class="gp-tab-btn" data-tab="panel-events" id="tab-events"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span class="tab-label">LỊCH GIỖ</span><span class="tab-label-m">LỊCH GIỖ</span></button>
   </nav>
 </div>
 
