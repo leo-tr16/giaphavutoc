@@ -6,6 +6,14 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f4f5f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14171c" media="(prefers-color-scheme: dark)">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TG8GHKFB87"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TG8GHKFB87');
+</script>
 <title>Gia Phả Vũ Tộc — Thái Bình</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
@@ -1302,6 +1310,92 @@
     .gio-card{padding:12px 12px 8px;}
     .gio-person{gap:12px;}
     .gio-day{width:58px;}
+  }
+
+
+  /* ════════ THIẾT KẾ LẠI ĐẦU TRANG & TAB (2026-10) ════════
+     ① Header thu gọn ngoài tab Phả hệ: ẩn đoạn giới thiệu phả hệ, nội dung lên màn hình đầu.
+     ② Tab gạch chân gắn đáy header (điều hướng trang, không phải bộ lọc): tab đang chọn = chữ đậm + gạch vàng đồng
+        trùng lên đường viền đáy header.
+     ③ Tiêu đề mục (Lịch sử / Lịch giỗ) bỏ khung — chỉ còn tiêu đề + mô tả canh trái theo mép nội dung.
+     ④ Khối Thanh Minh = thẻ sự kiện: nền giấy, viền trái vàng; ô "Thời gian" tách riêng bên trái;
+        hoạt động đánh số bằng badge tròn. */
+  header{padding-bottom:0;}
+  body:not(.is-tab-genealogy) header{padding-top:36px;}
+  body:not(.is-tab-genealogy) header .sub{display:none;}
+  body:not(.is-tab-genealogy) header h1{margin-bottom:14px;}
+
+  .gp-tabs-wrap{margin:30px auto 0;}
+  .gp-tabs{
+    display:flex;justify-content:center;gap:36px;width:auto;
+    background:none;padding:0;border-radius:0;box-shadow:none;
+  }
+  .gp-tab-btn{
+    position:relative;padding:12px 2px 13px;min-height:48px;border-radius:0;
+    font-size:14.5px;font-weight:600;color:var(--ink-meta);background:none;
+    border-bottom:3px solid transparent;margin-bottom:-1px;   /* gạch chân đè lên viền đáy header */
+    transition:color .15s ease,border-color .15s ease;
+  }
+  .gp-tab-btn:hover{background:none;color:var(--ink);border-bottom-color:var(--gold-rule);}
+  .gp-tab-btn.active{background:none;box-shadow:none;color:var(--ink-name);font-weight:700;border-bottom-color:var(--gold);}
+  .gp-tab-btn.active svg{color:var(--gold);}
+  .gp-tab-btn:focus-visible{outline:2px solid var(--blue2);outline-offset:-2px;}
+
+  .history-wrap,.events-wrap{margin-top:36px;}
+  /* Tiêu đề mục canh đúng mép CHỮ bên trong thẻ phía dưới (đệm thẻ 28px + viền 1px), mô tả chạy hết bề ngang
+     → không xuống dòng sớm, không để thừa khoảng trống bên phải. */
+  .history-wrap .hist-hero,.events-wrap .hist-hero{
+    background:none;border:0;border-radius:0;padding:0 29px;margin:0 0 24px;text-align:left;
+  }
+  .events-wrap .hist-hero{padding:0 25px 0 28px;}   /* thẻ Thanh Minh: viền trái 4px + đệm 24px */
+  .hist-hero-title{font-size:24px;color:var(--ink-name);margin:0 0 6px;}
+  .hist-hero-sub{margin:0;max-width:none;color:var(--ink-soft);}
+
+  .event-notice{
+    background:var(--paper);border:1px solid var(--card-line);border-left:4px solid var(--gold);
+    border-radius:4px 14px 14px 4px;padding:20px 24px 22px;box-shadow:var(--shadow);
+  }
+  .event-notice-head{
+    font-size:15px;letter-spacing:.04em;line-height:1.45;color:var(--gold-ink);
+    margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--card-line);
+  }
+  .event-notice-head svg{flex:none;width:18px;height:18px;}
+  .ev-body{display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;align-items:start;}
+  .ev-when{
+    display:flex;flex-direction:column;gap:6px;padding:16px;border-radius:12px;
+    background:var(--gold-bg);border:1px solid var(--gold-rule);
+  }
+  .ev-when-l{font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink);}
+  .ev-when b{font-family:'Lora',serif;font-size:17px;font-weight:600;line-height:1.45;color:var(--ink-name);}
+  .event-notice .event-notice-p{color:var(--ink-body);margin:0 0 10px;}
+  .event-notice .event-notice-p strong{color:var(--ink-name);}
+  .ev-notes{margin-bottom:6px;}
+  .ev-acts-h{
+    margin:14px 0 10px;padding-top:14px;border-top:1px dashed var(--card-line);
+    font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-meta);
+  }
+  .ev-acts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .ev-acts li{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.65;color:var(--ink-body);}
+  .ev-acts li strong{color:var(--ink-name);}
+  .ev-num{
+    flex:none;width:24px;height:24px;margin-top:1px;border-radius:50%;
+    display:inline-flex;align-items:center;justify-content:center;
+    background:var(--blue-bg);color:var(--blue);font-size:12.5px;font-weight:700;font-variant-numeric:tabular-nums;
+  }
+
+  @media (max-width:640px){
+    header{padding-bottom:0;}
+    body:not(.is-tab-genealogy) header{padding-top:28px;}
+    .gp-tabs-wrap{margin-top:20px;}
+    .gp-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:0;width:100%;}
+    .gp-tab-btn{padding:10px 2px 11px;font-size:13.5px;gap:6px;}
+    .history-wrap,.events-wrap{margin-top:24px;}
+    .hist-hero-title{font-size:20px;}
+    .history-wrap .hist-hero{padding:0 15px;}
+    .events-wrap .hist-hero{padding:0 15px 0 18px;}
+    .event-notice{padding:16px 14px 18px;}
+    .ev-body{grid-template-columns:minmax(0,1fr);gap:16px;}
+    .ev-when{padding:12px 14px;}
   }
 </style>
 </head>
@@ -2702,10 +2796,11 @@
     </div>
     <div class="event-notice">
       <div class="event-notice-head"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>I. ĐẠI LỄ TẾT THANH MINH &amp; TỤ HỌP TOÀN TỘC</span></div>
-      <p class="event-notice-p"><strong>Thời gian:</strong> Hàng năm vào dịp Tiết Thanh Minh (tháng 3 Âm lịch)</p>
-      <div style="margin:12px 0;"><p class="event-notice-p"><strong>Ngày tụ họp cụ thể hàng năm sẽ được dòng họ thống nhất và thông báo trước một thời gian</strong> để bà con, con cháu các nơi chủ động thu xếp công việc về dự.</p><p class="event-notice-p">Con cháu các gia đình <strong>chủ động đăng ký trước số lượng người về tham dự</strong> để <strong>Trưởng họ (hiện tại là ông Vũ Đức Hà)</strong> cùng ban khánh tiết tiện tính toán mua sắm lễ vật, nấu cỗ và tổ chức ăn uống, gặp mặt đầm ấm tại Từ đường.</p></div>
-      <div><strong>Các hoạt động chính:</strong>
-<p class="event-notice-p">1. Toàn họ tề tựu ra <strong>Khu Lăng mộ Tiên Tổ</strong> (xã Thụy Chính, huyện Thái Thụy) dọn dẹp, thắp hương viếng mộ từ Cụ Thủy Tổ đến các phần mộ tổ của các Ngành, Chi.</p><p class="event-notice-p">2. Về <strong>Từ đường họ Vũ</strong> làm lễ bái lạy Tổ tiên, báo cáo tình hình dòng họ, giao lưu gắn kết con cháu và liên hoan đồng tộc.</p></div>
+      <div class="ev-body">
+        <div class="ev-when"><span class="ev-when-l">Thời gian</span><b>Hàng năm vào dịp Tiết Thanh Minh (tháng 3 Âm lịch)</b></div>
+        <div class="ev-main"><div class="ev-notes"><p class="event-notice-p"><strong>Ngày tụ họp cụ thể hàng năm sẽ được dòng họ thống nhất và thông báo trước một thời gian</strong> để bà con, con cháu các nơi chủ động thu xếp công việc về dự.</p><p class="event-notice-p">Con cháu các gia đình <strong>chủ động đăng ký trước số lượng người về tham dự</strong> để <strong>Trưởng họ (hiện tại là ông Vũ Đức Hà)</strong> cùng ban khánh tiết tiện tính toán mua sắm lễ vật, nấu cỗ và tổ chức ăn uống, gặp mặt đầm ấm tại Từ đường.</p></div>
+          <p class="ev-acts-h">Các hoạt động chính</p><ol class="ev-acts"><li><span class="ev-num">1</span><span>Toàn họ tề tựu ra <strong>Khu Lăng mộ Tiên Tổ</strong> (xã Thụy Chính, huyện Thái Thụy) dọn dẹp, thắp hương viếng mộ từ Cụ Thủy Tổ đến các phần mộ tổ của các Ngành, Chi.</span></li><li><span class="ev-num">2</span><span>Về <strong>Từ đường họ Vũ</strong> làm lễ bái lạy Tổ tiên, báo cáo tình hình dòng họ, giao lưu gắn kết con cháu và liên hoan đồng tộc.</span></li></ol></div>
+      </div>
     </div>
     <section class="hist-sec gio-sec">
       <h3 class="hist-sec-title">II. NGÀY GIỖ &amp; MỘ PHẦN CÁC CỤ TIÊN TỔ</h3>
