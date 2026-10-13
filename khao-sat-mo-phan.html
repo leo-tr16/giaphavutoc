@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Công cụ Đo Tọa Độ Mộ Phần Tiên Tổ — Họ Vũ Thái Bình</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f6f9; --card: #ffffff; --ink: #1a1e29; --soft: #5e6678; --line: #e2e5ec;
+    --blue: #185abc; --blue-light: #e8f0fe; --green: #188038; --green-light: #e6f4ea;
+    --red: #d93025; --red-light: #fce8e6; --gold: #b0720a; --gold-light: #fef7e0;
+    --shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0; padding: env(safe-area-inset-top) 16px env(safe-area-inset-bottom);
+    background: var(--bg); color: var(--ink);
+    font-family: 'Be Vietnam Pro', -apple-system, system-ui, sans-serif;
+    font-size: 15px; line-height: 1.55;
+  }
+  .wrap { max-width: 540px; margin: 0 auto; padding: 20px 0 60px; }
+  
+  /* Header */
+  .header { text-align: center; margin-bottom: 20px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--gold-light); color: var(--gold);
+    font-size: 12px; font-weight: 700; border-radius: 999px;
+    padding: 4px 12px; margin-bottom: 8px; border: 1px solid #f9e2ae;
+  }
+  h1 { font-family: 'Lora', serif; font-size: 22px; color: #10243e; margin: 4px 0 6px; }
+  .desc { font-size: 13px; color: var(--soft); margin: 0; }
+  
+  /* Main GPS Tool Card */
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 16px; padding: 18px; margin-bottom: 16px;
+    box-shadow: var(--shadow);
+  }
+  .card-h { font-size: 15px; font-weight: 700; color: #162a45; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  
+  /* Big GPS Button */
+  .btn-gps {
+    width: 100%; border: none; border-radius: 14px;
+    background: linear-gradient(135deg, #1a73e8, #1557b0); color: #fff;
+    padding: 16px 20px; font-size: 17px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    box-shadow: 0 4px 14px rgba(26,115,232,0.35); cursor: pointer;
+    transition: transform 0.1s, opacity 0.2s;
+  }
+  .btn-gps:active { transform: scale(0.98); opacity: 0.9; }
+  .btn-gps svg { width: 24px; height: 24px; flex-shrink: 0; }
+  
+  /* GPS Result Display */
+  .gps-box {
+    margin-top: 14px; padding: 14px; border-radius: 12px;
+    background: #f8fafd; border: 1.5px dashed #bed4f7;
+    display: none;
+  }
+  .gps-box.active { display: block; }
+  .gps-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+  .gps-lbl { font-size: 12px; font-weight: 600; color: var(--soft); text-transform: uppercase; }
+  .gps-acc { font-size: 12px; font-weight: 600; color: var(--green); }
+  .gps-val {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 20px; font-weight: 700; color: #0d47a1;
+    word-break: break-all; margin: 4px 0 10px;
+  }
+  .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .btn-act {
+    padding: 10px 14px; border-radius: 10px; font-size: 13.5px; font-weight: 600;
+    text-align: center; text-decoration: none; cursor: pointer; border: 1px solid var(--line);
+    background: #fff; color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .btn-act.copy { background: var(--green); color: #fff; border-color: var(--green); }
+  .btn-act.maps { background: #fff; color: var(--blue); border-color: #bed4f7; }
+  
+  /* Quick Note Form */
+  .field { margin-bottom: 12px; }
+  label { display: block; font-size: 12.5px; font-weight: 600; color: var(--soft); margin-bottom: 4px; }
+  select, input, textarea {
+    width: 100%; padding: 11px 14px; border-radius: 10px;
+    border: 1px solid var(--line); font-family: inherit; font-size: 14.5px;
+    background: #fff; color: var(--ink); outline: none;
+  }
+  select:focus, input:focus, textarea:focus { border-color: var(--blue); }
+  
+  .btn-save {
+    width: 100%; border: none; border-radius: 12px;
+    background: #1e293b; color: #fff; padding: 13px; font-size: 15px; font-weight: 600;
+    cursor: pointer; margin-top: 6px;
+  }
+  
+  /* Saved List */
+  .item-list { list-style: none; padding: 0; margin: 0; }
+  .item {
+    background: #f8fafc; border: 1px solid var(--line); border-radius: 12px;
+    padding: 12px 14px; margin-bottom: 10px; position: relative;
+  }
+  .item-title { font-weight: 700; font-size: 15px; color: #1e3a5f; margin-bottom: 3px; }
+  .item-coords { font-family: monospace; font-size: 13px; color: var(--blue); font-weight: 600; }
+  .item-note { font-size: 13px; color: var(--soft); margin-top: 4px; }
+  .item-del {
+    position: absolute; top: 10px; right: 10px;
+    background: none; border: none; color: var(--red); font-size: 12px; font-weight: 600; cursor: pointer;
+  }
+  
+  .btn-export {
+    width: 100%; padding: 14px; border-radius: 12px;
+    background: #0068ff; color: #fff; font-size: 15px; font-weight: 700;
+    border: none; cursor: pointer; margin-top: 8px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  
+  /* Quick steps */
+  .step-h { font-size: 14px; font-weight: 700; color: #10243e; margin: 12px 0 6px; }
+  .step-p { font-size: 13.5px; color: var(--soft); margin: 0 0 8px; }
+  
+  /* Toast notification */
+  .toast {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+    background: rgba(15,23,42,0.92); color: #fff; font-size: 14px; font-weight: 500;
+    padding: 10px 20px; border-radius: 999px; z-index: 9999;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25); display: none; backdrop-filter: blur(8px);
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="header">
+    <div class="badge">🌿 DÒNG HỌ VŨ THÁI BÌNH</div>
+    <h1>Công Cụ Đo Tọa Độ Mộ Phần</h1>
+    <p class="desc">Ứng dụng bỏ túi trên iPhone khi đi khảo sát thực địa tại quê nhà</p>
+  </div>
+
+  <!-- SECTION 1: ONE-TAP GPS MEASUREMENT -->
+  <div class="card">
+    <div class="card-h">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+      <span>1. Đo Tọa Độ Tự Động (GPS)</span>
+    </div>
+    
+    <p style="font-size:13px; color:var(--soft); margin-bottom:12px;">Đứng sát đầu bia mộ, chờ khoảng 15 giây cho GPS ổn định rồi chạm nút dưới:</p>
+
+    <button type="button" class="btn-gps" id="btnGetGps" onclick="measureGPS()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+      <span>LẤY TỌA ĐỘ VỊ TRÍ NÀY</span>
+    </button>
+
+    <div class="gps-box" id="gpsBox">
+      <div class="gps-row">
+        <span class="gps-lbl">Tọa độ GPS vệ tinh:</span>
+        <span class="gps-acc" id="gpsAcc">Sai số ± ...m</span>
+      </div>
+      <div class="gps-val" id="gpsVal">Đang chờ tín hiệu...</div>
+      
+      <div class="btn-group">
+        <button type="button" class="btn-act copy" onclick="copyCoords()">📋 Sao chép</button>
+        <a class="btn-act maps" id="btnOpenMaps" target="_blank" href="#">🗺️ Mở Maps xem</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: QUICK SAVE LIST -->
+  <div class="card">
+    <div class="card-h">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b0720a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      <span>2. Lưu Nhật Ký Ngôi Mộ</span>
+    </div>
+
+    <div class="field">
+      <label>Mộ phần cụ nào:</label>
+      <select id="selCu">
+        <option value="Cụ Thủy Tổ Vũ Đạo Chính (Lăng Tiên Tổ - Thôn Miếu)">Cụ Thủy Tổ Vũ Đạo Chính (Lăng Tiên Tổ)</option>
+        <option value="Cụ Tổ Đời 7 Vũ Đức Mậu (Đường Chay trong)">Cụ Tổ Đời 7 Vũ Đức Mậu (Đường Chay trong)</option>
+        <option value="Cụ Tổ Chi 2 Vũ Đức Tiên (Cụ Bá Tiên)">Cụ Tổ Chi 2 Vũ Đức Tiên (Cụ Bá Tiên)</option>
+        <option value="Cụ Khởi Tổ Ngành I Vũ Đức Luân (Cụ Giáo Luân)">Cụ Vũ Đức Luân (Cụ Giáo Luân)</option>
+        <option value="Cụ Khởi Tổ Ngành II Vũ Đức Trạch (Cụ Thế Long)">Cụ Vũ Đức Trạch (Cụ Thế Long)</option>
+        <option value="Cụ Khởi Tổ Ngành III Vũ Lợi Thiệp (Cụ Tổng Tiềm)">Cụ Vũ Lợi Thiệp (Cụ Tổng Tiềm)</option>
+        <option value="khac">Khác (tự nhập tên cụ)...</option>
+      </select>
+    </div>
+
+    <div class="field" id="customNameBox" style="display:none;">
+      <label>Nhập tên cụ / mộ phần:</label>
+      <input type="text" id="customName" placeholder="Ví dụ: Mộ cụ bà Chu Thị Liên...">
+    </div>
+
+    <div class="field">
+      <label>Mô tả vị trí thực tế:</label>
+      <input type="text" id="txtMoTa" placeholder="Ví dụ: Hàng 2, ngôi thứ 3 bên trái lăng...">
+    </div>
+
+    <button type="button" class="btn-save" onclick="saveRecord()">➕ Lưu vào danh sách khảo sát</button>
+  </div>
+
+  <!-- SECTION 3: EXPORT RESULTS -->
+  <div class="card">
+    <div class="card-h">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#188038" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <span>3. Danh Sách Đã Thu Thập (<span id="savedCount">0</span>)</span>
+    </div>
+
+    <ul class="item-list" id="savedList">
+      <li style="color:var(--soft); font-size:13.5px; text-align:center; padding:15px 0;">Chưa có ngôi mộ nào được lưu. Bấm đo và lưu ở trên.</li>
+    </ul>
+
+    <button type="button" class="btn-export" id="btnExport" style="display:none;" onclick="exportToZalo()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+      <span>SAO CHÉP TOÀN BỘ GỬI ZALO</span>
+    </button>
+  </div>
+
+  <!-- SECTION 4: FIELD TIPS -->
+  <div class="card">
+    <div class="card-h">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5e6678" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <span>4. Cẩm Nang Đo Bằng Google Maps Thủ Công</span>
+    </div>
+
+    <div class="step-h">Nếu không dùng nút tự động ở trên, mở app Google Maps:</div>
+    <p class="step-p">1. Bấm nút <b>Định vị tròn</b> để về chấm xanh.</p>
+    <p class="step-p">2. <b>Ấn giữ 2 giây</b> vào chấm xanh để cắm ghim đỏ.</p>
+    <p class="step-p">3. Kéo bảng dưới lên, chạm vào số tọa độ (ví dụ <code>20.564128, 106.512349</code>) để Copy.</p>
+    <p class="step-p">4. Nhớ chụp 1 ảnh cận cảnh bia mộ + 1 ảnh toàn cảnh lối vào.</p>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">Đã sao chép!</div>
+
+<script>
+  var curLat = null, curLng = null, curAcc = null;
+  var records = JSON.parse(localStorage.getItem('gp_khao_sat') || '[]');
+
+  document.getElementById('selCu').addEventListener('change', function(e) {
+    document.getElementById('customNameBox').style.display = (e.target.value === 'khac') ? 'block' : 'none';
+  });
+
+  function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.innerText = msg;
+    t.style.display = 'block';
+    setTimeout(function() { t.style.display = 'none'; }, 2200);
+  }
+
+  function measureGPS() {
+    var btn = document.getElementById('btnGetGps');
+    var box = document.getElementById('gpsBox');
+    var val = document.getElementById('gpsVal');
+    var acc = document.getElementById('gpsAcc');
+
+    if (!navigator.geolocation) {
+      alert('Trình duyệt trên máy không hỗ trợ GPS vệ tinh.');
+      return;
+    }
+
+    btn.innerHTML = '<span>⏳ Đang bắt sóng vệ tinh GPS...</span>';
+    btn.style.opacity = '0.7';
+
+    navigator.geolocation.getCurrentPosition(
+      function(pos) {
+        curLat = pos.coords.latitude.toFixed(6);
+        curLng = pos.coords.longitude.toFixed(6);
+        curAcc = Math.round(pos.coords.accuracy);
+
+        box.classList.add('active');
+        val.innerText = curLat + ', ' + curLng;
+        acc.innerText = 'Sai số ± ' + curAcc + 'm (vệ tinh)';
+
+        document.getElementById('btnOpenMaps').href = 'https://www.google.com/maps/search/?api=1&query=' + curLat + ',' + curLng;
+
+        btn.innerHTML = '<span>✓ ĐÃ ĐO XONG (BẤM ĐỂ ĐO LẠI)</span>';
+        btn.style.opacity = '1';
+        showToast('Đã lấy tọa độ GPS thành công!');
+      },
+      function(err) {
+        btn.innerHTML = '<span>LẤY TỌA ĐỘ VỊ TRÍ NÀY</span>';
+        btn.style.opacity = '1';
+        var msg = 'Không thể lấy GPS. Vui lòng bật "Dịch vụ định vị" cho trình duyệt trong Cài đặt iPhone.';
+        if (err.code === 1) msg = 'Bạn đã từ chối quyền truy cập vị trí. Hãy bật lại trong Cài đặt Safari/Chrome.';
+        alert(msg);
+      },
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 }
+    );
+  }
+
+  function copyCoords() {
+    if (!curLat) return;
+    var str = curLat + ', ' + curLng;
+    navigator.clipboard.writeText(str).then(function() {
+      showToast('Đã chép: ' + str);
+    });
+  }
+
+  function saveRecord() {
+    if (!curLat) {
+      alert('Vui lòng bấm nút "LẤY TỌA ĐỘ" ở trên trước khi lưu!');
+      return;
+    }
+    var sel = document.getElementById('selCu');
+    var name = sel.value;
+    if (name === 'khac') {
+      name = document.getElementById('customName').value.trim() || 'Mộ phần (chưa rõ tên)';
+    }
+    var mota = document.getElementById('txtMoTa').value.trim();
+
+    var item = {
+      id: Date.now(),
+      ten: name,
+      lat: curLat,
+      lng: curLng,
+      acc: curAcc,
+      mota: mota,
+      time: new Date().toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'})
+    };
+
+    records.push(item);
+    localStorage.setItem('gp_khao_sat', JSON.stringify(records));
+    renderList();
+    document.getElementById('txtMoTa').value = '';
+    showToast('Đã lưu vào danh sách!');
+  }
+
+  function deleteItem(idx) {
+    if (confirm('Xóa mục này?')) {
+      records.splice(idx, 1);
+      localStorage.setItem('gp_khao_sat', JSON.stringify(records));
+      renderList();
+    }
+  }
+
+  function renderList() {
+    var ul = document.getElementById('savedList');
+    var cnt = document.getElementById('savedCount');
+    var exp = document.getElementById('btnExport');
+    cnt.innerText = records.length;
+
+    if (records.length === 0) {
+      ul.innerHTML = '<li style="color:var(--soft); font-size:13.5px; text-align:center; padding:15px 0;">Chưa có ngôi mộ nào được lưu. Bấm đo và lưu ở trên.</li>';
+      exp.style.display = 'none';
+      return;
+    }
+
+    exp.style.display = 'flex';
+    var html = '';
+    records.forEach(function(r, idx) {
+      html += '<li class="item">' +
+        '<button type="button" class="item-del" onclick="deleteItem(' + idx + ')">Xóa</button>' +
+        '<div class="item-title">' + (idx + 1) + '. ' + r.ten + '</div>' +
+        '<div class="item-coords">📍 ' + r.lat + ', ' + r.lng + ' (±' + r.acc + 'm · ' + r.time + ')</div>' +
+        (r.mota ? '<div class="item-note">📝 ' + r.mota + '</div>' : '') +
+      '</li>';
+    });
+    ul.innerHTML = html;
+  }
+
+  function exportToZalo() {
+    if (records.length === 0) return;
+    var text = '=== KẾT QUẢ KHẢO SÁT TỌA ĐỘ MỘ PHẦN HỌ VŨ ===\n';
+    text += 'Thời gian: ' + new Date().toLocaleDateString('vi-VN') + '\n\n';
+    records.forEach(function(r, idx) {
+      text += (idx + 1) + '. ' + r.ten + '\n';
+      text += '📍 Tọa độ: ' + r.lat + ', ' + r.lng + ' (±' + r.acc + 'm)\n';
+      if (r.mota) text += '📝 Mô tả: ' + r.mota + '\n';
+      text += '🗺️ Maps: https://www.google.com/maps/search/?api=1&query=' + r.lat + ',' + r.lng + '\n\n';
+    });
+
+    navigator.clipboard.writeText(text).then(function() {
+      alert('Đã sao chép toàn bộ danh sách kết quả!\n\nAnh chỉ cần mở Zalo và Bấm DÁN (Paste) để gửi cho chính mình hoặc nhóm họ.');
+    });
+  }
+
+  renderList();
+</script>
+
+</body>
+</html>
