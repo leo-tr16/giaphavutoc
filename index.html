@@ -1530,7 +1530,7 @@
   }
   .ev-head-main{flex:1;min-width:0;}
   .ev-head-title{
-    margin:0;font-family:'Lora',serif;font-size:18px;font-weight:700;line-height:1.35;
+    margin:0;font-family:'Lora',serif;font-size:18px;font-weight:600;line-height:1.35;
     letter-spacing:.01em;color:var(--ink-name);text-align:left;
   }
   .ev-head-sub{
@@ -1540,7 +1540,7 @@
   .ev-sub-tag{
     display:inline-flex;align-items:center;padding:1px 7px;border-radius:999px;
     background:var(--paper);border:1px solid var(--gold-rule);
-    font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-ink);
+    font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-ink);
   }
   /* Thân thẻ: dọn bỏ khung 'Thời gian' thừa thãi */
   .ev-body{display:block;padding:2px 26px 24px;}
@@ -1588,7 +1588,8 @@
     .event-notice-head{padding:14px 14px 13px;gap:10px;}
     .ev-head-icon svg{width:16px;height:16px;padding:6px;border-radius:8px;}
     .ev-head-title{font-size:16px;}
-    .ev-head-sub{font-size:12.5px;margin-top:4px;}
+    .ev-head-sub{display:block;font-size:12.5px;margin-top:6px;line-height:1.6;}
+    .ev-head-sub .ev-sub-tag{margin-right:6px;vertical-align:1px;}
     .gio-sec-title{font-size:16px;gap:10px;margin-bottom:16px;padding-bottom:12px;}
     .gio-sec-title svg{width:16px;height:16px;padding:7px;border-radius:8px;}
     .ev-body{padding:2px 14px 18px;}
@@ -2350,112 +2351,102 @@
   .page-back,.page-back-end,.gp-fab,.chi-sticky{display:none !important;}
 }
 
-  /* ═══ Ô THANH MINH SẮP TỚI — Tinh gọn, súc tích & Hài hòa ═══ */
+  /* ═══ Ô THANH MINH SẮP TỚI — v3 (2026-10) ═══
+     Nguyên tắc: MỘT điểm nhấn duy nhất là ngày dương lịch (Lora 600).
+     Còn lại: nhãn chữ nhỏ mờ (không đậm), giá trị chữ thường; bỏ dấu "·" nối dòng
+     để mobile không còn ký tự lửng đầu dòng. Bố cục lưới: tờ lịch | đầu thẻ / thân thẻ. */
   .tm-next{
-    display:flex;align-items:flex-start;gap:16px;
-    margin:14px 20px 14px;padding:14px 18px;border-radius:12px;
+    display:grid;grid-template-columns:64px minmax(0,1fr);column-gap:20px;
+    margin:16px 20px;padding:18px 22px 18px 20px;border-radius:12px;
     background:var(--gold-bg);
-    border:1px solid var(--gold-rule);
-    border-left:4px solid var(--gold);
-    box-shadow:0 1px 3px rgba(0,0,0,.03);
+    border:1px solid var(--gold-rule);border-left:3px solid var(--gold);
   }
   .tm-next [hidden]{display:none !important;}
   .tm-next[data-tm-status="chinh-thuc"]{border-left-color:#2f6b4f;}
 
-  /* Tờ lịch mini */
+  /* Tờ lịch mini — chữ mảnh, chỉ số ngày là serif */
   .tm-tile{
-    flex:none;width:64px;display:flex;flex-direction:column;align-items:center;overflow:hidden;
+    grid-column:1;grid-row:1 / span 2;align-self:start;
+    width:64px;display:flex;flex-direction:column;align-items:center;overflow:hidden;
     border:1px solid var(--gold-rule);border-radius:8px;background:var(--paper);
-    box-shadow:0 2px 5px rgba(120,90,30,.08);
   }
   .tm-mo{
     align-self:stretch;display:flex;justify-content:center;padding:3px 2px;
     background:var(--gold-ink);color:var(--paper);
-    font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+    font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
   }
   .tm-next[data-tm-status="chinh-thuc"] .tm-mo{background:#245a41;}
   .tm-day{
-    font-family:'Lora',serif;font-size:25px;font-weight:700;line-height:1.15;
-    color:var(--ink-name);padding:4px 0 1px;font-variant-numeric:lining-nums;
+    font-family:'Lora',serif;font-size:26px;font-weight:500;line-height:1.1;
+    color:var(--ink-name);padding:7px 0 1px;font-variant-numeric:lining-nums;
   }
-  .tm-wd{
-    padding:0 2px 5px;font-size:11px;font-weight:600;color:var(--gold-ink);
-  }
+  .tm-wd{padding:0 2px 7px;font-size:10.5px;font-weight:400;color:var(--ink-meta);}
 
-  /* Nội dung bên phải: gọn gàng, súc tích */
-  .tm-content{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;}
-
-  /* Kicker: Tiêu đề năm + Đếm ngược (chữ thường thanh mảnh, không đóng khung hộp) */
-  .tm-kicker{
-    display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;
-    font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-ink);
-  }
-  .tm-sep{color:var(--ink-meta);font-weight:normal;opacity:.6;margin:0 2px;}
-  .tm-count{font-size:11.5px;font-weight:500;color:var(--ink-meta);text-transform:none;letter-spacing:normal;}
-  .tm-count b{font-weight:700;color:var(--ink-name);}
-
-  /* Hàng ngày tháng: Dương lịch + Label Trạng thái + Âm lịch */
-  .tm-date-row{
-    display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;
+  /* Đầu thẻ: kicker → ngày + trạng thái → âm lịch · đếm ngược */
+  .tm-head{grid-column:2;min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:0 12px;}
+  .tm-title{
+    flex-basis:100%;margin:0 0 5px;
+    font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink);
   }
   .tm-date{
-    margin:0;font-family:'Lora',serif;font-size:18px;font-weight:700;line-height:1.3;
-    color:var(--ink-name);
+    margin:0;font-family:'Lora',serif;font-size:22px;font-weight:600;line-height:1.3;
+    letter-spacing:.005em;color:var(--ink-name);font-variant-numeric:lining-nums;
   }
-  /* Tag trạng thái duy nhất: bo nhẹ 4px, phân biệt rõ với button/pill */
+  /* Trạng thái: chấm tròn + chữ thường, không viết hoa, không đậm */
   .tm-status{
-    display:inline-flex;align-items:center;padding:1.5px 7px;border-radius:4px;
-    font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
-    background:#fff8eb;border:1px solid #ebd3a2;color:#8c5600;
+    display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px 0 8px;border-radius:999px;
+    font-size:11.5px;font-weight:500;line-height:1;white-space:nowrap;
+    color:#8c5600;background:rgba(255,255,255,.55);border:1px solid #ebd3a2;
   }
-  .tm-next[data-tm-status="chinh-thuc"] .tm-status{
-    background:#edf7f2;border-color:#99d6b5;color:#1a633c;
-  }
-  .tm-lunar{
-    font-size:13.5px;line-height:1.4;color:var(--ink-body);font-style:italic;
-  }
+  .tm-status::before{content:'';flex:none;width:6px;height:6px;border-radius:50%;background:currentColor;}
+  .tm-next[data-tm-status="chinh-thuc"] .tm-status{color:#1a633c;background:#edf7f2;border-color:#99d6b5;}
+  .tm-sub{flex-basis:100%;margin:5px 0 0;font-size:13.5px;line-height:1.55;color:var(--ink-meta);}
+  .tm-lunar{color:var(--ink-body);}
+  .tm-count{color:var(--gold-ink);}
+  .tm-lunar .nw{white-space:nowrap;}
+  .tm-count b{font-weight:600;font-variant-numeric:tabular-nums;}
+  .tm-lunar:not([hidden]) + .tm-count::before{content:'';display:inline-block;width:3px;height:3px;margin:0 10px 3px;border-radius:50%;background:var(--ink-meta);opacity:.55;}
 
-  /* Thông tin phụ: 1 dòng thanh mảnh, bỏ viền đứt rườm rà */
-  .tm-facts{
-    display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin:1px 0;
-    font-size:13px;line-height:1.5;color:var(--ink-body);
+  /* Thân thẻ: đường kẻ mảnh tách khối, thông tin dạng Nhãn / Giá trị */
+  .tm-body{
+    grid-column:2;min-width:0;margin-top:16px;padding-top:14px;
+    border-top:1px solid color-mix(in srgb, var(--gold-rule) 60%, transparent);
   }
-  .tm-fact b{color:var(--ink-name);font-weight:600;}
+  .tm-facts{display:flex;flex-wrap:wrap;gap:12px 48px;margin:0;}
+  .tm-fact{min-width:0;}
+  .tm-fact dt{
+    margin:0 0 3px;font-size:10.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-meta);
+  }
+  .tm-fact dd{margin:0;font-size:14px;line-height:1.5;color:var(--ink-body);}
 
-  /* Chân: Nút thêm lịch + Ghi chú ngắn gọn */
-  .tm-foot{
-    display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-top:2px;
-  }
+  /* Chân: Nút thêm lịch + ghi chú */
+  .tm-foot{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:16px;}
   .tm-cal-wrap{position:relative;display:inline-block;}
   .tm-btn{
-    display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:7px;
-    font-family:'Be Vietnam Pro',sans-serif;font-size:12.5px;font-weight:600;text-decoration:none;
-    background:var(--paper);color:var(--gold-ink);border:1px solid var(--gold);
-    box-shadow:0 1px 2px rgba(120,90,30,.06);cursor:pointer;
-    transition:all .15s ease;-webkit-tap-highlight-color:transparent;
+    display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 14px;border-radius:8px;
+    font-family:'Be Vietnam Pro',sans-serif;font-size:13px;font-weight:500;text-decoration:none;
+    background:var(--paper);color:var(--gold-ink);border:1px solid var(--gold-rule);
+    cursor:pointer;transition:background-color .15s ease,border-color .15s ease,color .15s ease;
+    -webkit-tap-highlight-color:transparent;
   }
-  .tm-btn svg{flex:none;width:14px;height:14px;color:var(--gold);}
-  .tm-btn-arrow{width:11px !important;height:11px !important;transition:transform .2s ease;}
+  .tm-btn svg{flex:none;width:15px;height:15px;color:var(--gold);}
+  .tm-btn-arrow{width:11px !important;height:11px !important;opacity:.7;transition:transform .2s ease;}
   .tm-cal-wrap.is-open .tm-btn-arrow{transform:rotate(180deg);}
-  .tm-btn:hover{
-    background:var(--gold);color:var(--paper);border-color:var(--gold);
-    box-shadow:0 2px 6px rgba(120,90,30,.18);transform:translateY(-1px);
-  }
+  .tm-btn:hover{background:var(--gold-ink);color:var(--paper);border-color:var(--gold-ink);}
   .tm-btn:hover svg{color:var(--paper);}
-  .tm-btn:active{transform:none;box-shadow:none;}
   .tm-btn:focus-visible{outline:2px solid var(--blue2);outline-offset:2px;}
 
   /* Popover menu Thêm vào lịch */
   .tm-cal-pop{
     position:absolute;left:0;top:calc(100% + 6px);z-index:90;
-    width:250px;padding:6px;border-radius:10px;
+    width:260px;padding:6px;border-radius:10px;
     background:var(--paper);border:1px solid var(--gold-rule);
     box-shadow:0 6px 20px rgba(120,90,30,.15),0 1px 3px rgba(0,0,0,.06);
     display:flex;flex-direction:column;gap:3px;
   }
   .tm-cal-pop[hidden]{display:none !important;}
   .tm-cal-item{
-    display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;
+    display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:7px;
     text-decoration:none;color:var(--ink-body);background:none;border:none;width:100%;
     text-align:left;font-family:inherit;cursor:pointer;
     transition:background .15s ease;-webkit-tap-highlight-color:transparent;
@@ -2463,49 +2454,58 @@
   .tm-cal-item:hover{background:var(--gold-bg);}
   .tm-cal-ico{flex:none;font-size:17px;line-height:1;}
   .tm-cal-txt{display:flex;flex-direction:column;gap:1px;text-align:left;}
-  .tm-cal-txt strong{font-size:12.5px;font-weight:600;color:var(--ink-name);line-height:1.3;}
-  .tm-cal-txt small{font-size:10.5px;color:var(--ink-meta);line-height:1.3;}
+  .tm-cal-txt strong{font-size:13px;font-weight:500;color:var(--ink-name);line-height:1.3;}
+  .tm-cal-txt small{font-size:11px;color:var(--ink-meta);line-height:1.3;}
 
   /* Hướng dẫn thêm vào iPhone */
   .tm-cal-guide{
-    margin-top:6px;padding:10px 14px;border-radius:8px;
-    background:#f4f8fa;border:1px solid #cbe0ea;border-left:4px solid #2a7a9e;
+    margin-top:12px;padding:10px 14px;border-radius:8px;
+    background:#f4f8fa;border:1px solid #cbe0ea;border-left:3px solid #2a7a9e;
   }
   .tm-cal-guide[hidden]{display:none !important;}
   .tm-guide-title{
     display:flex;align-items:center;justify-content:space-between;gap:8px;
-    font-size:12px;font-weight:700;color:#18536e;margin-bottom:5px;
+    font-size:12.5px;font-weight:600;color:#18536e;margin-bottom:5px;
   }
   .tm-guide-close{
     background:none;border:none;font-size:18px;line-height:1;color:#18536e;
     cursor:pointer;padding:0 4px;opacity:.7;
   }
   .tm-guide-close:hover{opacity:1;}
-  .tm-guide-list{
-    margin:0;padding-left:16px;font-size:11.5px;line-height:1.6;color:#284553;
-  }
+  .tm-guide-list{margin:0;padding-left:16px;font-size:12px;line-height:1.6;color:#284553;}
   .tm-guide-list li{margin-bottom:2px;}
-  .tm-guide-list b{color:#103445;font-weight:700;}
+  .tm-guide-list b{color:#103445;font-weight:600;}
 
-  .tm-note{font-size:12px;line-height:1.45;color:var(--ink-meta);font-style:italic;}
+  .tm-note{font-size:12.5px;line-height:1.5;color:var(--ink-meta);}
   .tm-next.is-past{opacity:.75;}
 
-  /* Responsive Mobile */
+  /* Mobile: tờ lịch + đầu thẻ cùng hàng; thân thẻ tràn hết chiều ngang.
+     Mỗi dòng MỘT thông tin → không còn xuống dòng lửng. */
   @media (max-width:680px){
-    .tm-next{
-      gap:12px;margin:12px 14px 12px;padding:12px 14px;
-    }
-    .tm-tile{width:56px;}
-    .tm-day{font-size:22px;}
-    .tm-mo{font-size:9.5px;}
-    .tm-wd{font-size:10px;padding-bottom:3px;}
-    .tm-date{font-size:16.5px;}
-    .tm-lunar{font-size:13px;}
-    .tm-facts{gap:4px 6px;}
-    .tm-foot{flex-direction:column;align-items:flex-start;gap:8px;}
+    .tm-next{grid-template-columns:52px minmax(0,1fr);column-gap:12px;margin:12px 14px;padding:14px 13px 16px;}
+    .tm-tile{grid-row:1;width:52px;}
+    .tm-day{font-size:22px;padding-top:5px;}
+    .tm-mo{font-size:9px;letter-spacing:.03em;white-space:nowrap;}
+    .tm-wd{font-size:10px;padding-bottom:5px;}
+    .tm-title{font-size:10.5px;letter-spacing:.1em;margin-bottom:3px;}
+    .tm-date{flex-basis:100%;font-size:18px;}
+    .tm-sub{display:contents;}
+    .tm-lunar{flex-basis:100%;margin-top:3px;font-size:12.5px;line-height:1.5;}
+    .tm-count{margin-top:6px;font-size:13px;line-height:22px;}
+    .tm-lunar:not([hidden]) + .tm-count::before{display:none;}
+    .tm-status{order:9;margin-top:6px;height:22px;font-size:11px;}
+    .tm-body{grid-column:1 / -1;margin-top:14px;padding-top:12px;}
+    .tm-facts{flex-direction:column;gap:10px;}
+    .tm-fact dd{font-size:14.5px;}
+    .tm-foot{flex-direction:column;align-items:stretch;gap:8px;margin-top:14px;}
     .tm-cal-wrap{width:100%;}
-    .tm-btn{width:100%;justify-content:center;height:36px;font-size:13.5px;}
+    .tm-btn{width:100%;justify-content:center;height:44px;font-size:14px;}
     .tm-cal-pop{width:100%;box-sizing:border-box;}
+  }
+
+  @media (prefers-color-scheme: dark){
+    .tm-status{color:#e0b46a;background:transparent;border-color:#6f5d33;}
+    .tm-next[data-tm-status="chinh-thuc"] .tm-status{color:#8fd1ae;background:transparent;border-color:#2f6b4f;}
   }
 
   /* ════════ PHƯƠNG ÁN B: CÂN BẰNG QUANG HỌC NÂNG CAO (2026-10) ════════
@@ -2528,18 +2528,21 @@
   .gp-tab-btn{min-height:48px;padding:10px 4px 12px;font-size:15px;font-weight:500;color:#6b635a;letter-spacing:0.01em;}
   .gp-tab-btn.active{font-weight:600;color:#244b78;}
   .gp-tab-btn::after{background:#244b78;height:2.5px;}
-  .history-wrap .hist-hero,.events-wrap .hist-hero,.page-wrap .hist-hero{margin:0 0 18px;padding:0 20px;text-align:left;}
-  .hist-hero-title,.page-wrap .hist-hero-title{font-family:'Be Vietnam Pro',sans-serif;font-size:17.5px;font-weight:600;line-height:1.4;letter-spacing:-0.01em;color:#214a75;margin:0 0 5px;text-align:left;text-wrap:wrap;}
-  .hist-hero-sub,.page-wrap .hist-hero-sub{font-family:'Be Vietnam Pro',sans-serif;font-size:14px;font-weight:400;line-height:1.65;color:#544d46;margin:0;text-align:left;text-wrap:wrap;}
+  /* Lời dẫn đầu tab (2026-10): là CHÚ THÍCH, không phải tiêu đề nội dung →
+     nhãn chữ nhỏ giãn cách màu vàng (đồng bộ "GIA PHẢ" ở header) + lời dẫn serif nghiêng,
+     đường chỉ vàng bên trái tách hẳn khỏi các thẻ nội dung bên dưới. */
+  .history-wrap .hist-hero,.events-wrap .hist-hero,.page-wrap .hist-hero{margin:0 20px 28px;padding:2px 0 3px 18px;text-align:left;background:none;border:0;border-left:2px solid #c9ad76;border-radius:0;}
+  .hist-hero-title,.page-wrap .hist-hero-title{font-family:'Be Vietnam Pro',sans-serif;font-size:11.5px;font-weight:600;line-height:1.5;letter-spacing:.14em;text-transform:uppercase;color:#8c6a32;margin:0 0 7px;text-align:left;text-wrap:wrap;}
+  .hist-hero-sub,.page-wrap .hist-hero-sub{font-family:'Lora',serif;font-style:italic;font-size:16px;font-weight:400;line-height:1.7;color:#5c544b;max-width:68ch;margin:0;text-align:left;text-wrap:wrap;}
 
   @media (max-width:680px){
     header h1{font-size:clamp(24px,7vw,27px);margin:8px 0 10px;}
     .gp-tabs-wrap{margin-top:14px;}
     .gp-tabs{gap:0;width:100%;}
     .gp-tab-btn{font-size:13.5px;min-height:46px;}
-    .history-wrap .hist-hero,.events-wrap .hist-hero,.page-wrap .hist-hero{padding:0 14px;margin-bottom:14px;}
-    .hist-hero-title,.page-wrap .hist-hero-title{font-size:16px;}
-    .hist-hero-sub,.page-wrap .hist-hero-sub{font-size:13.5px;line-height:1.6;}
+    .history-wrap .hist-hero,.events-wrap .hist-hero,.page-wrap .hist-hero{margin:0 16px 20px;padding:1px 0 2px 14px;}
+    .hist-hero-title,.page-wrap .hist-hero-title{font-size:10.5px;letter-spacing:.12em;margin-bottom:5px;}
+    .hist-hero-sub,.page-wrap .hist-hero-sub{font-size:14.5px;line-height:1.65;}
   }
 
   @media (prefers-color-scheme: dark){
@@ -2550,8 +2553,9 @@
     .gp-tab-btn{color:#a29a90;}
     .gp-tab-btn.active{color:#7fafe0;}
     .gp-tab-btn::after{background:#7fafe0;}
-    .hist-hero-title,.page-wrap .hist-hero-title{color:#7fafe0;}
+    .hist-hero-title,.page-wrap .hist-hero-title{color:#cbb07a;}
     .hist-hero-sub,.page-wrap .hist-hero-sub{color:#b6b0a6;}
+    .history-wrap .hist-hero,.events-wrap .hist-hero,.page-wrap .hist-hero{border-left-color:#6f5d33;}
   }
 </style>
 </head>
@@ -4011,17 +4015,17 @@
       </div>
         <section class="tm-next" data-tm-date="2027-04-11" data-tm-status="du-kien" data-tm-noi="Khu Lăng mộ Tiên Tổ, xã Thụy Chính" aria-labelledby="tm-next-date">
           <div class="tm-tile" aria-hidden="true"><span class="tm-mo">Tháng 4</span><b class="tm-day">11</b><span class="tm-wd">Chủ nhật</span></div>
-          <div class="tm-content">
-            <div class="tm-kicker">
-              <span class="tm-title">Thanh Minh năm Đinh Mùi</span>
-              <span class="tm-count" data-f="count" hidden></span>
-            </div>
-            <div class="tm-date-row">
-              <h3 class="tm-date" id="tm-next-date">Chủ nhật, 11/04/2027</h3>
-              <span class="tm-status" data-f="status">Dự kiến</span>
+          <div class="tm-head">
+            <span class="tm-title">Thanh Minh năm Đinh Mùi</span>
+            <h3 class="tm-date" id="tm-next-date">Chủ nhật, 11/04/2027</h3>
+            <span class="tm-status" data-f="status">Dự kiến</span>
+            <p class="tm-sub">
               <span class="tm-lunar" data-f="lunar" hidden></span>
-            </div>
-            <div class="tm-facts"><span class="tm-fact"><b>Tập trung:</b> Khu Lăng mộ Tiên Tổ, xã Thụy Chính</span><span class="tm-sep" aria-hidden="true">·</span><span class="tm-fact"><b>Tiết Thanh Minh:</b> Thứ hai, 05/04/2027</span></div>
+              <span class="tm-count" data-f="count" hidden></span>
+            </p>
+          </div>
+          <div class="tm-body">
+            <dl class="tm-facts"><div class="tm-fact"><dt>Tập trung</dt><dd>Khu Lăng mộ Tiên Tổ, xã Thụy Chính</dd></div><div class="tm-fact"><dt>Tiết Thanh Minh</dt><dd>Thứ hai, 05/04/2027</dd></div></dl>
             <div class="tm-foot">
               <div class="tm-cal-wrap">
                 <button type="button" class="tm-btn" data-f="cal-btn" aria-haspopup="true" aria-expanded="false">
@@ -4657,11 +4661,11 @@ var AL=(function(){
   function f(k){return box.querySelector('[data-f="'+k+'"]');}
   var L=AL.toLunar(d,m,y), nam=CAN[L[2]%10]+' '+CHI[L[2]%12];
   var am=(L[0]<=10?'Mùng ':'Ngày ')+L[0]+' tháng '+L[1]+(L[3]?' nhuận':'')+' năm '+nam;
-  var lu=f('lunar'); lu.innerHTML='<span class="tm-sep" aria-hidden="true">·</span> '+am+' (âm lịch)'; lu.hidden=false;
+  var lu=f('lunar'); lu.innerHTML=am+' <span class="nw">(âm lịch)</span>'; lu.hidden=false;
   var now=new Date(), days=Math.round((Date.UTC(y,m-1,d)-Date.UTC(now.getFullYear(),now.getMonth(),now.getDate()))/864e5);
   var c=f('count');
-  if(days>0){ c.innerHTML='<span class="tm-sep" aria-hidden="true">·</span> Còn <b>'+days+'</b> ngày'; c.hidden=false; }
-  else if(days===0){ c.innerHTML='<span class="tm-sep" aria-hidden="true">·</span> <b>Hôm nay</b> là ngày Thanh Minh'; c.hidden=false; }
+  if(days>0){ c.innerHTML='Còn <b>'+days+'</b> ngày'; c.hidden=false; }
+  else if(days===0){ c.innerHTML='<b>Hôm nay</b> là ngày Thanh Minh'; c.hidden=false; }
   else { box.classList.add('is-past'); f('status').textContent='Đã diễn ra'; f('note').textContent='Dòng họ sẽ thông báo ngày Thanh Minh năm sau.'; return; }
 
   /* Chuẩn bị link Google Calendar & file Apple Calendar */
