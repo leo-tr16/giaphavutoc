@@ -16,7 +16,7 @@
 </script>
 <title>Gia Phả Vũ Tộc — Thái Bình</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500&text=%E4%BA%94%E6%9E%9D%E8%8A%B3%E6%AD%A6&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -2456,7 +2456,8 @@
   .tm-cal-pop[hidden]{display:none !important;}
   .tm-cal-item{
     display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:7px;
-    text-decoration:none;color:var(--ink-body);
+    text-decoration:none;color:var(--ink-body);background:none;border:none;width:100%;
+    text-align:left;font-family:inherit;cursor:pointer;
     transition:background .15s ease;-webkit-tap-highlight-color:transparent;
   }
   .tm-cal-item:hover{background:var(--gold-bg);}
@@ -2506,6 +2507,52 @@
     .tm-btn{width:100%;justify-content:center;height:36px;font-size:13.5px;}
     .tm-cal-pop{width:100%;box-sizing:border-box;}
   }
+
+  /* ════════ PHƯƠNG ÁN B: CÂN BẰNG QUANG HỌC NÂNG CAO (2026-10) ════════
+     Tinh chỉnh theo feedback người dùng:
+     ① Header H1 Lora 600 (Semi-bold, 33px) đậm đà, uy nghi, không bị mảnh; màu mực nâu than hoàng gia #2e2621.
+     ② Tiêu đề Hero chuyên mục hạ xuống 17.5px / font-weight 600 gọn gàng, không bị to thô át phần trên.
+     ③ Tuân thủ: text-align: left & text-wrap: wrap; CẤM justify/pretty; chạm >= 44px. */
+  .eyebrow{font-size:11.5px;font-weight:600;letter-spacing:0.3em;color:#8c6a32;text-transform:uppercase;}
+  header h1{font-family:'Lora',serif;font-size:33px;font-weight:600;line-height:1.25;letter-spacing:0.04em;color:#2e2621;margin:10px 0 14px;}
+  .h-orn{margin:0 0 18px;color:#c9ad76;}
+  .header-actions{margin-top:0;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:4px 10px;}
+  .btn-hdr-action{min-height:44px;padding:6px 12px;font-size:13.5px;font-weight:500;color:#574e46;background:transparent;display:inline-flex;align-items:center;gap:7px;text-decoration:none;border-radius:6px;transition:background-color .15s ease;}
+  .btn-hdr-action:hover{background:rgba(176,138,60,.08);}
+  .btn-hdr-action svg{width:16px;height:16px;background:transparent;color:#8c6a32;}
+  .btn-hdr-action span{text-decoration:underline dotted #bfa063;text-underline-offset:4px;}
+  .btn-hdr-action::after{opacity:.45;}
+  .btn-hdr-action:first-child::before{background:#b33927;}
+  .gp-tabs-wrap{margin-top:20px;}
+  .gp-tabs{gap:32px;}
+  .gp-tab-btn{min-height:48px;padding:10px 4px 12px;font-size:15px;font-weight:500;color:#6b635a;letter-spacing:0.01em;}
+  .gp-tab-btn.active{font-weight:600;color:#244b78;}
+  .gp-tab-btn::after{background:#244b78;height:2.5px;}
+  .history-wrap .hist-hero,.events-wrap .hist-hero,.page-wrap .hist-hero{margin:0 0 18px;padding:0 20px;text-align:left;}
+  .hist-hero-title,.page-wrap .hist-hero-title{font-family:'Be Vietnam Pro',sans-serif;font-size:17.5px;font-weight:600;line-height:1.4;letter-spacing:-0.01em;color:#214a75;margin:0 0 5px;text-align:left;text-wrap:wrap;}
+  .hist-hero-sub,.page-wrap .hist-hero-sub{font-family:'Be Vietnam Pro',sans-serif;font-size:14px;font-weight:400;line-height:1.65;color:#544d46;margin:0;text-align:left;text-wrap:wrap;}
+
+  @media (max-width:680px){
+    header h1{font-size:clamp(24px,7vw,27px);margin:8px 0 10px;}
+    .gp-tabs-wrap{margin-top:14px;}
+    .gp-tabs{gap:0;width:100%;}
+    .gp-tab-btn{font-size:13.5px;min-height:46px;}
+    .history-wrap .hist-hero,.events-wrap .hist-hero,.page-wrap .hist-hero{padding:0 14px;margin-bottom:14px;}
+    .hist-hero-title,.page-wrap .hist-hero-title{font-size:16px;}
+    .hist-hero-sub,.page-wrap .hist-hero-sub{font-size:13.5px;line-height:1.6;}
+  }
+
+  @media (prefers-color-scheme: dark){
+    header h1{color:#e5dfd5;}
+    .eyebrow{color:#cbb07a;}
+    .btn-hdr-action{color:#a8a096;}
+    .btn-hdr-action svg{color:#cbb07a;}
+    .gp-tab-btn{color:#a29a90;}
+    .gp-tab-btn.active{color:#7fafe0;}
+    .gp-tab-btn::after{background:#7fafe0;}
+    .hist-hero-title,.page-wrap .hist-hero-title{color:#7fafe0;}
+    .hist-hero-sub,.page-wrap .hist-hero-sub{color:#b6b0a6;}
+  }
 </style>
 </head>
 <body class="is-tab-genealogy">
@@ -2522,9 +2569,9 @@
 
 <div class="gp-tabs-wrap">
   <nav class="gp-tabs" aria-label="Không gian dòng họ">
-    <button type="button" class="gp-tab-btn active" data-tab="panel-genealogy" id="tab-genealogy" aria-selected="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22v-7"/><path d="M9 12a3 3 0 0 1 6 0v3H9v-3Z"/><path d="M4 6a2 2 0 0 1 4 0v3H4V6Z"/><path d="M16 6a2 2 0 0 1 4 0v3h-4V6Z"/><path d="M6 9v3a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V9"/></svg><span class="tab-label">PHẢ HỆ</span><span class="tab-label-m">PHẢ HỆ</span></button>
-    <button type="button" class="gp-tab-btn" data-tab="panel-history" id="tab-history"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span class="tab-label">LỊCH SỬ</span><span class="tab-label-m">LỊCH SỬ</span></button>
-    <button type="button" class="gp-tab-btn" data-tab="panel-events" id="tab-events"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span class="tab-label">LỊCH GIỖ</span><span class="tab-label-m">LỊCH GIỖ</span></button>
+    <button type="button" class="gp-tab-btn active" data-tab="panel-genealogy" id="tab-genealogy" aria-selected="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22v-7"/><path d="M9 12a3 3 0 0 1 6 0v3H9v-3Z"/><path d="M4 6a2 2 0 0 1 4 0v3H4V6Z"/><path d="M16 6a2 2 0 0 1 4 0v3h-4V6Z"/><path d="M6 9v3a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V9"/></svg><span class="tab-label">Phả hệ</span><span class="tab-label-m">Phả hệ</span></button>
+    <button type="button" class="gp-tab-btn" data-tab="panel-history" id="tab-history"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span class="tab-label">Lịch sử</span><span class="tab-label-m">Lịch sử</span></button>
+    <button type="button" class="gp-tab-btn" data-tab="panel-events" id="tab-events"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span class="tab-label">Lịch giỗ</span><span class="tab-label-m">Lịch giỗ</span></button>
   </nav>
 </div>
 
@@ -3982,13 +4029,13 @@
                   <svg class="tm-btn-arrow" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
                 </button>
                 <div class="tm-cal-pop" data-f="cal-pop" hidden>
-                  <a class="tm-cal-item" data-f="apple-cal" href="thanh-minh-2027.ics" download="thanh-minh-2027.ics">
+                  <button type="button" class="tm-cal-item" data-f="apple-cal">
                     <span class="tm-cal-ico">🍎</span>
                     <span class="tm-cal-txt">
                       <strong>Lịch Apple (iPhone / iPad / Mac)</strong>
                       <small>Tải file .ics vào ứng dụng Lịch</small>
                     </span>
-                  </a>
+                  </button>
                   <a class="tm-cal-item" data-f="google-cal" href="#" target="_blank" rel="noopener">
                     <span class="tm-cal-ico">🗓️</span>
                     <span class="tm-cal-txt">
@@ -4679,13 +4726,7 @@ var AL=(function(){
         try{guide.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}
       }
 
-      // Nếu đang chạy trên web server HTTP(S), mở trực tiếp file .ics tĩnh đã build
-      if(location.protocol.indexOf('http')===0){
-        window.location.href='thanh-minh-'+y+'.ics';
-        return;
-      }
-
-      // Ngược lại (chạy offline / file://), tạo Blob và kích hoạt tải về đồng bộ ngay trong user gesture
+      // Tạo Blob và kích hoạt tải về tệp .ics trực tiếp từ bộ nhớ trình duyệt (không cần lưu file rác trên đĩa)
       try {
         var blob=new Blob([ics],{type:'text/calendar;charset=utf-8'});
         var url=URL.createObjectURL(blob);
@@ -4698,9 +4739,7 @@ var AL=(function(){
           document.body.removeChild(dl);
           URL.revokeObjectURL(url);
         },2000);
-      } catch(err){
-        window.location.href='thanh-minh-'+y+'.ics';
-      }
+      } catch(err){}
     });
   }
 
