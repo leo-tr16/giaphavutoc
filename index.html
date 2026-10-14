@@ -2655,6 +2655,68 @@
   /* bỏ ô Thanh Minh sắp tới → thân khối I cần khoảng thở dưới dải tiêu đề */
   .event-notice .ev-body{padding-top:22px;}
   @media (max-width:680px){ .event-notice .ev-body{padding-top:18px;} }
+
+  /* ════════ (14/10/2026) THANH MINH SẮP TỚI — DẢI GỌN CHO ĐIỆN THOẠI & TABLET (< 1180px) ════════
+     Vị trí: ngay dưới khung tìm kiếm, trên cây Đời 1–7 → nằm trong màn hình đầu tiên nhưng không chen
+     trước việc chính (tìm người). Thu gọn 1 thẻ ~80px; chạm để mở (thẻ <details> gốc → chạy cả trong Zalo).
+     Còn ≤ 45 ngày: nền vàng nhạt để gây chú ý đúng lúc. Vùng chạm ≥ 44px. */
+  .tm-strip{
+    max-width:min(640px, calc(100% - 32px));margin:-8px auto 24px;
+    background:var(--paper);border:1px solid var(--gold-rule);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;
+  }
+  @media (min-width:1180px){ .tm-strip{display:none;} }
+  .tm-strip > summary{
+    display:flex;align-items:center;gap:14px;min-height:80px;padding:12px 14px 12px 12px;
+    list-style:none;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  }
+  .tm-strip > summary::-webkit-details-marker{display:none;}
+  .tm-strip > summary::before,.tm-strip > summary:hover::before{content:none;display:none;}
+  .tm-strip > summary:focus-visible{outline:2px solid var(--blue2);outline-offset:-2px;border-radius:16px;}
+  .tms-tile{
+    flex:none;width:54px;height:58px;border-radius:12px;overflow:hidden;
+    display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--gold-rule);
+  }
+  .tms-tile > span{display:flex;justify-content:center;padding:3px 0;background:var(--gold);color:#fff;font-size:11px;font-weight:600;line-height:1.3;}
+  .tms-tile > b{flex:1;display:flex;align-items:center;justify-content:center;font-family:'Lora',serif;font-size:25px;font-weight:600;line-height:1;color:var(--ink-name);}
+  .tms-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;text-align:left;}
+  .tms-eb{
+    display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;
+    font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-ink);line-height:1.5;
+  }
+  .tms-st{
+    font-style:normal;letter-spacing:0;text-transform:none;font-size:11.5px;font-weight:600;
+    padding:0 7px;border-radius:999px;border:1px solid var(--gold-rule);background:var(--gold-bg);color:var(--gold-ink);
+  }
+  .tms-st.ok{border-color:#9cc7b0;background:var(--green-bg);color:var(--green);}
+  .tms-date{font-family:'Lora',serif;font-size:17px;font-weight:600;line-height:1.35;color:var(--ink-name);text-wrap:wrap;}
+  .tms-sub{font-size:14px;line-height:1.45;color:var(--ink-meta);text-wrap:wrap;}
+  .tms-count{display:block;font-weight:700;color:var(--ink-note);}
+  .tms-chev{flex:none;color:var(--gold-ink);transition:transform .2s ease;}
+  .tm-strip[open] .tms-chev{transform:rotate(180deg);}
+  .tm-strip.is-soon{background:linear-gradient(180deg,var(--gold-bg),var(--paper) 70%);border-color:var(--gold);}
+  .tm-strip.is-soon .tms-count{color:#b33927;}
+  .tms-body{padding:4px 14px 8px;border-top:1px dashed var(--gold-rule);}
+  .tms-row{margin:12px 0 0;font-size:15px;line-height:1.55;color:var(--ink-body);text-align:left;text-wrap:wrap;}
+  .tms-row > span{display:block;margin-bottom:1px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-meta);}
+  .tms-acts-h{margin:16px 0 8px;font-size:13.5px;line-height:1.5;color:var(--ink-meta);text-align:left;text-wrap:wrap;}
+  .tms-acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .tms-btn{
+    display:flex;align-items:center;gap:10px;min-height:56px;padding:8px 12px;border-radius:12px;
+    border:1px solid var(--card-line);background:var(--paper);text-decoration:none;color:var(--ink-name);
+    -webkit-tap-highlight-color:transparent;
+  }
+  .tms-btn svg{flex:none;width:20px;height:20px;color:var(--gold-ink);}
+  .tms-btn > span{display:flex;flex-direction:column;font-size:14.5px;font-weight:600;line-height:1.3;text-align:left;}
+  .tms-btn small{font-size:12px;font-weight:400;color:var(--ink-meta);}
+  .tms-btn:active{background:var(--gold-bg);}
+  .tms-more{
+    display:inline-flex;align-items:center;gap:6px;min-height:48px;margin-top:4px;padding:0;
+    border:0;background:none;cursor:pointer;font-family:'Be Vietnam Pro',sans-serif;font-size:14.5px;font-weight:600;color:var(--gold-ink);
+  }
+  .tms-more span{border-bottom:1.5px dotted var(--gold);padding-bottom:1px;}
+  @media (max-width:640px){ .tm-strip{margin:-6px 10px 18px;max-width:none;} }
+  @media (max-width:360px){ .tms-acts{grid-template-columns:1fr;} }
+  @media (prefers-color-scheme: dark){ .tm-strip.is-soon .tms-count{color:#e8917f;} }
 </style>
 </head>
 <body class="is-tab-genealogy">
@@ -2703,6 +2765,16 @@
 </div>
 <aside class="gt-side gt-tm" aria-label="Thanh Minh sắp tới" data-tm-date="2027-04-11"><p class="gs-eb">Thanh Minh sắp tới</p><div class="gs-tm"><span class="gs-tile lg" aria-hidden="true"><span>Tháng 4</span><b>11</b></span><div class="gs-tm-main"><p class="gs-tm-date">Chủ nhật, 11/04/2027</p><p class="gs-tm-lunar" data-f="lunar" hidden></p></div></div><p class="gs-tm-meta"><span class="gs-badge">Dự kiến</span><em data-f="count" hidden></em></p><p class="gs-tm-noi"><span>Tập trung: </span>Khu Lăng mộ Tiên Tổ, xã Thụy Chính</p><button type="button" class="gs-more" data-tab="panel-events"><span>Xem lịch Thanh Minh</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></aside>
 </div>
+<details class="tm-strip" data-tm-date="2027-04-11">
+  <summary><span class="tms-tile" aria-hidden="true"><span>Tháng 4</span><b>11</b></span><span class="tms-main"><span class="tms-eb">Thanh Minh Đinh Mùi<i class="tms-st">Dự kiến</i></span><span class="tms-date">Chủ nhật, 11/04/2027</span><span class="tms-sub">Mùng 5 tháng 3 âm lịch<span class="tms-count" data-f="count" hidden></span></span></span><svg class="tms-chev" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
+  <div class="tms-body">
+    <p class="tms-row"><span>Tập trung</span>Khu Lăng mộ Tiên Tổ, xã Thụy Chính</p>
+    <p class="tms-row"><span>Ghi chú</span>Ngày dự kiến — chờ Trưởng họ chốt chính thức.</p>
+    <p class="tms-acts-h">Thêm vào lịch điện thoại — máy sẽ tự nhắc trước 7 ngày và 1 ngày</p>
+    <div class="tms-acts"><a class="tms-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%28D%E1%BB%B1%20ki%E1%BA%BFn%29%20Thanh%20Minh%20V%C5%A9%20T%E1%BB%99c%20Th%C3%A1i%20B%C3%ACnh&amp;dates=20270411/20270412&amp;details=M%C3%B9ng%205%20th%C3%A1ng%203%20n%C4%83m%20%C4%90inh%20M%C3%B9i%20%28%C3%A2m%20l%E1%BB%8Bch%29.%20Vi%E1%BA%BFng%20m%E1%BB%99%20Ti%C3%AAn%20T%E1%BB%95%2C%20t%E1%BA%BF%20l%E1%BB%85%20t%E1%BA%A1i%20T%E1%BB%AB%20%C4%91%C6%B0%E1%BB%9Dng%20h%E1%BB%8D%20V%C5%A9.&amp;location=Khu%20L%C4%83ng%20m%E1%BB%99%20Ti%C3%AAn%20T%E1%BB%95%2C%20x%C3%A3%20Th%E1%BB%A5y%20Ch%C3%ADnh" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4"/></svg><span>Lịch Google<small>Điện thoại Android</small></span></a><a class="tms-btn" href="data:text/calendar;charset=utf-8,BEGIN%3AVCALENDAR%0D%0AVERSION%3A2.0%0D%0APRODID%3A-//Vu%20Toc%20Thai%20Binh//Gia%20pha//VI%0D%0ABEGIN%3AVEVENT%0D%0AUID%3Athanh-minh-2027%40vutoc-thaibinh%0D%0ADTSTAMP%3A20270411T000000Z%0D%0ADTSTART%3BVALUE%3DDATE%3A20270411%0D%0ADTEND%3BVALUE%3DDATE%3A20270412%0D%0ASUMMARY%3A%28D%E1%BB%B1%20ki%E1%BA%BFn%29%20Thanh%20Minh%20V%C5%A9%20T%E1%BB%99c%20Th%C3%A1i%20B%C3%ACnh%0D%0ALOCATION%3AKhu%20L%C4%83ng%20m%E1%BB%99%20Ti%C3%AAn%20T%E1%BB%95%5C%2C%20x%C3%A3%20Th%E1%BB%A5y%20Ch%C3%ADnh%0D%0ADESCRIPTION%3AM%C3%B9ng%205%20th%C3%A1ng%203%20n%C4%83m%20%C4%90inh%20M%C3%B9i%20%28%C3%A2m%20l%E1%BB%8Bch%29.%20Vi%E1%BA%BFng%20m%E1%BB%99%20Ti%C3%AAn%20T%E1%BB%95%5C%2C%20t%E1%BA%BF%20l%E1%BB%85%20t%E1%BA%A1i%20T%E1%BB%AB%20%C4%91%C6%B0%E1%BB%9Dng%20h%E1%BB%8D%20V%C5%A9.%0D%0ABEGIN%3AVALARM%0D%0ATRIGGER%3A-P7D%0D%0AACTION%3ADISPLAY%0D%0ADESCRIPTION%3AC%C3%B2n%207%20ng%C3%A0y%20%C4%91%E1%BA%BFn%20Thanh%20Minh%0D%0AEND%3AVALARM%0D%0ABEGIN%3AVALARM%0D%0ATRIGGER%3A-P1D%0D%0AACTION%3ADISPLAY%0D%0ADESCRIPTION%3AMai%20l%C3%A0%20Thanh%20Minh%0D%0AEND%3AVALARM%0D%0AEND%3AVEVENT%0D%0AEND%3AVCALENDAR" download="thanh-minh-2027.ics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4"/></svg><span>Lịch iPhone<small>Apple Calendar</small></span></a></div>
+    <button type="button" class="tms-more" data-tab="panel-events"><span>Xem chương trình Thanh Minh</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
+</details>
 
 <div class="trunk-wrap">
   <span class="trunk-title">ĐỜI 1 → ĐỜI 7</span>
@@ -4713,14 +4785,24 @@ var AL=(function(){
   if(a){
     a.querySelector('.gs-body').innerHTML=
       '<div class="gs-big"><b>'+L[0]+'</b><span>tháng '+L[1]+(L[3]?' nhuận':'')+'<br>năm '+CAN[L[2]%10]+' '+CHI[L[2]%12]+'</span></div>'+
-      '<p class="gs-solar">'+WD[now.getDay()]+', '+p2(now.getDate())+'/'+p2(now.getMonth()+1)+'/'+now.getFullYear()+' <span>(dương lịch)</span></p>';
+      '<p class="gs-solar">'+WD[now.getDay()]+', '+p2(now.getDate())+'/'+p2(now.getMonth()+1)+'/'+now.getFullYear()+'</p>';
     a.hidden=false;
+  }
+  /* dải Thanh Minh (điện thoại): còn N ngày · ≤ 45 ngày tô vàng · quá ngày thì ẩn */
+  var s=document.querySelector('.tm-strip');
+  if(s){
+    var u=(s.getAttribute('data-tm-date')||'').split('-').map(Number);
+    if(u.length===3&&u[0]){
+      var dd=Math.round((Date.UTC(u[0],u[1]-1,u[2])-T0)/864e5), sc=s.querySelector('[data-f="count"]');
+      if(dd<0){ s.hidden=true; }
+      else{ sc.textContent=dd===0?'Hôm nay':'Còn '+dd+' ngày'; sc.hidden=false; if(dd<=45) s.classList.add('is-soon'); }
+    }
   }
   var b=document.querySelector('.gt-tm'); if(!b) return;
   var t=(b.getAttribute('data-tm-date')||'').split('-').map(Number); if(t.length!==3||!t[0]) return;
   var M=AL.toLunar(t[2],t[1],t[0]);
   var lu=b.querySelector('[data-f="lunar"]');
-  lu.textContent=(M[0]<=10?'Mùng ':'Ngày ')+M[0]+' tháng '+M[1]+(M[3]?' nhuận':'')+' năm '+CAN[M[2]%10]+' '+CHI[M[2]%12]+' (âm lịch)'; lu.hidden=false;
+  lu.textContent='Âm lịch: '+(M[0]<=10?'mùng ':'ngày ')+M[0]+' tháng '+M[1]+(M[3]?' nhuận':''); lu.hidden=false;
   var d=Math.round((Date.UTC(t[0],t[1]-1,t[2])-T0)/864e5), c=b.querySelector('[data-f="count"]');
   c.textContent=d>0?'Còn '+d+' ngày':(d===0?'Hôm nay':'Đã diễn ra'); c.hidden=false;
 })();
