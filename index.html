@@ -1268,24 +1268,24 @@
   }
   /* Đầu thẻ: dải ngà ấm hổ phách chuyển dần → trang nhã, tôn nghiêm */
   .gio-sec-head{
-    display:flex;align-items:flex-start;gap:16px;margin:0;padding:18px 26px 16px;
+    display:flex;align-items:flex-start;gap:14px;margin:0;padding:18px 26px 16px;
     background:linear-gradient(180deg,#fbf2e3 0%,#fdfcf9 100%);
     border-bottom:1px solid rgba(180,138,60,.25);
   }
   .gio-head-icon{
     --gio-flame:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M12 1C13.6 3.7 18.2 7.5 18.2 12.4C18.2 16.1 15.4 19 12 19C8.6 19 5.8 16.1 5.8 12.4C5.8 9.6 7.5 7.3 8.9 5.9C9.1 7.7 9.9 8.9 11 9.4C10.5 6.5 11.1 3.5 12 1ZM12 17.4C10.4 17.4 9.3 16.2 9.3 14.7C9.3 13.1 10.7 11.9 12 10.3C13.3 11.9 14.7 13.1 14.7 14.7C14.7 16.2 13.6 17.4 12 17.4Z'/%3E%3Crect x='7.5' y='20.6' width='9' height='1.6' rx='.8'/%3E%3C/svg%3E");
-    flex:none;position:relative;align-self:center;margin:0 2px 0 3px;
-    width:42px;height:42px;border-radius:50%;
+    flex:none;position:relative;align-self:flex-start;margin:2px 0 0;
+    width:34px;height:34px;border-radius:50%;
     background:radial-gradient(circle at 50% 32%,#9c2e27 0%,#7a1f1d 55%,#5c1613 100%);
-    box-shadow:0 0 0 1.5px #fffaf0,0 0 0 2.5px #c4a052,0 3px 10px rgba(122,31,29,.22);
+    box-shadow:0 0 0 1px #fffaf0,0 0 0 2px #c4a052,0 2px 8px rgba(122,31,29,.22);
   }
   .gio-head-icon svg{display:none;}
   .gio-head-icon::after{
-    content:"";position:absolute;inset:3px;border-radius:50%;
+    content:"";position:absolute;inset:2px;border-radius:50%;
     border:1px solid rgba(253,230,138,.30);
   }
   .gio-head-icon::before{
-    content:"";position:absolute;inset:0;margin:auto;width:22px;height:22px;
+    content:"";position:absolute;inset:0;margin:auto;width:18px;height:18px;
     transform:translateY(-.5px);
     background:linear-gradient(180deg,#fef3c7 0%,#e6bd62 100%);
     -webkit-mask:var(--gio-flame) center/contain no-repeat;
@@ -1640,10 +1640,11 @@
   @media (max-width:680px){
     .event-notice, .gio-sec{border-radius:14px;margin-bottom:24px;}
     .event-notice-head{padding:14px 14px 13px;gap:10px;}
-    .gio-sec-head{padding:14px 14px 13px;gap:12px;}
+    .gio-sec-head{padding:14px 14px 13px;gap:10px;}
     .ev-head-icon svg{width:16px;height:16px;padding:6px;border-radius:8px;}
-    .gio-head-icon{align-self:flex-start;width:38px;height:38px;margin:3px 1px 0 3px;}
-    .gio-head-icon::before{width:20px;height:20px;}
+    .gio-head-icon{align-self:flex-start;width:28px;height:28px;margin:2px 0 0;box-shadow:0 0 0 1px #fffaf0,0 0 0 1.5px #c4a052,0 2px 6px rgba(122,31,29,.2);}
+    .gio-head-icon::after{inset:1.5px;}
+    .gio-head-icon::before{width:15px;height:15px;}
     .ev-head-title, .gio-head-title, .gio-sec-title{font-size:16px;}
     .ev-head-sub, .gio-head-sub{display:block;font-size:12.5px;margin-top:5px;line-height:1.6;}
     .ev-head-sub .ev-sub-lead{margin-right:2px;}
@@ -2711,56 +2712,39 @@
   }
   .ev-hero-main{flex:1;min-width:0;max-width:680px;}
   .ev-hero-aside{flex:none;}
-  /* Thẻ Ngọc Lịch Vạn Niên */
+  /* ═══ (15/10/2026 v2) "HÔM NAY ÂM LỊCH" — BỎ KHUNG THẺ, DESKTOP & MOBILE CÙNG KIỂU DÒNG NGÀY THÁNG ═══
+     Desktop (≥ 781px): tiêu đề trải hết bề ngang; hàng dưới [ câu dẫn | Hôm nay ] ngăn bằng vạch xám dọc.
+     Mobile (≤ 780px): xếp dọc, vạch vàng ngắn phía trên ô Hôm nay. */
   .ev-today-card{
-    display:flex;flex-direction:column;gap:3px;padding:11px 18px 10px;border-radius:14px;
-    background:linear-gradient(135deg,#fffdfa 0%,#f9f3e5 100%);
-    border:1px solid rgba(180,138,60,.38);
-    box-shadow:0 2px 10px rgba(140,90,30,.06),0 1px 2px rgba(20,30,50,.03);
-    min-width:260px;transition:box-shadow .2s ease;
+    position:relative;display:flex;flex-direction:column;gap:2px;
+    min-width:0;padding:0;
+    background:none;border:0;border-radius:0;box-shadow:none;
+    text-align:left;text-wrap:wrap;
   }
-  .ev-today-card:hover{
-    box-shadow:0 4px 14px rgba(140,90,30,.1);
-  }
+  .ev-today-card:hover{box-shadow:none;}
   .ev-today-badge{
-    display:inline-flex;align-items:center;gap:6px;
-    font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-    color:#8a3818;margin-bottom:2px;
+    display:flex;align-items:center;gap:6px;margin:0 0 3px;
+    font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-ink);
   }
-  .ev-today-badge svg{flex:none;color:#b45309;}
-  .ev-today-lunar{
-    font-family:'Lora',serif;font-size:15.5px;font-weight:700;line-height:1.35;
-    color:#731f1a;letter-spacing:.01em;
+  .ev-today-badge svg{display:none;}
+  .ev-today-badge::before{content:'';flex:none;width:15px;height:15px;background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='11' fill='%23fff' stroke='%231f242c' stroke-width='1.5'/><path d='M12 1A11 11 0 0 1 12 23A5.5 5.5 0 0 1 12 12A5.5 5.5 0 0 0 12 1Z' fill='%231f242c'/><circle cx='12' cy='17.5' r='1.7' fill='%23fff'/><circle cx='12' cy='6.5' r='1.7' fill='%231f242c'/></svg>") center/contain no-repeat;}
+  .ev-today-lunar{font-family:'Be Vietnam Pro',sans-serif;font-size:15px;font-weight:600;line-height:1.45;letter-spacing:0;color:#4a3f33;text-align:left;text-wrap:wrap;}
+  .ev-today-solar{font-size:13px;font-weight:400;line-height:1.5;color:var(--ink-meta);text-align:left;text-wrap:wrap;}
+  @media (prefers-color-scheme:dark){ .ev-today-lunar{color:#d8cfc2;} }
+  @media (min-width:781px){
+    .events-wrap .ev-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:32px;row-gap:0;align-items:center;}
+    .ev-hero-main{display:contents;}
+    .ev-hero .hist-hero-title{grid-column:1 / -1;}
+    .ev-hero .hist-hero-sub{grid-column:1;grid-row:2;max-width:680px;}
+    .ev-hero-aside{grid-column:2;grid-row:2;align-self:center;padding:2px 0 2px 24px;border-left:1px solid var(--card-line);}
   }
-  .ev-today-solar{
-    font-size:12px;font-weight:500;line-height:1.4;color:var(--ink-meta);
-  }
-  /* ═══ (15/10/2026) "HÔM NAY ÂM LỊCH" — MOBILE: BỎ KHUNG, THÀNH DÒNG NGÀY THÁNG ═══ */
   @media (max-width:780px){
     .events-wrap .ev-hero{flex-direction:column;align-items:stretch;gap:16px;margin-bottom:20px;padding:0 15px;}
-    .ev-today-card{
-      position:relative;display:flex;flex-direction:column;gap:2px;
-      min-width:0;padding:14px 0 0;
-      background:none;border:0;border-radius:0;box-shadow:none;
-      text-align:left;text-wrap:wrap;
-    }
+    .ev-today-card{padding-top:14px;}
     .ev-today-card::before{
       content:'';position:absolute;top:0;left:0;width:28px;height:2px;border-radius:2px;background:var(--gold);
     }
-    .ev-today-card:hover{box-shadow:none;}
-    .ev-today-badge{
-      display:flex;align-items:center;gap:6px;margin:0 0 3px;
-      font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--gold-ink);
-    }
-    .ev-today-badge svg{display:none;}
-    .ev-today-badge::before{content:'';flex:none;width:15px;height:15px;background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='11' fill='%23fff' stroke='%231f242c' stroke-width='1.5'/><path d='M12 1A11 11 0 0 1 12 23A5.5 5.5 0 0 1 12 12A5.5 5.5 0 0 0 12 1Z' fill='%231f242c'/><circle cx='12' cy='17.5' r='1.7' fill='%23fff'/><circle cx='12' cy='6.5' r='1.7' fill='%231f242c'/></svg>") center/contain no-repeat;}
-    .ev-today-lunar{font-family:'Be Vietnam Pro',sans-serif;font-size:15px;font-weight:600;line-height:1.45;letter-spacing:0;color:#4a3f33;text-align:left;text-wrap:wrap;}
-    .ev-today-solar{font-size:13px;font-weight:400;line-height:1.5;color:var(--ink-meta);text-align:left;text-wrap:wrap;}
   }
-  @media (max-width:780px) and (prefers-color-scheme:dark){
-    .ev-today-lunar{color:#d8cfc2;}
-  }
-
 
   /* ════════ (14/10/2026) TIÊU ĐỀ MỤC I · II TAB LỊCH GIỖ = KIỂU "PHẦN I" TAB LỊCH SỬ ════════ */
   .ev-head-title,.gio-sec-title{
@@ -2853,32 +2837,55 @@
     margin:0 0 10px;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
     color:var(--gold-ink);text-align:left;
   }
+  /* (15/10/2026 v2) Ô ngày: tông NAVY cho cả desktop & mobile, KHÔNG viền — chỉ nền xanh nhạt bo góc
+     (tránh lặp khung với thẻ "Đại lễ Thanh Minh"). Nhãn "Sắp tới" có chấm cam tỏa sóng + vệt sáng lướt ngang ô. */
   .ev-date{
+    position:relative;overflow:hidden;isolation:isolate;
     display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:12px;
-    background:var(--gold-bg);border:1px solid var(--gold-rule);
+    background:#f1f5fa;border:0;
   }
   .ev-tile{
     flex:none;width:52px;border-radius:9px;overflow:hidden;display:flex;flex-direction:column;
-    background:var(--paper);border:1px solid var(--gold-rule);text-align:center;
+    background:var(--paper);border:1px solid #cfdbe9;text-align:center;
   }
-  .ev-tile > span{display:block;padding:2px 0;background:var(--gold);color:#fff;font-size:10.5px;font-weight:600;line-height:1.4;white-space:nowrap;}
-  .ev-tile > b{display:block;padding:4px 0 5px;font-family:'Lora',serif;font-size:24px;font-weight:600;line-height:1.1;color:var(--ink-name);}
+  .ev-tile > span{display:block;padding:2px 0;background:#1f3a5f;color:#fff;font-size:10.5px;font-weight:600;line-height:1.4;white-space:nowrap;}
+  .ev-tile > b{display:block;padding:4px 0 5px;font-family:'Lora',serif;font-size:24px;font-weight:600;line-height:1.1;color:#1f3a5f;}
   .ev-dt{flex:1;min-width:0;display:flex;flex-direction:column;text-align:left;}
-  .ev-wd{font-size:13px;line-height:1.4;color:var(--gold-ink);font-weight:500;}
+  .ev-wd{font-size:13px;line-height:1.4;color:#4a5f7a;font-weight:500;}
   .ev-sep{display:none;}
-  .ev-dd{font-family:'Lora',serif;font-size:19px;font-weight:600;line-height:1.3;color:var(--ink-name);font-variant-numeric:lining-nums;}
-  .ev-al{font-size:13px;line-height:1.45;color:var(--gold-ink);text-wrap:wrap;}
+  .ev-dd{font-family:'Lora',serif;font-size:19px;font-weight:600;line-height:1.3;color:#1f3a5f;font-variant-numeric:lining-nums;}
+  .ev-al{font-size:13px;line-height:1.45;color:#4a5f7a;text-wrap:wrap;}
   .ev-st{
     flex:none;align-self:flex-start;padding:1px 9px;border-radius:999px;white-space:nowrap;
-    font-size:11.5px;font-weight:600;line-height:1.6;color:var(--gold-ink);
-    background:var(--paper);border:1px solid var(--gold-rule);
+    font-size:11.5px;font-weight:600;line-height:1.6;color:#1f3a5f;
+    background:var(--paper);border:1px solid #b9cbe0;
   }
-  .ev-st.ok{color:var(--green);border-color:#9cc7b0;background:var(--green-bg);}
+  .ev-st.soon{display:inline-flex;align-items:center;gap:6px;padding-left:8px;}
+  .ev-st.soon i{position:relative;flex:none;width:7px;height:7px;border-radius:50%;background:#e0791a;}
+  .ev-st.soon i::after{content:'';position:absolute;inset:0;border-radius:50%;background:#e0791a;animation:tm-ping 1.8s cubic-bezier(0,0,.2,1) infinite;}
+  @keyframes tm-ping{0%{transform:scale(1);opacity:.7}80%,100%{transform:scale(2.8);opacity:0}}
+  .ev-date::after{
+    content:'';position:absolute;top:0;bottom:0;left:-60%;width:45%;z-index:-1;pointer-events:none;
+    background:linear-gradient(105deg,transparent 0%,rgba(255,255,255,.75) 50%,transparent 100%);
+    animation:tm-sweep 4.5s ease-in-out infinite;
+  }
+  @keyframes tm-sweep{0%,55%{left:-60%}100%{left:130%}}
+  @media (prefers-reduced-motion:reduce){ .ev-st.soon i::after,.ev-date::after{animation:none;} }
+  @media (prefers-color-scheme:dark){
+    .ev-date{background:var(--blue-bg);}
+    .ev-date::after{background:linear-gradient(105deg,transparent,rgba(255,235,190,.14),transparent);}
+    .ev-tile{border-color:#33465c;}
+    .ev-tile > span{background:#33507a;}
+    .ev-tile > b,.ev-dd{color:#c9dbef;}
+    .ev-wd,.ev-al{color:#9fb3c9;}
+    .ev-st{color:#c9dbef;border-color:#33465c;}
+  }
   .ev-reg{
     display:flex;align-items:center;gap:7px;margin:10px 2px 0;
     font-size:12.5px;line-height:1.5;color:var(--ink-meta);text-align:left;text-wrap:wrap;
   }
-  .ev-reg svg{flex:none;color:var(--gold);}
+  .ev-reg svg{flex:none;color:#1f3a5f;}
+  @media (prefers-color-scheme:dark){ .ev-reg svg{color:#86aedc;} }
   .ev-prog .ev-acts{grid-column:auto;grid-row:auto;background:none;padding:0;border-radius:0;}
   .ev-prog .ev-acts li{font-size:14.5px;line-height:1.65;padding-bottom:16px;}
   .ev-prog .ev-acts li:last-child{padding-bottom:0;}
@@ -2886,32 +2893,22 @@
   .ev-act-d{color:var(--ink-body);}
   .ev-prog .ev-num{box-shadow:0 0 0 3px var(--paper);}
 
-  /* ═══ (15/10/2026) Ô "THANH MINH DỰ KIẾN" — MOBILE: TÔNG XANH NAVY ═══ */
+  /* ═══ (15/10/2026 v2) Ô "THANH MINH SẮP TỚI" — MOBILE: ngày 1 dòng (màu navy dùng chung với desktop) ═══ */
   @media (max-width:680px){
     .ev-when{padding:14px 14px 12px;}
     .ev-prog{padding:14px 14px 18px;}
-    .ev-when .ev-cap{display:none;}
-    .ev-date{
-      gap:12px;padding:10px 12px 10px 11px;
-      background:#f1f5fa;border:1px solid #cfdbe9;border-left:3px solid #1f3a5f;box-shadow:none;
-    }
-    .ev-tile{width:50px;border-color:#cfdbe9;}
-    .ev-tile > span{padding:2px 4px;background:#1f3a5f;color:#fff;font-size:10.5px;font-weight:600;letter-spacing:0;}
-    .ev-tile > b{font-size:19px;font-weight:600;color:#1f3a5f;}
+    .ev-date{gap:12px;padding:10px 12px;}
+    .ev-tile{width:50px;}
+    .ev-tile > span{padding:2px 4px;letter-spacing:0;}
+    .ev-tile > b{font-size:19px;}
     .ev-sep{display:inline;}
     .ev-dt{display:block;}
-    .ev-wd,.ev-dd{font-family:'Be Vietnam Pro',sans-serif;font-size:15px;font-weight:600;line-height:1.45;color:#1f3a5f;}
-    .ev-al{font-size:13px;line-height:1.5;color:#4a5f7a;text-align:left;text-wrap:wrap;}
-    .ev-st{color:#1f3a5f;background:var(--paper);border-color:#b9cbe0;font-weight:600;}
+    .ev-wd,.ev-dd{font-family:'Be Vietnam Pro',sans-serif;font-size:15px;font-weight:600;line-height:1.45;}
+    .ev-al{display:block;font-size:13px;line-height:1.5;}
     .ev-prog .ev-acts li{font-size:14.5px;padding-bottom:12px;}
   }
   @media (max-width:680px) and (prefers-color-scheme:dark){
-    .ev-date{background:var(--blue-bg);border-color:#33465c;border-left-color:#86aedc;}
-    .ev-tile{border-color:#33465c;}
-    .ev-tile > span{background:#33507a;}
-    .ev-tile > b,.ev-wd,.ev-dd{color:#c9dbef;}
-    .ev-al{color:#9fb3c9;}
-    .ev-st{color:#c9dbef;border-color:#33465c;}
+    .ev-wd{color:#c9dbef;}
   }
 
   /* ════════ (15/10/2026) KHUNG CÔNG CỤ PHẢ HỆ — TRẢI ĐÚNG BỀ RỘNG KHỐI CÂY (≥ 641px) ════════
@@ -4446,7 +4443,7 @@
           <p class="ev-head-sub"><strong class="ev-sub-lead">Thông lệ:</strong> Hàng năm vào tiết tháng 3 Âm lịch, con cháu trở về nguồn cội dọn dẹp cỏ dại, sửa sang phần mộ và thắp hương tưởng nhớ ông bà tổ tiên.</p>
         </div>
       </div>
-      <div class="ev-body ev-grid"><div class="ev-when"><p class="ev-cap">Thanh Minh sắp tới</p><div class="ev-date" data-tm-date="2027-04-11"><span class="ev-tile" aria-hidden="true"><span>Tháng 4</span><b>11</b></span><span class="ev-dt"><span class="ev-wd">Chủ nhật<span class="ev-sep">, </span></span><b class="ev-dd">11/04/2027</b><span class="ev-al">Mùng 5 tháng 3 âm lịch</span></span><span class="ev-st">Dự kiến</span></div><p class="ev-reg"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M21.5 20a6.5 6.5 0 0 0-4-6"/></svg><span>Báo số người về dự cho Trưởng họ</span></p></div><div class="ev-prog"><p class="ev-cap">Hoạt động chính</p><ol class="ev-acts"><li><span class="ev-num">1</span><span><strong>Viếng mộ Tiên Tổ</strong><span class="ev-act-d"> — tại khu lăng mộ xã Thụy Chính (Thái Thụy): dọn dẹp, thắp hương từ mộ Cụ Thủy Tổ đến mộ tổ các Ngành, Chi.</span></span></li><li><span class="ev-num">2</span><span><strong>Tế lễ Từ đường</strong><span class="ev-act-d"> — bái lạy Tổ tiên, báo cáo tình hình dòng họ, giao lưu con cháu và liên hoan đồng tộc.</span></span></li></ol></div></div>
+      <div class="ev-body ev-grid"><div class="ev-when" aria-label="Thanh Minh sắp tới"><div class="ev-date" data-tm-date="2027-04-11"><span class="ev-tile" aria-hidden="true"><span>Tháng 4</span><b>11</b></span><span class="ev-dt"><span class="ev-wd">Chủ nhật<span class="ev-sep">, </span></span><b class="ev-dd">11/04/2027</b><span class="ev-al">Mùng 5 tháng 3 âm lịch</span></span><span class="ev-st soon"><i aria-hidden="true"></i>Sắp tới</span></div><p class="ev-reg"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M21.5 20a6.5 6.5 0 0 0-4-6"/></svg><span>Báo số người về dự cho Trưởng họ</span></p></div><div class="ev-prog"><p class="ev-cap">Hoạt động chính</p><ol class="ev-acts"><li><span class="ev-num">1</span><span><strong>Viếng mộ Tiên Tổ</strong><span class="ev-act-d"> — tại khu lăng mộ xã Thụy Chính (Thái Thụy): dọn dẹp, thắp hương từ mộ Cụ Thủy Tổ đến mộ tổ các Ngành, Chi.</span></span></li><li><span class="ev-num">2</span><span><strong>Tế lễ Từ đường</strong><span class="ev-act-d"> — bái lạy Tổ tiên, báo cáo tình hình dòng họ, giao lưu con cháu và liên hoan đồng tộc.</span></span></li></ol></div></div>
     </div>
     <section class="gio-sec">
       <div class="gio-sec-head">
