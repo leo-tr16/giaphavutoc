@@ -2983,6 +2983,21 @@
   .gp-tab-btn:hover{background:rgba(255,255,255,.04);}
   .gp-tab-btn.active{color:#9cc3ec;background:var(--page-bg);border-color:var(--line);box-shadow:none;}
 }
+
+  /* ════════ (15/10/2026) TAB LỊCH GIỖ — GIẢM MÀU: CHỈ GIỮ 1 ĐIỂM NHẤN ════════
+     Nguyên tắc: CHỮ dùng thang xám trung tính; giữ nguyên khung thẻ vàng mờ & biểu tượng mục I · II.
+     Màu nhấn chữ (navy + chấm cam) chỉ dành cho ô NGÀY THANH MINH. Bỏ vàng ở nhãn/số bước, bỏ navy ở tiêu đề mục. */
+  /* Tiêu đề mục I · II: mực đậm trung tính thay cho navy */
+  .ev-head-title,.gio-sec-title{color:var(--ink-name);}
+  /* Câu ghi chú dưới tiêu đề: một tông xám, không nhãn */
+  .ev-head-sub,.gio-head-sub{color:var(--ink-meta);}
+  /* Hoạt động chính: nhãn xám, số bước là vòng viền xám — đọc như danh sách, không như nút */
+  .ev-cap{color:var(--ink-meta);}
+  .ev-num,.ev-prog .ev-num{
+    background:var(--paper);color:var(--ink-name);
+    box-shadow:inset 0 0 0 1.5px var(--ink-meta),0 0 0 3px var(--paper);
+  }
+  .ev-acts li:not(:last-child)::before{background:var(--card-line);}
 </style>
 </head>
 <body class="is-tab-genealogy">
@@ -4443,7 +4458,7 @@
         <div class="ev-head-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
         <div class="ev-head-main">
           <h3 class="ev-head-title">I. Đại Lễ Tết Thanh Minh &amp; Tụ Họp Toàn Tộc</h3>
-          <p class="ev-head-sub"><strong class="ev-sub-lead">Thông lệ:</strong> Hàng năm vào tiết tháng 3 Âm lịch, con cháu trở về nguồn cội dọn dẹp cỏ dại, sửa sang phần mộ và thắp hương tưởng nhớ ông bà tổ tiên.</p>
+          <p class="ev-head-sub">Theo truyền thống hàng năm vào tiết tháng 3 Âm lịch, con cháu Vũ Tộc trở về nguồn cội dọn dẹp cỏ dại, sửa sang phần mộ và thắp hương tưởng nhớ ông bà tổ tiên.</p>
         </div>
       </div>
       <div class="ev-body ev-grid"><div class="ev-when" aria-label="Thanh Minh sắp tới"><div class="ev-date" data-tm-date="2027-04-11"><span class="ev-tile" aria-hidden="true"><span>Tháng 4</span><b>11</b></span><span class="ev-dt"><span class="ev-wd">Chủ nhật<span class="ev-sep">, </span></span><b class="ev-dd">11/04/2027</b><span class="ev-al">Mùng 5 tháng 3 âm lịch</span></span><span class="ev-st soon"><i aria-hidden="true"></i>Sắp tới</span></div><p class="ev-reg"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M21.5 20a6.5 6.5 0 0 0-4-6"/></svg><span>Báo số người về dự cho Trưởng họ</span></p></div><div class="ev-prog"><p class="ev-cap">Hoạt động chính</p><ol class="ev-acts"><li><span class="ev-num">1</span><span><strong>Viếng mộ Tiên Tổ</strong><span class="ev-act-d"> — tại khu lăng mộ xã Thụy Chính (Thái Thụy): dọn dẹp, thắp hương từ mộ Cụ Thủy Tổ đến mộ tổ các Ngành, Chi.</span></span></li><li><span class="ev-num">2</span><span><strong>Tế lễ Từ đường</strong><span class="ev-act-d"> — bái lạy Tổ tiên, báo cáo tình hình dòng họ, giao lưu con cháu và liên hoan đồng tộc.</span></span></li></ol></div></div>
