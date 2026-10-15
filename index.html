@@ -2679,71 +2679,76 @@
   .gs-more:hover svg{transform:translateX(3px);}
   .gs-more:focus-visible{outline:2px solid var(--blue2);outline-offset:2px;border-radius:8px;}
 
-  /* ════════ (14/10/2026) LỜI DẪN ĐẦU TAB (Lịch sử · Lịch giỗ · Tâm sự · Hướng dẫn) ════════
-     Trước: viền vàng + thụt 38px, chữ nghiêng mảnh màu nâu nhạt → lệch trục, khó đọc.
-     Nay: bỏ viền, chữ canh ĐÚNG mép chữ trong thẻ bên dưới (đệm 28px + viền 1px) → một trục trái;
-     cùng font với nội dung thẻ bên dưới. */
-  .history-wrap .hist-hero,.events-wrap .hist-hero,.page-wrap .hist-hero{
+  /* ════════ (14/10/2026) LỜI DẪN ĐẦU TRANG (Tâm sự · Hướng dẫn) ════════ */
+  .page-wrap .hist-hero{
     margin:0 0 24px;padding:0 29px;border:0;border-radius:0;background:none;text-align:left;
   }
-  /* tiêu đề lời dẫn = kiểu tiêu đề mục "1. Khởi tích…" (.hist-h3); lời dẫn = kiểu đoạn nội dung (.hist-p) */
-  .hist-hero-title,.page-wrap .hist-hero-title{
+  .page-wrap .hist-hero-title{
     font-family:'Lora',serif;font-size:16px;font-weight:600;line-height:1.4;letter-spacing:0;text-transform:none;
     color:var(--ink-name);margin:0 0 10px;text-align:left;text-wrap:wrap;
   }
-  .hist-hero-sub,.page-wrap .hist-hero-sub{
+  .page-wrap .hist-hero-sub{
     font-family:'Be Vietnam Pro',sans-serif;font-style:normal;font-size:14px;font-weight:400;line-height:1.7;
     color:var(--ink-body);max-width:none;margin:0;text-align:left;text-wrap:wrap;
   }
   @media (max-width:680px){
-    .history-wrap .hist-hero,.events-wrap .hist-hero,.page-wrap .hist-hero{margin:0 0 18px;padding:0 15px;}
-    .hist-hero-title,.page-wrap .hist-hero-title{font-size:16px;letter-spacing:0;margin-bottom:10px;}
-    .hist-hero-sub,.page-wrap .hist-hero-sub{font-size:14px;line-height:1.7;}
+    .page-wrap .hist-hero{margin:0 0 18px;padding:0 15px;}
+    .page-wrap .hist-hero-title{font-size:16px;letter-spacing:0;margin-bottom:10px;}
+    .page-wrap .hist-hero-sub{font-size:14px;line-height:1.7;}
   }
   @media (prefers-color-scheme: dark){
-    .hist-hero-title,.page-wrap .hist-hero-title{color:var(--ink-name);}
-    .hist-hero-sub,.page-wrap .hist-hero-sub{color:var(--ink-body);}
+    .page-wrap .hist-hero-title{color:var(--ink-name);}
+    .page-wrap .hist-hero-sub{color:var(--ink-body);}
   }
 
-  /* ════════ (15/10/2026) BỐ CỤC 2 CỘT MASTER-DETAIL HEADER TAB LỊCH GIỖ ════════ */
+  /* ════════ (15/10/2026) PA 1 — LỜI DẪN TAB LỊCH SỬ & LỊCH GIỖ: CÙNG TRỤC GIỮA VỚI THANH TAB ════════
+     Gốc = thanh tab (giữa trang, rộng 600px). Cấp chữ: tab 15.5/700 > ngày âm lịch 14/600 > chú giải 13.5/400.
+     Lịch giỗ: Tab → chú giải → vạch vàng 24px → 1 dòng "☯ Hôm nay: … · Thứ …". Chỉ CSS, không đổi HTML/JS
+     (JS chỉ ghi textContent của .ev-today-lunar/.ev-today-solar → tiền tố "Hôm nay:" và dấu "·" nằm ở ::before). */
+  .history-wrap .hist-hero,
   .events-wrap .ev-hero{
-    display:flex;align-items:center;justify-content:space-between;gap:24px;
-    margin:0 0 24px;padding:0 29px;text-align:left;
+    display:block;width:min(600px,100%);margin:0 auto 28px;padding:0;
+    background:none;border:0;border-radius:0;text-align:center;
   }
-  .ev-hero-main{flex:1;min-width:0;max-width:680px;}
-  .ev-hero-aside{flex:none;}
-  /* ═══ (15/10/2026 v2) "HÔM NAY ÂM LỊCH" — BỎ KHUNG THẺ, DESKTOP & MOBILE CÙNG KIỂU DÒNG NGÀY THÁNG ═══
-     Desktop (≥ 781px): tiêu đề trải hết bề ngang; hàng dưới [ câu dẫn | Hôm nay ] ngăn bằng vạch xám dọc.
-     Mobile (≤ 780px): xếp dọc, vạch vàng ngắn phía trên ô Hôm nay. */
-  .ev-today-card{
-    position:relative;display:flex;flex-direction:column;gap:2px;
-    min-width:0;padding:0;
+  .history-wrap .hist-hero-sub,
+  .events-wrap .ev-hero .hist-hero-sub{
+    max-width:none;margin:0 auto;
+    font-family:'Be Vietnam Pro',sans-serif;font-style:normal;font-size:13.5px;font-weight:400;line-height:1.75;
+    color:var(--ink-soft);text-align:center;text-wrap:balance;
+  }
+  /* bỏ bố cục 2 cột cũ */
+  .events-wrap .ev-hero-main{display:block;max-width:none;}
+  .events-wrap .ev-hero-aside{display:block;padding:0;border:0;}
+  /* vạch vàng ngắn — nhắc lại vạch vàng trên đầu tab active */
+  .events-wrap .ev-hero-aside::before{
+    content:'';display:block;width:24px;height:2px;border-radius:2px;background:var(--gold);margin:14px auto 12px;
+  }
+  /* ô Hôm nay → 1 dòng canh giữa */
+  .events-wrap .ev-today-card{
+    display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:center;
+    column-gap:7px;row-gap:2px;padding:0;text-align:center;
     background:none;border:0;border-radius:0;box-shadow:none;
-    text-align:left;text-wrap:wrap;
   }
-  .ev-today-card:hover{box-shadow:none;}
-  .ev-today-badge{
-    display:flex;align-items:center;gap:6px;margin:0 0 3px;
-    font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-ink);
+  .events-wrap .ev-today-card:hover{box-shadow:none;}
+  .events-wrap .ev-today-card::before{content:none;}
+  .events-wrap .ev-today-badge{margin:0;display:inline-flex;align-items:center;}
+  .events-wrap .ev-today-badge svg{display:none;}
+  .events-wrap .ev-today-badge::before{content:'';flex:none;width:15px;height:15px;background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='11' fill='%23fff' stroke='%231f242c' stroke-width='1.5'/><path d='M12 1A11 11 0 0 1 12 23A5.5 5.5 0 0 1 12 12A5.5 5.5 0 0 0 12 1Z' fill='%231f242c'/><circle cx='12' cy='17.5' r='1.7' fill='%23fff'/><circle cx='12' cy='6.5' r='1.7' fill='%231f242c'/></svg>") center/contain no-repeat;}
+  .events-wrap .ev-today-badge span{display:none;}           /* chỉ giữ biểu tượng âm dương */
+  .events-wrap .ev-today-lunar{font-size:14px;font-weight:600;line-height:1.5;color:#1f3a5f;text-align:center;}
+  .events-wrap .ev-today-lunar::before{content:'Hôm nay: ';}
+  .events-wrap .ev-today-solar{font-size:13px;line-height:1.5;color:var(--ink-meta);text-align:center;}
+  .events-wrap .ev-today-solar::before{content:'·';margin-right:7px;color:var(--gold-rule);}
+  @media (prefers-color-scheme:dark){
+    .events-wrap .ev-today-lunar{color:#9cc3ec;}            /* = màu tab active chế độ tối */
   }
-  .ev-today-badge svg{display:none;}
-  .ev-today-badge::before{content:'';flex:none;width:15px;height:15px;background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='11' fill='%23fff' stroke='%231f242c' stroke-width='1.5'/><path d='M12 1A11 11 0 0 1 12 23A5.5 5.5 0 0 1 12 12A5.5 5.5 0 0 0 12 1Z' fill='%231f242c'/><circle cx='12' cy='17.5' r='1.7' fill='%23fff'/><circle cx='12' cy='6.5' r='1.7' fill='%231f242c'/></svg>") center/contain no-repeat;}
-  .ev-today-lunar{font-family:'Be Vietnam Pro',sans-serif;font-size:15px;font-weight:600;line-height:1.45;letter-spacing:0;color:#4a3f33;text-align:left;text-wrap:wrap;}
-  .ev-today-solar{font-size:13px;font-weight:400;line-height:1.5;color:var(--ink-meta);text-align:left;text-wrap:wrap;}
-  @media (prefers-color-scheme:dark){ .ev-today-lunar{color:#d8cfc2;} }
-  @media (min-width:781px){
-    .events-wrap .ev-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:32px;row-gap:0;align-items:center;}
-    .ev-hero-main{display:contents;}
-    .ev-hero .hist-hero-title{grid-column:1 / -1;}
-    .ev-hero .hist-hero-sub{grid-column:1;grid-row:2;max-width:680px;}
-    .ev-hero-aside{grid-column:2;grid-row:2;align-self:center;padding:2px 0 2px 24px;border-left:1px solid var(--card-line);}
-  }
-  @media (max-width:780px){
-    .events-wrap .ev-hero{flex-direction:column;align-items:stretch;gap:16px;margin-bottom:20px;padding:0 15px;}
-    .ev-today-card{padding-top:14px;}
-    .ev-today-card::before{
-      content:'';position:absolute;top:0;left:0;width:28px;height:2px;border-radius:2px;background:var(--gold);
-    }
+  @media (max-width:680px){
+    .history-wrap .hist-hero,
+    .events-wrap .ev-hero{margin:0 auto 20px;padding:0 8px;}
+    .history-wrap .hist-hero-sub,
+    .events-wrap .ev-hero .hist-hero-sub{font-size:13.5px;line-height:1.75;}
+    .events-wrap .ev-today-solar{flex-basis:100%;}            /* dương lịch xuống dòng 2 */
+    .events-wrap .ev-today-solar::before{content:none;}
   }
 
   /* ════════ (14/10/2026) TIÊU ĐỀ MỤC I · II TAB LỊCH GIỖ = KIỂU "PHẦN I" TAB LỊCH SỬ ════════ */
@@ -4315,7 +4320,6 @@
 <div id="panel-history" class="gp-tab-panel" role="tabpanel" aria-labelledby="tab-history">
   <div class="history-wrap">
     <div class="hist-hero">
-      <h2 class="hist-hero-title">Lịch Sử Vũ Tộc Thái Bình</h2>
       <p class="hist-hero-sub">Ghi lại cội nguồn phát tích từ Cụ Thủy Tổ Vũ Đạo Chính (thế kỷ XVII), sự nghiệp rạng rỡ của Ngũ Chi Phương và những gia phong, tộc ước truyền đời của dòng họ Vũ Thái Bình.</p>
     </div>
     <section class="hist-sec">
@@ -4424,7 +4428,6 @@
   <div class="events-wrap">
     <div class="hist-hero ev-hero">
       <div class="ev-hero-main">
-        <h2 class="hist-hero-title">Lịch Thanh Minh &amp; Ngày Giỗ Tiên Tổ</h2>
         <p class="hist-hero-sub">Tra cứu các ngày đại lễ tập trung toàn tộc, ngày giỗ và nơi an táng của các bậc Tiên Tổ để con cháu tiện dâng hương tri ân.</p>
       </div>
       <div class="ev-hero-aside">
