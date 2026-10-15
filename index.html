@@ -2735,11 +2735,32 @@
   .ev-today-solar{
     font-size:12px;font-weight:500;line-height:1.4;color:var(--ink-meta);
   }
+  /* ═══ (15/10/2026) "HÔM NAY ÂM LỊCH" — MOBILE: BỎ KHUNG, THÀNH DÒNG NGÀY THÁNG ═══ */
   @media (max-width:780px){
-    .events-wrap .ev-hero{flex-direction:column;align-items:stretch;gap:14px;margin-bottom:20px;padding:0 15px;}
-    .ev-today-card{min-width:0;padding:10px 14px 9px;}
-    .ev-today-lunar{font-size:14.5px;}
+    .events-wrap .ev-hero{flex-direction:column;align-items:stretch;gap:16px;margin-bottom:20px;padding:0 15px;}
+    .ev-today-card{
+      position:relative;display:flex;flex-direction:column;gap:2px;
+      min-width:0;padding:14px 0 0;
+      background:none;border:0;border-radius:0;box-shadow:none;
+      text-align:left;text-wrap:wrap;
+    }
+    .ev-today-card::before{
+      content:'';position:absolute;top:0;left:0;width:28px;height:2px;border-radius:2px;background:var(--gold);
+    }
+    .ev-today-card:hover{box-shadow:none;}
+    .ev-today-badge{
+      display:flex;align-items:center;gap:6px;margin:0 0 3px;
+      font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--gold-ink);
+    }
+    .ev-today-badge svg{display:none;}
+    .ev-today-badge::before{content:'';flex:none;width:15px;height:15px;background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='11' fill='%23fff' stroke='%231f242c' stroke-width='1.5'/><path d='M12 1A11 11 0 0 1 12 23A5.5 5.5 0 0 1 12 12A5.5 5.5 0 0 0 12 1Z' fill='%231f242c'/><circle cx='12' cy='17.5' r='1.7' fill='%23fff'/><circle cx='12' cy='6.5' r='1.7' fill='%231f242c'/></svg>") center/contain no-repeat;}
+    .ev-today-lunar{font-family:'Be Vietnam Pro',sans-serif;font-size:15px;font-weight:600;line-height:1.45;letter-spacing:0;color:#4a3f33;text-align:left;text-wrap:wrap;}
+    .ev-today-solar{font-size:13px;font-weight:400;line-height:1.5;color:var(--ink-meta);text-align:left;text-wrap:wrap;}
   }
+  @media (max-width:780px) and (prefers-color-scheme:dark){
+    .ev-today-lunar{color:#d8cfc2;}
+  }
+
 
   /* ════════ (14/10/2026) TIÊU ĐỀ MỤC I · II TAB LỊCH GIỖ = KIỂU "PHẦN I" TAB LỊCH SỬ ════════ */
   .ev-head-title,.gio-sec-title{
@@ -2865,19 +2886,32 @@
   .ev-act-d{color:var(--ink-body);}
   .ev-prog .ev-num{box-shadow:0 0 0 3px var(--paper);}
 
+  /* ═══ (15/10/2026) Ô "THANH MINH DỰ KIẾN" — MOBILE: TÔNG XANH NAVY ═══ */
   @media (max-width:680px){
     .ev-when{padding:14px 14px 12px;}
     .ev-prog{padding:14px 14px 18px;}
     .ev-when .ev-cap{display:none;}
-    .ev-date{gap:12px;padding:10px 12px;}
-    .ev-tile{width:46px;}
-    .ev-tile > b{font-size:21px;}
-    .ev-wd{display:inline;font-family:'Lora',serif;font-size:16px;font-weight:600;color:var(--ink-name);}
+    .ev-date{
+      gap:12px;padding:10px 12px 10px 11px;
+      background:#f1f5fa;border:1px solid #cfdbe9;border-left:3px solid #1f3a5f;box-shadow:none;
+    }
+    .ev-tile{width:50px;border-color:#cfdbe9;}
+    .ev-tile > span{padding:2px 4px;background:#1f3a5f;color:#fff;font-size:10.5px;font-weight:600;letter-spacing:0;}
+    .ev-tile > b{font-size:19px;font-weight:600;color:#1f3a5f;}
     .ev-sep{display:inline;}
     .ev-dt{display:block;}
-    .ev-dd{font-size:16px;}
-    .ev-al{display:block;font-size:12.5px;}
+    .ev-wd,.ev-dd{font-family:'Be Vietnam Pro',sans-serif;font-size:15px;font-weight:600;line-height:1.45;color:#1f3a5f;}
+    .ev-al{font-size:13px;line-height:1.5;color:#4a5f7a;text-align:left;text-wrap:wrap;}
+    .ev-st{color:#1f3a5f;background:var(--paper);border-color:#b9cbe0;font-weight:600;}
     .ev-prog .ev-acts li{font-size:14.5px;padding-bottom:12px;}
+  }
+  @media (max-width:680px) and (prefers-color-scheme:dark){
+    .ev-date{background:var(--blue-bg);border-color:#33465c;border-left-color:#86aedc;}
+    .ev-tile{border-color:#33465c;}
+    .ev-tile > span{background:#33507a;}
+    .ev-tile > b,.ev-wd,.ev-dd{color:#c9dbef;}
+    .ev-al{color:#9fb3c9;}
+    .ev-st{color:#c9dbef;border-color:#33465c;}
   }
 
   /* ════════ (15/10/2026) KHUNG CÔNG CỤ PHẢ HỆ — TRẢI ĐÚNG BỀ RỘNG KHỐI CÂY (≥ 641px) ════════
