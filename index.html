@@ -2835,9 +2835,19 @@
     .ev-al{white-space:nowrap;}
     .ev-prog .ev-acts li{padding-bottom:20px;}
     .event-notice .ev-body.ev-grid.no-when{grid-template-columns:minmax(0,1fr);}
-    .ev-when{border-right:1px solid var(--card-line);}
+    .ev-when{position:relative;border-right:0;}
+    .ev-when::after{
+      content:'';position:absolute;top:20px;bottom:20px;right:0;width:1px;
+      background:linear-gradient(180deg,transparent 0%,var(--card-line) 15%,var(--card-line) 85%,transparent 100%);
+    }
   }
-  @media (max-width:899px){ .ev-when + .ev-prog{border-top:1px solid var(--card-line);} }
+  @media (max-width:899px){
+    .ev-when + .ev-prog{position:relative;border-top:0;}
+    .ev-when + .ev-prog::before{
+      content:'';position:absolute;top:0;left:18px;right:18px;height:1px;
+      background:linear-gradient(90deg,transparent 0%,var(--card-line) 15%,var(--card-line) 85%,transparent 100%);
+    }
+  }
   .ev-cap{
     margin:0 0 10px;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
     color:var(--gold-ink);text-align:left;
@@ -2987,8 +2997,11 @@
   /* ════════ (15/10/2026) TAB LỊCH GIỖ — GIẢM MÀU: CHỈ GIỮ 1 ĐIỂM NHẤN ════════
      Nguyên tắc: CHỮ dùng thang xám trung tính; giữ nguyên khung thẻ vàng mờ & biểu tượng mục I · II.
      Màu nhấn chữ (navy + chấm cam) chỉ dành cho ô NGÀY THANH MINH. Bỏ vàng ở nhãn/số bước, bỏ navy ở tiêu đề mục. */
-  /* Tiêu đề mục I · II: mực đậm trung tính thay cho navy */
-  .ev-head-title,.gio-sec-title{color:var(--ink-name);}
+  /* Tiêu đề mục I · II: tông Nâu Gỗ Trầm Cổ Điển (#463422) trang nhã, ấm áp thay cho đen than */
+  .ev-head-title,.gio-sec-title{color:#463422;}
+  @media (prefers-color-scheme:dark){
+    .ev-head-title,.gio-sec-title{color:#e0d0be;}
+  }
   /* Câu ghi chú dưới tiêu đề: một tông xám, không nhãn */
   .ev-head-sub,.gio-head-sub{color:var(--ink-meta);}
   /* Hoạt động chính: nhãn xám, số bước là vòng viền xám — đọc như danh sách, không như nút */
