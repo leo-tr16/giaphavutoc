@@ -1534,13 +1534,16 @@
     letter-spacing:.01em;color:var(--ink-name);text-align:left;
   }
   .ev-head-sub{
-    margin:5px 0 0;font-size:13.5px;line-height:1.5;color:var(--ink-meta);
-    display:flex;align-items:center;flex-wrap:wrap;gap:4px 7px;text-align:left;
+    display:block;margin:6px 0 0;font-size:13.5px;line-height:1.65;color:var(--ink-body);text-align:left;text-wrap:wrap;
+  }
+  .ev-sub-lead{
+    font-weight:600;color:var(--gold-ink);letter-spacing:.01em;margin-right:3px;
   }
   .ev-sub-tag{
     display:inline-flex;align-items:center;padding:1px 7px;border-radius:999px;
     background:var(--paper);border:1px solid var(--gold-rule);
     font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-ink);
+    margin-right:7px;vertical-align:1px;
   }
   /* Thân thẻ: dọn bỏ khung 'Thời gian' thừa thãi */
   .ev-body{display:block;padding:2px 26px 24px;}
@@ -1588,7 +1591,8 @@
     .event-notice-head{padding:14px 14px 13px;gap:10px;}
     .ev-head-icon svg{width:16px;height:16px;padding:6px;border-radius:8px;}
     .ev-head-title{font-size:16px;}
-    .ev-head-sub{display:block;font-size:12.5px;margin-top:6px;line-height:1.6;}
+    .ev-head-sub{display:block;font-size:12.5px;margin-top:5px;line-height:1.6;}
+    .ev-head-sub .ev-sub-lead{margin-right:2px;}
     .ev-head-sub .ev-sub-tag{margin-right:6px;vertical-align:1px;}
     .gio-sec-title{font-size:16px;gap:10px;margin-bottom:16px;padding-bottom:12px;}
     .gio-sec-title svg{width:16px;height:16px;padding:7px;border-radius:8px;}
@@ -2717,6 +2721,112 @@
   @media (max-width:640px){ .tm-strip{margin:-6px 10px 18px;max-width:none;} }
   @media (max-width:360px){ .tms-acts{grid-template-columns:1fr;} }
   @media (prefers-color-scheme: dark){ .tm-strip.is-soon .tms-count{color:#e8917f;} }
+
+  /* ════════ (14/10/2026 v2) KHỐI I THANH MINH — Ô NGÀY | CHƯƠNG TRÌNH ════════
+     Máy tính (≥ 900px): 2 cột — trái ô "Thanh Minh sắp tới" (chỉ thời gian: thứ · ngày dương · âm lịch · Dự kiến)
+     + 1 dòng đăng ký nhỏ; phải chương trình 2 bước. Điện thoại: 1 cột, ô ngày nằm gọn 1 hàng.
+     Tab Phả hệ không còn lịch Thanh Minh (đã bỏ .gt-row / .gt-side / .tm-strip khỏi HTML). */
+  .event-notice .ev-body.ev-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:0;padding:0;}
+  .ev-when{padding:20px 22px;}
+  .ev-prog{padding:20px 26px 22px;}
+  @media (min-width:900px){
+    .event-notice .ev-body.ev-grid{grid-template-columns:380px minmax(0,1fr);}
+    .ev-al{white-space:nowrap;}
+    .ev-prog .ev-acts li{padding-bottom:20px;}
+    .event-notice .ev-body.ev-grid.no-when{grid-template-columns:minmax(0,1fr);}
+    .ev-when{border-right:1px solid var(--card-line);}
+  }
+  @media (max-width:899px){ .ev-when + .ev-prog{border-top:1px solid var(--card-line);} }
+  .ev-cap{
+    margin:0 0 10px;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--gold-ink);text-align:left;
+  }
+  .ev-date{
+    display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:12px;
+    background:var(--gold-bg);border:1px solid var(--gold-rule);
+  }
+  .ev-tile{
+    flex:none;width:52px;border-radius:9px;overflow:hidden;display:flex;flex-direction:column;
+    background:var(--paper);border:1px solid var(--gold-rule);text-align:center;
+  }
+  .ev-tile > span{display:block;padding:2px 0;background:var(--gold);color:#fff;font-size:10.5px;font-weight:600;line-height:1.4;white-space:nowrap;}
+  .ev-tile > b{display:block;padding:4px 0 5px;font-family:'Lora',serif;font-size:24px;font-weight:600;line-height:1.1;color:var(--ink-name);}
+  .ev-dt{flex:1;min-width:0;display:flex;flex-direction:column;text-align:left;}
+  .ev-wd{font-size:13px;line-height:1.4;color:var(--gold-ink);font-weight:500;}
+  .ev-sep{display:none;}
+  .ev-dd{font-family:'Lora',serif;font-size:19px;font-weight:600;line-height:1.3;color:var(--ink-name);font-variant-numeric:lining-nums;}
+  .ev-al{font-size:13px;line-height:1.45;color:var(--gold-ink);text-wrap:wrap;}
+  .ev-st{
+    flex:none;align-self:flex-start;padding:1px 9px;border-radius:999px;white-space:nowrap;
+    font-size:11.5px;font-weight:600;line-height:1.6;color:var(--gold-ink);
+    background:var(--paper);border:1px solid var(--gold-rule);
+  }
+  .ev-st.ok{color:var(--green);border-color:#9cc7b0;background:var(--green-bg);}
+  .ev-reg{
+    display:flex;align-items:center;gap:7px;margin:10px 2px 0;
+    font-size:12.5px;line-height:1.5;color:var(--ink-meta);text-align:left;text-wrap:wrap;
+  }
+  .ev-reg svg{flex:none;color:var(--gold);}
+  .ev-prog .ev-acts{grid-column:auto;grid-row:auto;background:none;padding:0;border-radius:0;}
+  .ev-prog .ev-acts li{font-size:14.5px;line-height:1.65;padding-bottom:16px;}
+  .ev-prog .ev-acts li:last-child{padding-bottom:0;}
+  .ev-prog .ev-acts li strong{font-weight:600;color:var(--ink-name);}
+  .ev-act-d{color:var(--ink-body);}
+  .ev-prog .ev-num{box-shadow:0 0 0 3px var(--paper);}
+
+  @media (max-width:680px){
+    .ev-when{padding:14px 14px 12px;}
+    .ev-prog{padding:14px 14px 18px;}
+    .ev-when .ev-cap{display:none;}
+    .ev-date{gap:12px;padding:10px 12px;}
+    .ev-tile{width:46px;}
+    .ev-tile > b{font-size:21px;}
+    .ev-wd{display:inline;font-family:'Lora',serif;font-size:16px;font-weight:600;color:var(--ink-name);}
+    .ev-sep{display:inline;}
+    .ev-dt{display:block;}
+    .ev-dd{font-size:16px;}
+    .ev-al{display:block;font-size:12.5px;}
+    .ev-prog .ev-acts li{font-size:14.5px;padding-bottom:12px;}
+  }
+
+  /* ════════ (15/10/2026) KHUNG CÔNG CỤ PHẢ HỆ — TRẢI ĐÚNG BỀ RỘNG KHỐI CÂY (≥ 641px) ════════
+     Trước: khung rộng 640px giữa khối cây 1040px → hai bên trống ~200px, mép không khớp mép khối "Đời 1 → Đời 7".
+     Nay: khung rộng ĐÚNG bằng khối cây bên dưới (cùng trục lề trái/phải), xếp lưới 2 cột:
+       • Máy tính (≥ 1000px): [ Ô tìm kiếm | Chi 1…5 ] / [ Chú giải | Báo tin ] — hai nửa bằng nhau,
+         đường chia giữa trùng trục giữa trang (thẳng nhãn "Đời 1 → Đời 7"). Khung thấp hơn ~40% → cây hiện sớm hơn.
+       • Tablet (641–999px): ô tìm kiếm & 5 chi trải hết bề ngang; chú giải trái — báo tin phải chung 1 dòng.
+       • Điện thoại (≤ 640px): giữ nguyên như cũ. */
+  @media (min-width:641px){
+    .genealogy-toolbar{
+      width:min(var(--wrap), calc(100% - 40px));max-width:none;
+      margin:20px auto 0;padding:16px 20px 6px;
+      display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:0;row-gap:12px;
+      grid-template-areas:"search search" "chi chi" "legend report";
+    }
+    .genealogy-toolbar + *{margin-top:28px;}
+    .gt-search-row{grid-area:search;min-width:0;}
+    .gt-chi-row{grid-area:chi;min-width:0;}
+    .gt-meta-row{grid-area:legend;}
+    .gt-report{grid-area:report;justify-content:flex-end;text-align:right;}
+    .gt-search-row .gp-field{height:44px;}
+    .gt-chi-btn{height:44px;font-size:14px;}
+    /* Chú giải + báo tin: chung MỘT đường kẻ mảnh, cùng chiều cao 44px */
+    .gt-meta-row,.gt-report{
+      min-height:44px;margin:0;padding:8px 0 4px;
+      border-top:1px solid var(--card-line);
+    }
+    .gt-meta-row{padding-right:16px;}
+    .gt-legend{font-size:13px;}
+  }
+  @media (min-width:1000px){
+    .genealogy-toolbar{
+      grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+      grid-template-areas:"search chi" "legend report";
+    }
+    .gt-search-row{padding-right:8px;}
+    .gt-chi-row{padding-left:8px;}
+    .gt-chi-grid{gap:8px;}
+  }
 </style>
 </head>
 <body class="is-tab-genealogy">
@@ -2745,8 +2855,6 @@
 
 <div id="panel-genealogy" class="gp-tab-panel active" role="tabpanel" aria-labelledby="tab-genealogy">
 
-<div class="gt-row">
-<aside class="gt-side gt-today" aria-label="Hôm nay" hidden><p class="gs-eb">Hôm nay · Âm lịch</p><div class="gs-body"></div><button type="button" class="gs-more" data-tab="panel-events"><span>Xem lịch giỗ</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></aside>
 <div class="genealogy-toolbar">
   <div class="gt-search-row">
   <div class="gp-slot"><div class="gp-box" data-gp><div class="gp-field"><svg class="gp-ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg><input class="gp-in" type="search" placeholder="Tìm tên người — gõ không dấu cũng được" autocomplete="off" spellcheck="false" enterkeyhint="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="gp-res-h" aria-label="Tìm tên người trong gia phả"><kbd class="gp-kbd" data-kbd>Ctrl K</kbd><button type="button" class="gp-x" data-gp-close aria-label="Đóng tìm kiếm">Đóng</button></div><div class="gp-drop" hidden><div class="gp-sec" aria-live="polite"></div><ul class="gp-res" id="gp-res-h" role="listbox" aria-label="Kết quả tìm kiếm"></ul><div class="gp-foot" aria-hidden="true"><span><kbd>↑</kbd><kbd>↓</kbd> chọn</span><span><kbd>↵</kbd> mở</span><span><kbd>Esc</kbd> đóng</span></div></div></div></div>
@@ -2763,18 +2871,6 @@
   </div>
   <a class="gt-report" href="https://docs.google.com/forms/d/e/1FAIpQLSe9aXljUi011en7IK9iODC7ZKtOyqwLN68F51CzWOKvKKe6GQ/viewform" target="_blank" rel="noopener"><svg class="gt-bell" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg><span class="gt-rp-q">Nhà có tin hiếu, hỷ hay cháu mới chào đời?</span><span class="gt-rp-link">Báo cho dòng họ<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
 </div>
-<aside class="gt-side gt-tm" aria-label="Thanh Minh sắp tới" data-tm-date="2027-04-11"><p class="gs-eb">Thanh Minh sắp tới</p><div class="gs-tm"><span class="gs-tile lg" aria-hidden="true"><span>Tháng 4</span><b>11</b></span><div class="gs-tm-main"><p class="gs-tm-date">Chủ nhật, 11/04/2027</p><p class="gs-tm-lunar" data-f="lunar" hidden></p></div></div><p class="gs-tm-meta"><span class="gs-badge">Dự kiến</span><em data-f="count" hidden></em></p><p class="gs-tm-noi"><span>Tập trung: </span>Khu Lăng mộ Tiên Tổ, xã Thụy Chính</p><button type="button" class="gs-more" data-tab="panel-events"><span>Xem lịch Thanh Minh</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></aside>
-</div>
-<details class="tm-strip" data-tm-date="2027-04-11">
-  <summary><span class="tms-tile" aria-hidden="true"><span>Tháng 4</span><b>11</b></span><span class="tms-main"><span class="tms-eb">Thanh Minh Đinh Mùi<i class="tms-st">Dự kiến</i></span><span class="tms-date">Chủ nhật, 11/04/2027</span><span class="tms-sub">Mùng 5 tháng 3 âm lịch<span class="tms-count" data-f="count" hidden></span></span></span><svg class="tms-chev" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
-  <div class="tms-body">
-    <p class="tms-row"><span>Tập trung</span>Khu Lăng mộ Tiên Tổ, xã Thụy Chính</p>
-    <p class="tms-row"><span>Ghi chú</span>Ngày dự kiến — chờ Trưởng họ chốt chính thức.</p>
-    <p class="tms-acts-h">Thêm vào lịch điện thoại — máy sẽ tự nhắc trước 7 ngày và 1 ngày</p>
-    <div class="tms-acts"><a class="tms-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%28D%E1%BB%B1%20ki%E1%BA%BFn%29%20Thanh%20Minh%20V%C5%A9%20T%E1%BB%99c%20Th%C3%A1i%20B%C3%ACnh&amp;dates=20270411/20270412&amp;details=M%C3%B9ng%205%20th%C3%A1ng%203%20n%C4%83m%20%C4%90inh%20M%C3%B9i%20%28%C3%A2m%20l%E1%BB%8Bch%29.%20Vi%E1%BA%BFng%20m%E1%BB%99%20Ti%C3%AAn%20T%E1%BB%95%2C%20t%E1%BA%BF%20l%E1%BB%85%20t%E1%BA%A1i%20T%E1%BB%AB%20%C4%91%C6%B0%E1%BB%9Dng%20h%E1%BB%8D%20V%C5%A9.&amp;location=Khu%20L%C4%83ng%20m%E1%BB%99%20Ti%C3%AAn%20T%E1%BB%95%2C%20x%C3%A3%20Th%E1%BB%A5y%20Ch%C3%ADnh" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4"/></svg><span>Lịch Google<small>Điện thoại Android</small></span></a><a class="tms-btn" href="data:text/calendar;charset=utf-8,BEGIN%3AVCALENDAR%0D%0AVERSION%3A2.0%0D%0APRODID%3A-//Vu%20Toc%20Thai%20Binh//Gia%20pha//VI%0D%0ABEGIN%3AVEVENT%0D%0AUID%3Athanh-minh-2027%40vutoc-thaibinh%0D%0ADTSTAMP%3A20270411T000000Z%0D%0ADTSTART%3BVALUE%3DDATE%3A20270411%0D%0ADTEND%3BVALUE%3DDATE%3A20270412%0D%0ASUMMARY%3A%28D%E1%BB%B1%20ki%E1%BA%BFn%29%20Thanh%20Minh%20V%C5%A9%20T%E1%BB%99c%20Th%C3%A1i%20B%C3%ACnh%0D%0ALOCATION%3AKhu%20L%C4%83ng%20m%E1%BB%99%20Ti%C3%AAn%20T%E1%BB%95%5C%2C%20x%C3%A3%20Th%E1%BB%A5y%20Ch%C3%ADnh%0D%0ADESCRIPTION%3AM%C3%B9ng%205%20th%C3%A1ng%203%20n%C4%83m%20%C4%90inh%20M%C3%B9i%20%28%C3%A2m%20l%E1%BB%8Bch%29.%20Vi%E1%BA%BFng%20m%E1%BB%99%20Ti%C3%AAn%20T%E1%BB%95%5C%2C%20t%E1%BA%BF%20l%E1%BB%85%20t%E1%BA%A1i%20T%E1%BB%AB%20%C4%91%C6%B0%E1%BB%9Dng%20h%E1%BB%8D%20V%C5%A9.%0D%0ABEGIN%3AVALARM%0D%0ATRIGGER%3A-P7D%0D%0AACTION%3ADISPLAY%0D%0ADESCRIPTION%3AC%C3%B2n%207%20ng%C3%A0y%20%C4%91%E1%BA%BFn%20Thanh%20Minh%0D%0AEND%3AVALARM%0D%0ABEGIN%3AVALARM%0D%0ATRIGGER%3A-P1D%0D%0AACTION%3ADISPLAY%0D%0ADESCRIPTION%3AMai%20l%C3%A0%20Thanh%20Minh%0D%0AEND%3AVALARM%0D%0AEND%3AVEVENT%0D%0AEND%3AVCALENDAR" download="thanh-minh-2027.ics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4"/></svg><span>Lịch iPhone<small>Apple Calendar</small></span></a></div>
-    <button type="button" class="tms-more" data-tab="panel-events"><span>Xem chương trình Thanh Minh</span><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-  </div>
-</details>
 
 <div class="trunk-wrap">
   <span class="trunk-title">ĐỜI 1 → ĐỜI 7</span>
@@ -4092,12 +4188,12 @@
 </div><div class="hist-card">
   <div class="hist-card-head"><span class="hist-card-name">Cụ Vũ Đức Bạn (Lương Thác)</span><span class="hist-card-badge">Đời 4</span></div>
   <p class="hist-card-desc">Con thứ thay quyền con trưởng gánh vác việc họ sau khi anh cả mất sớm. Cụ bà là Nguyễn Thị Tấu (Từ Trang).</p>
-  <div class="hist-card-ctx"><span class="hist-card-ctx-title">📜 Bối cảnh lịch sử:</span><span class="hist-card-ctx-body">Giai đoạn đầu thế kỷ XVIII, thuế khóa nặng nề. Gia tộc vẫn bền bỉ quai đê ngăn mặn, duy trì nếp nhà đạo hiếu và giữ kín thân thế chờ thời cơ thuận lợi.</span></div>
+  <div class="hist-card-ctx"><span class="hist-card-ctx-title">📜 Bối cảnh lịch sử:</span><span class="hist-card-ctx-body">Đầu thế kỷ XVIII, dưới thời chúa Trịnh Cương, Đàng Ngoài bước vào giai đoạn thái bình thịnh trị nhờ cuộc đình chiến lịch sử Trịnh – Nguyễn năm 1672 (lấy sông Gianh làm giới tuyến, khép lại 45 năm khói lửa đao binh). Trong bối cảnh xã hội yên ổn dài lâu, Cụ là thế hệ bản lề khép lại gần một thế kỷ mai danh ẩn tích của dòng họ: từ thế đơn truyền suốt 3 đời trước, Cụ sinh hạ 3 người con trai, tạo bước ngoặt lịch sử giúp dòng họ bắt đầu đâm chồi phân cành (Cụ Kế nối dòng chính, Cụ Đĩnh lập Ngành thứ). Nền móng điền sản và nếp gia phong được Cụ củng cố vững vàng tại Thụy Chính, tạo tiền đề thực lực để thế hệ sau đàng hoàng công khai danh tính.</span></div>
   <button type="button" class="btn-goto-tree" data-goto="P005"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem trên Phả Hệ</span></button>
 </div><div class="hist-card">
   <div class="hist-card-head"><span class="hist-card-name">Cụ Vũ Đức Kế (Trung Ngôn)</span><span class="hist-card-badge">Đời 5</span></div>
   <p class="hist-card-desc">1726 – 1787, thọ 62 tuổi. Sinh thời vua Lê Dụ Tông, mất năm Chiêu Thống thứ 1. Cụ bà là Đỗ Thị Điều (1737 – 1788).</p>
-  <div class="hist-card-ctx"><span class="hist-card-ctx-title">📜 Bối cảnh lịch sử:</span><span class="hist-card-ctx-body">Cụ sinh cùng năm với Bác học Lê Quý Đôn (1726 tại Hưng Hà). Cuộc khởi nghĩa Hoàng Công Chất (1739) và Quận Hẹ (1741 – 1745) đánh tan đồn bốt Chúa Trịnh ở ven biển Thái Bình, xóa tan nỗi lo truy sát, mở đường cho dòng họ công khai họ tên thật và chép phả liên tục từ đời thứ 5.</span></div>
+  <div class="hist-card-ctx"><span class="hist-card-ctx-title">📜 Bối cảnh lịch sử:</span><span class="hist-card-ctx-body">Cụ sinh cùng năm với Bác học Lê Quý Đôn (1726 tại Hưng Hà). Thời thanh xuân của Cụ chứng kiến các cuộc khởi nghĩa nông dân rầm rộ Đàng Ngoài: Hoàng Công Chất phất cờ tại Sơn Nam (1739), cùng khoảng thời gian đó cuộc khởi nghĩa của Quận He (Nguyễn Hữu Cầu) làm rung chuyển cả vùng duyên hải Đông Bắc và Thái Bình. Qua cơn biến động thời cuộc, Cụ Kế chính thức công khai họ tên thật &#x27;Vũ Đức&#x27; và bắt đầu ghi chép gia phả liên tục từ đời thứ 5.</span></div>
   <button type="button" class="btn-goto-tree" data-goto="P007"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 7 11.5 7.3 11.8a1 1 0 0 0 1.4 0c.3-.3 7.3-6.4 7.3-11.8a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg><span>Xem trên Phả Hệ</span></button>
 </div><div class="hist-card">
   <div class="hist-card-head"><span class="hist-card-name">Cụ Vũ Đức Thiệu (Cẩn Thành)</span><span class="hist-card-badge">Đời 6</span></div>
@@ -4143,7 +4239,7 @@
 </li><li class="timeline-item">
   <span class="timeline-year">Khoảng năm 1740</span>
   <h4 class="timeline-title">Mốc son công khai danh tính &amp; Chép phả</h4>
-  <p class="timeline-desc">Khởi nghĩa nông dân Hoàng Công Chất và Quận Hẹ quét tan các đồn bốt Chúa Trịnh ở ven biển Thái Bình. Nỗi lo truy sát chấm dứt, Đời 5 (Cụ Vũ Đức Kế) chính thức công khai họ tên thật và bắt đầu ghi chép gia phả đầy đủ, liên tục.</p>
+  <p class="timeline-desc">Trước sự suy yếu của chúa Trịnh và làn sóng khởi nghĩa của Hoàng Công Chất, Quận He (Nguyễn Hữu Cầu) tại vùng duyên hải Bắc Bộ, nỗi lo truy sát tiêu tan. Đời 5 (Cụ Vũ Đức Kế) chính thức công khai họ tên thật và bắt đầu ghi chép gia phả đầy đủ, liên tục.</p>
 </li><li class="timeline-item">
   <span class="timeline-year">Năm 1789 · Kỷ Dậu</span>
   <h4 class="timeline-title">Tổ nghề truyền thống</h4>
@@ -4184,13 +4280,10 @@
         <div class="ev-head-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
         <div class="ev-head-main">
           <h3 class="ev-head-title">I. Đại Lễ Tết Thanh Minh &amp; Tụ Họp Toàn Tộc</h3>
-          <p class="ev-head-sub"><span class="ev-sub-tag">Thông lệ</span><span>Hàng năm vào dịp Tiết Thanh Minh (tháng 3 Âm lịch)</span></p>
+          <p class="ev-head-sub"><strong class="ev-sub-lead">Thông lệ:</strong> Hàng năm vào tiết tháng 3 Âm lịch, con cháu trở về nguồn cội dọn dẹp cỏ dại, sửa sang phần mộ và thắp hương tưởng nhớ ông bà tổ tiên.</p>
         </div>
       </div>
-      <div class="ev-body">
-        <div class="ev-main"><div class="ev-notes"><p class="event-notice-p"><strong>Thông báo ngày họp</strong>: Ngày tụ họp cụ thể hàng năm sẽ được dòng họ thống nhất và thông báo sớm để bà con, con cháu các nơi chủ động thu xếp công việc về dự.</p><p class="event-notice-p"><strong>Đăng ký tham dự</strong>: Các gia đình chủ động báo trước số lượng người về dự với Trưởng họ (ông Vũ Đức Hà) để ban khánh tiết tiện tính toán mua sắm lễ vật, nấu cỗ và tổ chức gặp mặt đầm ấm tại Từ đường.</p></div>
-          <p class="ev-acts-h">Các hoạt động chính</p><ol class="ev-acts"><li><span class="ev-num">1</span><span><strong>Viếng Mộ Tiên Tổ</strong>: Toàn họ tề tựu tại Khu Lăng mộ (xã Thụy Chính, huyện Thái Thụy) dọn dẹp, thắp hương viếng mộ từ Cụ Thủy Tổ đến các phần mộ tổ của các Ngành, Chi.</span></li><li><span class="ev-num">2</span><span><strong>Tế Lễ Từ Đường</strong>: Về Từ đường họ Vũ làm lễ bái lạy Tổ tiên, báo cáo tình hình dòng họ, giao lưu gắn kết con cháu và liên hoan đồng tộc.</span></li></ol></div>
-      </div>
+      <div class="ev-body ev-grid"><div class="ev-when"><p class="ev-cap">Thanh Minh sắp tới</p><div class="ev-date" data-tm-date="2027-04-11"><span class="ev-tile" aria-hidden="true"><span>Tháng 4</span><b>11</b></span><span class="ev-dt"><span class="ev-wd">Chủ nhật<span class="ev-sep">, </span></span><b class="ev-dd">11/04/2027</b><span class="ev-al">Mùng 5 tháng 3 âm lịch</span></span><span class="ev-st">Dự kiến</span></div><p class="ev-reg"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M21.5 20a6.5 6.5 0 0 0-4-6"/></svg><span>Báo số người về dự cho Trưởng họ</span></p></div><div class="ev-prog"><p class="ev-cap">Hoạt động chính</p><ol class="ev-acts"><li><span class="ev-num">1</span><span><strong>Viếng mộ Tiên Tổ</strong><span class="ev-act-d"> — tại khu lăng mộ xã Thụy Chính (Thái Thụy): dọn dẹp, thắp hương từ mộ Cụ Thủy Tổ đến mộ tổ các Ngành, Chi.</span></span></li><li><span class="ev-num">2</span><span><strong>Tế lễ Từ đường</strong><span class="ev-act-d"> — bái lạy Tổ tiên, báo cáo tình hình dòng họ, giao lưu con cháu và liên hoan đồng tộc.</span></span></li></ol></div></div>
     </div>
     <section class="hist-sec gio-sec">
       <h3 class="hist-sec-title gio-sec-title"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg><span>II. Ngày Giỗ &amp; Mộ Phần Các Cụ Tiên Tổ</span></h3>
@@ -4513,7 +4606,7 @@ var GP_SEARCH=(function(){
       c.classList.toggle('is-open',on); b.setAttribute('aria-expanded',on?'true':'false');
       b.setAttribute('aria-label',on?'Thu gọn chi tiết':'Xem chi tiết');
       b.querySelector('.more-t').textContent=on?'Thu gọn':'Chi tiết';
-      later(); return;
+      return;
     }
     /* bấm vào chữ trong phần chi tiết (để đọc / bôi đen) không làm đóng-mở nhánh */
     if(e.target.closest('.notes-wrap') && e.target.closest('summary') && !e.target.closest('a')) e.preventDefault();
@@ -4530,14 +4623,6 @@ var GP_SEARCH=(function(){
         if(ch.scrollWidth>ch.clientWidth+1) c.classList.add('sp-hide');
       }
     });
-  }
-  /* Đời 7: hai thẻ Cụ Thạc | Cụ Mậu cao bằng nhau (khi cả hai đang thu gọn, màn đủ rộng) */
-  function eq(){
-    var cs=document.querySelectorAll('.fork-col'); if(cs.length<2) return;
-    var a=cs[0].querySelector('.card-body'), b=cs[1].querySelector('.card-body'), d=cs[0].querySelector('details');
-    if(!a||!b) return; a.style.minHeight=b.style.minHeight='';
-    if(window.innerWidth<=640||(d&&d.open)||a.classList.contains('is-open')||b.classList.contains('is-open')) return;
-    var h=Math.max(a.offsetHeight,b.offsetHeight); a.style.minHeight=b.style.minHeight=h+'px';
   }
   /* 1-Click Share: Native Web Share API (Zalo, Messenger, Telegram...) kèm fallback copy link */
   document.addEventListener('click',function(e){
@@ -4589,7 +4674,7 @@ var GP_SEARCH=(function(){
     }
   });
 
-  function fit(){ fitChips(); eq(); }
+  function fit(){ fitChips(); }
   var t; function later(){ clearTimeout(t); t=setTimeout(fit,120); }
   document.addEventListener('toggle',later,true);
   window.addEventListener('resize',later);
@@ -4770,145 +4855,6 @@ var AL=(function(){
   });
   if(best){ best.el.classList.add('is-next'); }
   panel.querySelectorAll('.gio-month[data-month]').forEach(function(m){ if(+m.getAttribute('data-month')===L[1]) m.classList.add('is-now'); });
-})();
-</script>
-<script>
-/* 2 ô hai bên khung tìm kiếm (màn rộng): "Hôm nay" (âm lịch) + "Thanh Minh sắp tới" (âm lịch, đếm ngược). */
-(function(){
-  if(typeof AL==='undefined') return;
-  var CAN=['Canh','Tân','Nhâm','Quý','Giáp','Ất','Bính','Đinh','Mậu','Kỷ'], CHI=['Thân','Dậu','Tuất','Hợi','Tý','Sửu','Dần','Mão','Thìn','Tỵ','Ngọ','Mùi'];
-  var WD=['Chủ nhật','Thứ hai','Thứ ba','Thứ tư','Thứ năm','Thứ sáu','Thứ bảy'];
-  function p2(n){return (n<10?'0':'')+n;}
-  var now=new Date(), T0=Date.UTC(now.getFullYear(),now.getMonth(),now.getDate());
-  var L=AL.toLunar(now.getDate(),now.getMonth()+1,now.getFullYear());
-  var a=document.querySelector('.gt-today');
-  if(a){
-    a.querySelector('.gs-body').innerHTML=
-      '<div class="gs-big"><b>'+L[0]+'</b><span>tháng '+L[1]+(L[3]?' nhuận':'')+'<br>năm '+CAN[L[2]%10]+' '+CHI[L[2]%12]+'</span></div>'+
-      '<p class="gs-solar">'+WD[now.getDay()]+', '+p2(now.getDate())+'/'+p2(now.getMonth()+1)+'/'+now.getFullYear()+'</p>';
-    a.hidden=false;
-  }
-  /* dải Thanh Minh (điện thoại): còn N ngày · ≤ 45 ngày tô vàng · quá ngày thì ẩn */
-  var s=document.querySelector('.tm-strip');
-  if(s){
-    var u=(s.getAttribute('data-tm-date')||'').split('-').map(Number);
-    if(u.length===3&&u[0]){
-      var dd=Math.round((Date.UTC(u[0],u[1]-1,u[2])-T0)/864e5), sc=s.querySelector('[data-f="count"]');
-      if(dd<0){ s.hidden=true; }
-      else{ sc.textContent=dd===0?'Hôm nay':'Còn '+dd+' ngày'; sc.hidden=false; if(dd<=45) s.classList.add('is-soon'); }
-    }
-  }
-  var b=document.querySelector('.gt-tm'); if(!b) return;
-  var t=(b.getAttribute('data-tm-date')||'').split('-').map(Number); if(t.length!==3||!t[0]) return;
-  var M=AL.toLunar(t[2],t[1],t[0]);
-  var lu=b.querySelector('[data-f="lunar"]');
-  lu.textContent='Âm lịch: '+(M[0]<=10?'mùng ':'ngày ')+M[0]+' tháng '+M[1]+(M[3]?' nhuận':''); lu.hidden=false;
-  var d=Math.round((Date.UTC(t[0],t[1]-1,t[2])-T0)/864e5), c=b.querySelector('[data-f="count"]');
-  c.textContent=d>0?'Còn '+d+' ngày':(d===0?'Hôm nay':'Đã diễn ra'); c.hidden=false;
-})();
-</script>
-<script>
-/* Ô "Thanh Minh sắp tới": ngày âm lịch, đếm ngược, thêm vào lịch Apple/Google. */
-(function(){
-  var box=document.querySelector('.tm-next'); if(!box||typeof AL==='undefined') return;
-  var a=(box.getAttribute('data-tm-date')||'').split('-').map(Number); if(a.length!==3||!a[0]) return;
-  var y=a[0],m=a[1],d=a[2];
-  var CAN=['Canh','Tân','Nhâm','Quý','Giáp','Ất','Bính','Đinh','Mậu','Kỷ'], CHI=['Thân','Dậu','Tuất','Hợi','Tý','Sửu','Dần','Mão','Thìn','Tỵ','Ngọ','Mùi'];
-  function p2(n){return (n<10?'0':'')+n;}
-  function f(k){return box.querySelector('[data-f="'+k+'"]');}
-  var L=AL.toLunar(d,m,y), nam=CAN[L[2]%10]+' '+CHI[L[2]%12];
-  var am=(L[0]<=10?'Mùng ':'Ngày ')+L[0]+' tháng '+L[1]+(L[3]?' nhuận':'')+' năm '+nam;
-  var lu=f('lunar'); lu.innerHTML=am+' <span class="nw">(âm lịch)</span>'; lu.hidden=false;
-  var now=new Date(), days=Math.round((Date.UTC(y,m-1,d)-Date.UTC(now.getFullYear(),now.getMonth(),now.getDate()))/864e5);
-  var c=f('count');
-  if(days>0){ c.innerHTML='Còn <b>'+days+'</b> ngày'; c.hidden=false; }
-  else if(days===0){ c.innerHTML='<b>Hôm nay</b> là ngày Thanh Minh'; c.hidden=false; }
-  else { box.classList.add('is-past'); f('status').textContent='Đã diễn ra'; f('note').textContent='Dòng họ sẽ thông báo ngày Thanh Minh năm sau.'; return; }
-
-  /* Chuẩn bị link Google Calendar & file Apple Calendar */
-  var ok=box.getAttribute('data-tm-status')==='chinh-thuc', noi=box.getAttribute('data-tm-noi')||'';
-  var e=new Date(Date.UTC(y,m-1,d+1)), s=''+y+p2(m)+p2(d), se=''+e.getUTCFullYear()+p2(e.getUTCMonth()+1)+p2(e.getUTCDate());
-  function q(t){return t.replace(/[\\,;]/g,'\\$&');}
-  var summary=(ok?'':'(Dự kiến) ')+'Thanh Minh Vũ Tộc Thái Bình';
-  var desc=am+' (âm lịch). Viếng mộ Tiên Tổ tại thôn Miếu, xã Thụy Chính, tế lễ tại Từ đường họ Vũ.';
-
-  var gBtn=f('google-cal');
-  if(gBtn){
-    gBtn.href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(summary)+
-      '&dates='+s+'/'+se+'&details='+encodeURIComponent(desc)+(noi?'&location='+encodeURIComponent(noi):'');
-  }
-
-  var ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Vu Toc Thai Binh//Gia pha//VI','CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT',
-    'UID:thanh-minh-'+y+'@vutoc-thaibinh','DTSTAMP:'+s+'T000000Z','DTSTART;VALUE=DATE:'+s,'DTEND;VALUE=DATE:'+se,
-    'SUMMARY:'+summary, noi?'LOCATION:'+q(noi):'', 'DESCRIPTION:'+q(desc),
-    'BEGIN:VALARM','TRIGGER:-P7D','ACTION:DISPLAY','DESCRIPTION:Còn 7 ngày đến Thanh Minh','END:VALARM',
-    'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:Mai là Thanh Minh','END:VALARM',
-    'END:VEVENT','END:VCALENDAR'].filter(Boolean).join('\r\n');
-
-  var wrap=box.querySelector('.tm-cal-wrap'), trig=f('cal-btn'), pop=f('cal-pop'), appleBtn=f('apple-cal'), guide=f('cal-guide'), guideClose=f('guide-close');
-
-  if(trig && pop){
-    trig.addEventListener('click',function(ev){
-      ev.stopPropagation();
-      var open=!pop.hidden;
-      pop.hidden=open;
-      wrap.classList.toggle('is-open',!open);
-      trig.setAttribute('aria-expanded',String(!open));
-    });
-    document.addEventListener('click',function(ev){
-      if(wrap && !wrap.contains(ev.target)){
-        pop.hidden=true;
-        wrap.classList.remove('is-open');
-        trig.setAttribute('aria-expanded','false');
-      }
-    });
-  }
-
-  if(gBtn){
-    gBtn.addEventListener('click',function(){
-      pop.hidden=true;
-      wrap.classList.remove('is-open');
-      trig.setAttribute('aria-expanded','false');
-    });
-  }
-
-  if(appleBtn){
-    appleBtn.addEventListener('click',function(ev){
-      ev.preventDefault();
-      pop.hidden=true;
-      wrap.classList.remove('is-open');
-      trig.setAttribute('aria-expanded','false');
-
-      var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
-                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-
-      if(guide && isIOS){
-        guide.hidden=false;
-        try{guide.scrollIntoView({behavior:'smooth',block:'nearest'});}catch(e){}
-      }
-
-      // Tạo Blob và kích hoạt tải về tệp .ics trực tiếp từ bộ nhớ trình duyệt (không cần lưu file rác trên đĩa)
-      try {
-        var blob=new Blob([ics],{type:'text/calendar;charset=utf-8'});
-        var url=URL.createObjectURL(blob);
-        var dl=document.createElement('a');
-        dl.href=url;
-        dl.download='thanh-minh-'+y+'.ics';
-        document.body.appendChild(dl);
-        dl.click();
-        setTimeout(function(){
-          document.body.removeChild(dl);
-          URL.revokeObjectURL(url);
-        },2000);
-      } catch(err){}
-    });
-  }
-
-  if(guideClose && guide){
-    guideClose.addEventListener('click',function(){
-      guide.hidden=true;
-    });
-  }
 })();
 </script>
 <script>
