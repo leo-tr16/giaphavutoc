@@ -2902,10 +2902,10 @@
   .ev-reg svg{flex:none;color:#1f3a5f;}
   @media (prefers-color-scheme:dark){ .ev-reg svg{color:#86aedc;} }
   .ev-prog .ev-acts{grid-column:auto;grid-row:auto;background:none;padding:0;border-radius:0;}
-  .ev-prog .ev-acts li{font-size:14.5px;line-height:1.65;padding-bottom:16px;}
+  .ev-prog .ev-acts li{font-size:14.5px;line-height:1.65;padding-bottom:16px;color:var(--ink-soft);}
   .ev-prog .ev-acts li:last-child{padding-bottom:0;}
-  .ev-prog .ev-acts li strong{font-weight:600;color:var(--ink-name);}
-  .ev-act-d{color:var(--ink-body);}
+  .ev-prog .ev-acts li strong{font-weight:600;color:var(--ink-soft);}
+  .ev-act-d{color:var(--ink-soft);}
   .ev-prog .ev-num{box-shadow:0 0 0 3px var(--paper);}
 
   /* ═══ (15/10/2026 v2) Ô "THANH MINH SẮP TỚI" — MOBILE: ngày 1 dòng (màu navy dùng chung với desktop) ═══ */
@@ -3004,11 +3004,14 @@
   }
   /* Câu ghi chú dưới tiêu đề: một tông xám, không nhãn */
   .ev-head-sub,.gio-head-sub{color:var(--ink-meta);}
-  /* Hoạt động chính: nhãn xám, số bước là vòng viền xám — đọc như danh sách, không như nút */
-  .ev-cap{color:var(--ink-meta);}
+  /* Hoạt động chính: toàn bộ content dùng 1 màu xám mờ đồng nhất (var(--ink-soft)) để không lấn át ô ngày Thanh Minh */
+  .ev-cap{color:var(--ink-soft);}
+  .ev-prog .ev-acts li{color:var(--ink-soft);}
+  .ev-prog .ev-acts li strong{font-weight:600;color:var(--ink-soft);}
+  .ev-act-d{color:var(--ink-soft);}
   .ev-num,.ev-prog .ev-num{
-    background:var(--paper);color:var(--ink-name);
-    box-shadow:inset 0 0 0 1.5px var(--ink-meta),0 0 0 3px var(--paper);
+    background:var(--paper);color:var(--ink-soft);
+    box-shadow:inset 0 0 0 1.5px var(--ink-soft),0 0 0 3px var(--paper);
   }
   .ev-acts li:not(:last-child)::before{background:var(--card-line);}
 </style>
@@ -4461,8 +4464,8 @@
       <div class="ev-hero-aside">
         <div class="ev-today-card" data-al-today>
           <div class="ev-today-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18 6 6 0 0 1 0-12 3 3 0 0 0 0-6"/></svg><span>HÔM NAY (ÂM LỊCH)</span></div>
-          <div class="ev-today-lunar">Ngày 6 tháng 9 năm Bính Ngọ</div>
-          <div class="ev-today-solar">Thứ năm, 15/10/2026 (dương lịch)</div>
+          <div class="ev-today-lunar">Ngày 7 tháng 9 năm Bính Ngọ</div>
+          <div class="ev-today-solar">Thứ sáu, 16/10/2026 (dương lịch)</div>
         </div>
       </div>
     </div>
