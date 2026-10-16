@@ -1809,17 +1809,18 @@
   /* Toast thông báo nhanh nổi trên màn hình */
   .gp-stat-toast{
     position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
-    z-index:9999;background:rgba(20,23,28,.95);color:#fff;
-    border:1px solid var(--gold-rule);border-radius:999px;
-    padding:10px 20px;box-shadow:0 12px 32px rgba(0,0,0,.35);
-    display:flex;align-items:center;gap:10px;font-size:13.5px;font-family:'Be Vietnam Pro',sans-serif;
+    z-index:9999;background:rgba(20,23,28,.96);color:#fff;
+    border:1px solid var(--gold-rule);border-radius:14px;
+    padding:10px 18px;box-shadow:0 12px 32px rgba(0,0,0,.45);
+    display:flex;align-items:center;gap:14px;font-size:13.5px;font-family:'Be Vietnam Pro',sans-serif;
     backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
     animation:toastPop .3s cubic-bezier(.16,1,.3,1);
+    max-width:calc(100vw - 32px);width:max-content;
   }
   .gp-stat-toast b{color:var(--gold-rule);font-size:15px;}
   .gp-stat-toast button{
     background:none;border:none;color:#9ea4af;cursor:pointer;padding:2px 6px;font-size:16px;line-height:1;
-    margin-left:6px;border-radius:4px;
+    margin-left:auto;border-radius:4px;
   }
   .gp-stat-toast button:hover{color:#fff;}
   @keyframes toastPop{from{opacity:0;transform:translate(-50%,16px);}to{opacity:1;transform:translate(-50%,0);}}
@@ -5192,7 +5193,9 @@ var AL=(function(){
 <script>
 (function(){
   var STAT_URL = 'https://api.visitorbadge.io/api/visitors?path=leo-tr16.github.io.giaphavutoc';
+  var RATING_URL = 'https://script.google.com/macros/s/AKfycbxhTfG-1MykBoh6P8whNM5PcSJTkO0BAoGgVhTmNDbOcTg5VFbTr2vMy-4TSI9-e_Gc/exec';
   var countVal = null;
+  var ratingVal = null;
   var isFetching = false;
 
   function fetchCount(cb){
@@ -5209,7 +5212,7 @@ var AL=(function(){
     fetch(STAT_URL)
       .then(function(r){ return r.text(); })
       .then(function(svg){
-        var m = svg.match(/VISITORS:\s*([\d,]+)/i) || svg.match(/<text[^>]*font-weight="bold"[^>]*>([^<]+)<\/text>/i);
+        var m = svg.match(/VISITORS:\\s*([\\d,]+)/i) || svg.match(/<text[^>]*font-weight="bold"[^>]*>([^<]+)<\\/text>/i);
         countVal = m ? m[1] : 'Đã ghi nhận';
         isFetching = false;
         if(cb) cb(countVal);
@@ -5220,24 +5223,42 @@ var AL=(function(){
       });
   }
 
+  function fetchRating(cb){
+    if(ratingVal !== null){ if(cb) cb(ratingVal); return; }
+    if(!RATING_URL){ if(cb) cb(null); return; }
+    fetch(RATING_URL)
+      .then(function(r){ return r.json(); })
+      .then(function(d){ ratingVal = d; if(cb) cb(d); })
+      .catch(function(){ if(cb) cb(null); });
+  }
+
   try{ fetchCount(null); }catch(e){}
+  try{ setTimeout(function(){ fetchRating(null); }, 1200); }catch(e){}
 
   function showSecretStats(){
     fetchCount(function(val){
-      var box = document.getElementById('fx-secret-stat');
-      var valEl = document.getElementById('fx-stat-val');
-      if(box && valEl){
-        valEl.textContent = val + ' lượt truy cập';
-        box.hidden = false;
-      }
-      var oldToast = document.querySelector('.gp-stat-toast');
-      if(oldToast) oldToast.remove();
-      var t = document.createElement('div');
-      t.className = 'gp-stat-toast';
-      t.innerHTML = '<span>📊 Lượt truy cập gia phả: <b>' + val + '</b></span>' +
-                    '<button type="button" aria-label="Đóng" onclick="this.parentElement.remove()">✕</button>';
-      document.body.appendChild(t);
-      setTimeout(function(){ if(t && t.parentElement) t.remove(); }, 8000);
+      fetchRating(function(rt){
+        var rtHtml = '';
+        var rtText = '';
+        if(rt && rt.total > 0){
+          rtHtml = '<div style="margin-top:4px;color:var(--gold-rule,#d5bd8a);font-size:13px;">⭐ Đánh giá: <b>' + rt.avg + ' / 5</b> (' + rt.total + ' lượt bà con)</div>';
+          rtText = ' · ⭐ ' + rt.avg + '/5 (' + rt.total + ' lượt)';
+        }
+        var box = document.getElementById('fx-secret-stat');
+        var valEl = document.getElementById('fx-stat-val');
+        if(box && valEl){
+          valEl.innerHTML = val + ' lượt truy cập' + (rtText ? '<br><span style="color:var(--fx-gold,#d4b46e);font-size:12.5px;">⭐ Đánh giá: <b>' + rt.avg + '/5</b> (' + rt.total + ' lượt)</span>' : '');
+          box.hidden = false;
+        }
+        var oldToast = document.querySelector('.gp-stat-toast');
+        if(oldToast) oldToast.remove();
+        var t = document.createElement('div');
+        t.className = 'gp-stat-toast';
+        t.innerHTML = '<div><span>📊 Lượt truy cập gia phả: <b>' + val + '</b></span>' + rtHtml + '</div>' +
+                      '<button type="button" aria-label="Đóng" onclick="this.parentElement.remove()">✕</button>';
+        document.body.appendChild(t);
+        setTimeout(function(){ if(t && t.parentElement) t.remove(); }, 9000);
+      });
     });
   }
 
@@ -5276,17 +5297,29 @@ var AL=(function(){
 </script>
 <script>
 (function(){
+  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbxhTfG-1MykBoh6P8whNM5PcSJTkO0BAoGgVhTmNDbOcTg5VFbTr2vMy-4TSI9-e_Gc/exec';
   var LABELS=['','Rất khó dùng','Còn hơi khó dùng','Tạm được','Hài lòng','Rất hài lòng, tuyệt vời'];
   var THANKS='Ban biên tập xin cảm ơn, kính chúc cả nhà mạnh khỏe bình an.';
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   function load(k){try{return JSON.parse(localStorage.getItem(k));}catch(e){return null;}}
   function save(k,v){try{v?localStorage.setItem(k,JSON.stringify(v)):localStorage.removeItem(k);}catch(e){}}
-  // Gửi về Google Analytics 4: sự kiện "danh_gia_trang". GA4 cắt tham số ở 100 ký tự → ô nhắn giới hạn 100.
+  // Gửi về Google Analytics 4 (danh_gia_trang) và Google Sheet ngầm
   function track(stars,note){
     try{ if(typeof gtag==='function'){
       var p={so_sao:stars,value:stars}; if(note)p.loi_nhan=note.slice(0,100);
       gtag('event','danh_gia_trang',p);
     } }catch(e){}
+    try{
+      if(SHEET_URL){
+        var dev = /Mobi|Android|iPhone/i.test(navigator.userAgent) ? 'Điện thoại' : 'Máy tính';
+        fetch(SHEET_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({stars: stars, message: note || '', device: dev})
+        }).catch(function(){});
+      }
+    }catch(e){}
   }
 
   document.querySelectorAll('[data-rating]').forEach(function(root){
