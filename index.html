@@ -2708,6 +2708,7 @@
   .history-wrap .hist-hero,
   .events-wrap .ev-hero{
     display:block;width:min(600px,100%);margin:0 auto 28px;padding:0;
+    transform:translateX(var(--col-shift));
     background:none;border:0;border-radius:0;text-align:center;
   }
   .history-wrap .hist-hero-sub,
@@ -2744,7 +2745,7 @@
   }
   @media (max-width:680px){
     .history-wrap .hist-hero,
-    .events-wrap .ev-hero{margin:0 auto 20px;padding:0 8px;}
+    .events-wrap .ev-hero{margin:0 auto 20px;padding:0 8px;transform:none;}
     .history-wrap .hist-hero-sub,
     .events-wrap .ev-hero .hist-hero-sub{font-size:13.5px;line-height:1.75;}
     .events-wrap .ev-today-solar{flex-basis:100%;}            /* dương lịch xuống dòng 2 */
