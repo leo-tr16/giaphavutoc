@@ -5236,29 +5236,47 @@ var AL=(function(){
   try{ setTimeout(function(){ fetchRating(null); }, 1200); }catch(e){}
 
   function showSecretStats(){
+    var oldToast = document.querySelector('.gp-stat-toast');
+    if(oldToast) oldToast.remove();
+    var t = document.createElement('div');
+    t.className = 'gp-stat-toast';
+    
+    function renderToastHtml(val, rt){
+      var rtHtml = '';
+      if(rt && rt.total > 0){
+        rtHtml = '<div style="margin-top:4px;color:var(--gold-rule,#d5bd8a);font-size:13px;">⭐ Đánh giá: <b>' + rt.avg + ' / 5</b> (' + rt.total + ' lượt bà con)</div>';
+      } else if(rt === false){
+        rtHtml = '';
+      } else {
+        rtHtml = '<div style="margin-top:4px;color:var(--fx-soft,#b3b8c1);font-size:12.5px;">⭐ Đang đọc đánh giá…</div>';
+      }
+      return '<div class="gp-stat-body"><span>📊 Lượt truy cập gia phả: <b>' + (val || 'Đang tải…') + '</b></span>' + rtHtml + '</div>' +
+             '<button type="button" aria-label="Đóng" onclick="this.parentElement.remove()">✕</button>';
+    }
+    
+    t.innerHTML = renderToastHtml(countVal, ratingVal);
+    document.body.appendChild(t);
+    setTimeout(function(){ if(t && t.parentElement) t.remove(); }, 9000);
+
+    function syncAll(val, rt){
+      t.innerHTML = renderToastHtml(val, rt);
+      var rtText = '';
+      if(rt && rt.total > 0){
+        rtText = ' · ⭐ ' + rt.avg + '/5 (' + rt.total + ' lượt)';
+      }
+      var box = document.getElementById('fx-secret-stat');
+      var valEl = document.getElementById('fx-stat-val');
+      if(box && valEl && val){
+        valEl.innerHTML = val + ' lượt truy cập' + (rtText ? '<br><span style="color:var(--fx-gold,#d4b46e);font-size:12.5px;">⭐ Đánh giá: <b>' + rt.avg + '/5</b> (' + rt.total + ' lượt)</span>' : '');
+        box.hidden = false;
+      }
+    }
+
     fetchCount(function(val){
-      fetchRating(function(rt){
-        var rtHtml = '';
-        var rtText = '';
-        if(rt && rt.total > 0){
-          rtHtml = '<div style="margin-top:4px;color:var(--gold-rule,#d5bd8a);font-size:13px;">⭐ Đánh giá: <b>' + rt.avg + ' / 5</b> (' + rt.total + ' lượt bà con)</div>';
-          rtText = ' · ⭐ ' + rt.avg + '/5 (' + rt.total + ' lượt)';
-        }
-        var box = document.getElementById('fx-secret-stat');
-        var valEl = document.getElementById('fx-stat-val');
-        if(box && valEl){
-          valEl.innerHTML = val + ' lượt truy cập' + (rtText ? '<br><span style="color:var(--fx-gold,#d4b46e);font-size:12.5px;">⭐ Đánh giá: <b>' + rt.avg + '/5</b> (' + rt.total + ' lượt)</span>' : '');
-          box.hidden = false;
-        }
-        var oldToast = document.querySelector('.gp-stat-toast');
-        if(oldToast) oldToast.remove();
-        var t = document.createElement('div');
-        t.className = 'gp-stat-toast';
-        t.innerHTML = '<div><span>📊 Lượt truy cập gia phả: <b>' + val + '</b></span>' + rtHtml + '</div>' +
-                      '<button type="button" aria-label="Đóng" onclick="this.parentElement.remove()">✕</button>';
-        document.body.appendChild(t);
-        setTimeout(function(){ if(t && t.parentElement) t.remove(); }, 9000);
-      });
+      syncAll(val, ratingVal);
+    });
+    fetchRating(function(rt){
+      syncAll(countVal || 'Đang tải…', rt);
     });
   }
 
@@ -5266,15 +5284,20 @@ var AL=(function(){
     if(!el) return;
     var clicks = 0, timer = null;
     el.style.cursor = 'pointer';
-    el.addEventListener('click', function(e){
+    el.style.touchAction = 'manipulation';
+    el.style.userSelect = 'none';
+    el.style.webkitUserSelect = 'none';
+    var evt = window.PointerEvent ? 'pointerdown' : 'click';
+    el.addEventListener(evt, function(e){
+      if(e.button && e.button !== 0) return;
       clicks++;
       clearTimeout(timer);
       if(clicks >= 3){
         clicks = 0;
-        e.preventDefault();
+        if(e.cancelable) e.preventDefault();
         showSecretStats();
       } else {
-        timer = setTimeout(function(){ clicks = 0; }, 1200);
+        timer = setTimeout(function(){ clicks = 0; }, 1400);
       }
     });
   }
@@ -5282,6 +5305,8 @@ var AL=(function(){
   function init(){
     makeTripleClick(document.getElementById('fx-author'));
     makeTripleClick(document.querySelector('header h1'));
+    makeTripleClick(document.querySelector('.chi-sticky .brand'));
+    makeTripleClick(document.querySelector('header .eyebrow'));
   }
   if(document.readyState !== 'loading') init();
   else document.addEventListener('DOMContentLoaded', init);
