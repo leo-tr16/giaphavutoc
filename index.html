@@ -5532,12 +5532,32 @@ var AL=(function(){
 
   /* ─────────── Hộp tự hiện: hiện đúng sau 20-25 giây xem trang ─────────── */
   var rtp=document.querySelector('[data-rtp]'); if(!rtp)return;
+  var force=/[?&]danhgia=1\b/.test(location.search);
+
+  // 1. Đã từng đánh giá (hoặc bấm "Để sau" trong vòng 14 ngày) → hủy bỏ popup, tuyệt đối không làm phiền
+  var SNOOZE_MS=14*86400*1000;
+  var laterState=load(LATER);
+  var isSnoozed=laterState&&laterState.t&&(Date.now()-laterState.t<SNOOZE_MS);
+  var isRated=!!(saved&&saved.stars);
+
+  if(!force && (isRated || isSnoozed)){
+    try{ rtp.remove(); }catch(e){ rtp.hidden=true; }
+    return;
+  }
+
   var card=rtp.querySelector('.rtp__card'), inst=all.filter(function(r){return r.root.closest('[data-rtp]');})[0];
   var later=rtp.querySelectorAll('.rtp__later')[0];
-  var force=/[?&]danhgia=1\b/.test(location.search);
   var DELAY=(parseInt(rtp.dataset.delay,10)||25)*1000;
   var hasShown=false;
   var open=false, prevFocus=null, autoClose;
+
+  // 2. Nếu người xem vừa bấm đánh giá ở Footer trong lúc chờ → huỷ ngay popup
+  document.addEventListener('rt:rated',function(){
+    hasShown=true;
+    if(!open){
+      try{ rtp.remove(); }catch(e){ rtp.hidden=true; }
+    }
+  });
 
   function busy(){
     var a=document.activeElement;
@@ -5548,6 +5568,7 @@ var AL=(function(){
   var mq=window.matchMedia('(max-width:680px)');
   function show(){
     if(open||hasShown||busy())return;
+    if(!force && ((load(KEY)||{}).stars || isSnoozed)) return;
     open=true;
     hasShown=true;
     var modal=mq.matches;
@@ -5567,7 +5588,10 @@ var AL=(function(){
     if(prevFocus&&prevFocus.focus)try{prevFocus.focus({preventScroll:true});}catch(e){}
   }
 
+  // 3. Người xem bấm "Để sau" → lưu mốc thời gian, tạm hoãn 14 ngày
   function postpone(){
+    var l=load(LATER)||{};
+    save(LATER,{t:Date.now(),n:(l.n||0)+1});
     hide();
     ga('danh_gia_de_sau');
   }
@@ -5575,8 +5599,9 @@ var AL=(function(){
   rtp.querySelectorAll('[data-rtp-later]').forEach(function(b){b.addEventListener('click',postpone);});
   document.addEventListener('keydown',function(e){if(open&&e.key==='Escape')postpone();});
 
-  // Chấm xong: nút đổi thành "Đóng"; tự đóng sau 6 giây nếu bà con không gõ lời nhắn
+  // Chấm xong trong popup: nút đổi thành "Đóng"; tự đóng sau 6 giây nếu bà con không gõ lời nhắn
   rtp.addEventListener('rt:rated',function(){
+    hasShown=true;
     later.textContent='Đóng';
     autoClose=setTimeout(function(){var a=document.activeElement;if(!(a&&a.name==='note'&&a.value))hide();},6000);
   });
