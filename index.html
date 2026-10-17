@@ -578,7 +578,7 @@
     --fx-rule:rgba(255,255,255,.09);
     margin-top:72px;
     background:var(--fx-bg);color:var(--fx-soft);
-    padding:44px calc(max(0px, (100% - var(--wrap)) / 2) + 20px) calc(28px + env(safe-area-inset-bottom,0px));
+    padding:24px calc(max(0px, (100% - var(--wrap)) / 2) + 20px) calc(28px + env(safe-area-inset-bottom,0px));
   }
   @media (prefers-color-scheme: dark){
     .site-foot{border-top:1px solid var(--gold-rule);}
@@ -616,41 +616,39 @@
 
   /* ════════ ① HÀNG PHẢN HỒI 1–5 SAO ════════
      • Không khung, không nền, không bóng — chỉ một đường chỉ mờ bên dưới, cùng ngữ pháp với hàng cuối.
-     • Câu hỏi = cỡ chữ đọc (14px, đậm 500) — KHÔNG to hơn tên người biên soạn (16px) để giữ thứ bậc.
-     • Sao 20px nét 1.25 — thanh như icon hệ thống; vùng bấm vẫn 36px (máy tính) / 44px (cảm ứng).
-     • Nhãn mức độ ("Hài lòng"…) hiện ngay cạnh sao khi rê chuột / sau khi chấm — thay cho dòng hướng dẫn dài. */
+     • Câu hỏi = cỡ chữ đọc (13.5px, đậm 500) nằm cùng hàng ngang với 5 ngôi sao trên máy tính / tablet.
+     • Sao 19px nét 1.25 thanh mảnh; chiều cao vùng bấm 32px vừa chuẩn, không chiếm không gian thừa.
+     • Nhãn mức độ ("Hài lòng"…) hiện ngay cạnh sao khi rê chuột / sau khi chấm. */
   .rt-a{
     --rt-ink:var(--fx-ink,#ece8df);
     --rt-soft:var(--fx-soft,#b3b8c1);
     --rt-dim:var(--fx-dim,#8d939d);
     --rt-rule:var(--fx-rule,rgba(255,255,255,.09));
     --rt-label:var(--fx-gold,#d4b46e);
-    margin:0 0 40px;padding:0 0 26px;border-bottom:1px solid var(--rt-rule);
-    font-family:'Be Vietnam Pro',sans-serif;font-size:14px;line-height:1.6;color:var(--rt-soft);
+    margin:0 0 24px;padding:0 0 14px;border-bottom:1px solid var(--rt-rule);
+    font-family:'Be Vietnam Pro',sans-serif;font-size:13.5px;line-height:1.5;color:var(--rt-soft);
+    text-align:center;
   }
   .rt-a p,.rt-a h2{text-wrap:wrap;}
-  /* căn giữa: câu hỏi → sao → nhãn mức độ, gom thành MỘT cụm (mắt không phải đi từ mép trái sang mép phải) */
-  .rt-a{text-align:center;}
-  .rt-a__row{display:flex;flex-direction:column;align-items:center;gap:10px;}
-  .rt-a__ask{min-width:0;}
-  .rt-a__title{margin:0;font-size:14px;line-height:1.55;font-weight:500;color:var(--rt-ink);letter-spacing:0;}
-  .rt-a__sub{margin:2px 0 0;font-size:13px;line-height:1.55;color:var(--rt-dim);}
+  .rt-a__row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 18px;}
+  .rt-a__ask{min-width:0;display:flex;align-items:center;}
+  .rt-a__title{margin:0;font-size:13.5px;line-height:1.5;font-weight:500;color:var(--rt-ink);letter-spacing:0;}
 
-  .rt-a__rate{display:flex;flex-direction:column-reverse;align-items:center;gap:2px;flex:none;}  /* sao trên, nhãn dưới */
+  .rt-a__rate{display:inline-flex;align-items:center;gap:8px;flex:none;}
   .rt-a__label{
-    margin:0;min-height:1.4em;white-space:nowrap;   /* giữ chỗ sẵn → hiện nhãn không làm trang nhảy */
-    font-size:13px;line-height:1.4;color:var(--rt-dim);
+    margin:0;font-size:12.5px;line-height:1.4;color:var(--rt-dim);white-space:nowrap;
   }
+  .rt-a__label:empty{display:none;}
   .rt-a__label.is-set{color:var(--rt-label);font-weight:500;}
   .rt-a__stars{display:flex;align-items:center;gap:0;}
   .rt-a__star{
-    appearance:none;flex:none;width:36px;height:36px;
-    display:grid;place-items:center;margin:0;padding:0;border:0;border-radius:8px;
-    background:transparent;color:rgba(212,180,110,.5);cursor:pointer;
+    appearance:none;flex:none;width:32px;height:32px;
+    display:grid;place-items:center;margin:0;padding:0;border:0;border-radius:6px;
+    background:transparent;color:rgba(212,180,110,.45);cursor:pointer;
     touch-action:manipulation;-webkit-tap-highlight-color:transparent;
     transition:transform .15s ease,color .15s ease,background-color .15s ease;
   }
-  .rt-a__star svg{width:20px;height:20px;overflow:visible;}
+  .rt-a__star svg{width:19px;height:19px;overflow:visible;}
   .rt-a__star path{fill:transparent;stroke:currentColor;stroke-width:1.25;stroke-linejoin:round;transition:fill .18s ease;}
   .rt-a__star.is-on{color:var(--rt-label);}
   .rt-a__star.is-on path{fill:var(--rt-label);}
@@ -659,9 +657,9 @@
   @media (hover:hover){ .rt-a__star:hover{background:rgba(212,180,110,.08);} }
   .rt-a.is-rated .rt-a__star{cursor:default;pointer-events:none;background:transparent;}
 
-  /* sau khi chấm: lời cảm ơn + ô nhắn mở xuống, canh trái theo câu hỏi */
+  /* sau khi chấm: lời cảm ơn + ô nhắn mở xuống, canh giữa thanh thoát */
   .rt-a__reveal{
-    max-width:480px;margin:0 auto;
+    max-width:440px;margin:0 auto;
     display:grid;grid-template-rows:0fr;opacity:0;visibility:hidden;
     transition:grid-template-rows .35s ease,opacity .25s ease,visibility 0s linear .35s;
   }
@@ -670,37 +668,37 @@
     transition:grid-template-rows .35s ease,opacity .3s ease .05s,visibility 0s;
   }
   .rt-a__reveal-in{overflow:hidden;min-height:0;}
-  .rt-a__box{padding-top:10px;}
-  .rt-a__thanks{margin:0;font-size:13.5px;line-height:1.6;color:var(--rt-soft);text-wrap:balance;}
-  .rt-a__note{display:flex;gap:8px;margin-top:12px;}
+  .rt-a__box{padding-top:8px;}
+  .rt-a__thanks{margin:0;font-size:13px;line-height:1.55;color:var(--rt-soft);text-wrap:balance;}
+  .rt-a__note{display:flex;gap:8px;margin-top:10px;}
   .rt-a__note[hidden]{display:none;}
   .rt-a__note input{
-    flex:1;min-width:0;height:38px;padding:0 12px;border-radius:8px;
+    flex:1;min-width:0;height:36px;padding:0 12px;border-radius:8px;
     border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);color:var(--rt-ink);
-    font:inherit;font-size:13.5px;
+    font:inherit;font-size:13px;
   }
   .rt-a__note input::placeholder{color:var(--rt-dim);opacity:1;}
   .rt-a__note input:focus{outline:none;border-color:rgba(212,180,110,.6);box-shadow:0 0 0 3px rgba(212,180,110,.12);}
   .rt-a__send{
-    flex:none;height:38px;padding:0 16px;border-radius:8px;cursor:pointer;
+    flex:none;height:36px;padding:0 14px;border-radius:8px;cursor:pointer;
     border:1px solid rgba(212,180,110,.45);background:transparent;color:var(--rt-label);
-    font:inherit;font-size:13px;font-weight:600;transition:background-color .15s ease,color .15s ease;
+    font:inherit;font-size:12.5px;font-weight:600;transition:background-color .15s ease,color .15s ease;
   }
   .rt-a__send:hover{background:var(--rt-label);color:#2a2416;}
   .rt-a__send:focus-visible{outline:2px solid var(--rt-label);outline-offset:2px;}
-  .rt-a__sent{margin:10px 0 0;font-size:13px;color:var(--rt-label);font-weight:500;}
+  .rt-a__sent{margin:8px 0 0;font-size:12.5px;color:var(--rt-label);font-weight:500;}
   .rt-a__redo{
-    display:inline-flex;align-items:center;min-height:32px;margin-top:4px;padding:0;
-    background:none;border:0;cursor:pointer;font:inherit;font-size:12.5px;color:var(--rt-dim);
+    display:inline-flex;align-items:center;min-height:28px;margin-top:2px;padding:0;
+    background:none;border:0;cursor:pointer;font:inherit;font-size:12px;color:var(--rt-dim);
     text-decoration:underline;text-decoration-color:rgba(255,255,255,.2);text-underline-offset:3px;
   }
   .rt-a__redo:hover{color:var(--rt-soft);}
   .rt-a__redo:focus-visible{outline:2px solid var(--rt-label);outline-offset:2px;}
 
-  /* cảm ứng (iPad, điện thoại): vùng bấm sao 44px theo Apple HIG */
+  /* cảm ứng (iPad, điện thoại): vùng bấm sao 38px vừa vặn */
   @media (pointer:coarse){
-    .rt-a__star{width:44px;height:44px;}
-    .rt-a__star svg{width:22px;height:22px;}
+    .rt-a__star{width:38px;height:38px;}
+    .rt-a__star svg{width:20px;height:20px;}
   }
   @media (prefers-reduced-motion:reduce){
     .rt-a *,.rt-a__reveal{transition:none !important;}
@@ -728,8 +726,9 @@
   }
   @media (max-width:640px){
     .tree-end{margin-top:48px;}
-    .site-foot{margin-top:56px;padding:36px 22px calc(24px + env(safe-area-inset-bottom,0px));}
-    .rt-a{margin-bottom:32px;padding-bottom:22px;}
+    .site-foot{margin-top:56px;padding:22px 18px calc(24px + env(safe-area-inset-bottom,0px));}
+    .rt-a{margin-bottom:18px;padding-bottom:12px;}
+    .rt-a__row{flex-direction:column;gap:6px;}
     .rt-a__note{flex-direction:column;}
     .rt-a__note input{flex:none;width:100%;height:44px;font-size:16px;}   /* 16px: iPhone không tự phóng to khi gõ */
     .rt-a__send{width:100%;height:42px;}
@@ -4843,7 +4842,7 @@
   </div>
 </div>
 
-<footer class="site-foot" aria-labelledby="fx-h"><div class="fx-in"><section class="rt-a" data-rating data-src="footer" data-key="vutoc_rating_v1" aria-labelledby="rt-a-q"><div class="rt-a__row"><div class="rt-a__ask"><h2 class="rt-a__title" id="rt-a-q">Bà con thấy trang gia phả thế nào?</h2><p class="rt-a__sub">Chấm từ 1 đến 5 sao, chỉ cần một chạm.</p></div><div class="rt-a__rate"><p class="rt-a__label" data-label aria-live="polite"></p><div class="rt-a__stars" data-stars role="group" aria-label="Chấm từ 1 đến 5 sao"><button type="button" class="rt-a__star" data-star aria-pressed="false" aria-label="1 sao: Rất khó dùng"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2l2.6 5.3 5.8.85-4.2 4.1 1 5.8L12 16.5l-5.2 2.75 1-5.8-4.2-4.1 5.8-.85z"/></svg></button><button type="button" class="rt-a__star" data-star aria-pressed="false" aria-label="2 sao: Còn hơi khó dùng"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2l2.6 5.3 5.8.85-4.2 4.1 1 5.8L12 16.5l-5.2 2.75 1-5.8-4.2-4.1 5.8-.85z"/></svg></button><button type="button" class="rt-a__star" data-star aria-pressed="false" aria-label="3 sao: Tạm được"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2l2.6 5.3 5.8.85-4.2 4.1 1 5.8L12 16.5l-5.2 2.75 1-5.8-4.2-4.1 5.8-.85z"/></svg></button><button type="button" class="rt-a__star" data-star aria-pressed="false" aria-label="4 sao: Hài lòng"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2l2.6 5.3 5.8.85-4.2 4.1 1 5.8L12 16.5l-5.2 2.75 1-5.8-4.2-4.1 5.8-.85z"/></svg></button><button type="button" class="rt-a__star" data-star aria-pressed="false" aria-label="5 sao: Rất hài lòng, tuyệt vời"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2l2.6 5.3 5.8.85-4.2 4.1 1 5.8L12 16.5l-5.2 2.75 1-5.8-4.2-4.1 5.8-.85z"/></svg></button></div></div></div><div class="rt-a__reveal" data-reveal><div class="rt-a__reveal-in"><div class="rt-a__box"><div role="status"><p class="rt-a__thanks" data-thanks></p></div><form class="rt-a__note" data-note><input type="text" name="note" maxlength="100" autocomplete="off" enterkeyhint="send" placeholder="Nhắn gửi thêm (tùy chọn)…" aria-label="Nhắn gửi thêm, không bắt buộc"><button type="submit" class="rt-a__send">Gửi</button></form><p class="rt-a__sent" data-sent hidden>Lời nhắn đã được gửi.</p><button type="button" class="rt-a__redo" data-redo>Lỡ tay? Chấm lại</button></div></div></div></section><div class="fx-grid"><section class="fx-col fx-about"><p class="fx-eyebrow" id="fx-h">Về bản gia phả</p><p class="fx-lead">Trải qua thời gian thăng trầm, tư liệu xưa lưu truyền khó tránh khỏi những thiếu sót. Bà con nội ngoại gần xa khi có tin hiếu, tin hỷ, tin nhà sinh thêm con cháu, hoặc phát hiện thông tin chưa chuẩn xác, hãy bấm nút &quot;Báo tin&quot; (ở đầu trang hoặc trong mục Chi tiết của từng người) để người biên soạn cập nhật — cùng chung tay giúp gia phả dòng họ ngày càng đầy đủ và vẹn toàn.</p></section><section class="fx-col fx-byline"><p class="fx-eyebrow">Biên soạn</p><p class="fx-strong" id="fx-author" title="Người biên soạn">Vũ Phi Trường</p><p class="fx-sub">Đời 11 · Ngành III, Chi 2 · con trưởng ông Vũ Đức Linh</p><dl class="fx-facts"><div><dt>Khởi soạn</dt><dd>Tháng 9 năm 2026</dd></div></dl><div class="fx-secret-stat" id="fx-secret-stat" hidden></div></section><section class="fx-col fx-src"><p class="fx-eyebrow">Tư liệu</p><ul class="fx-list"><li>Gia phả viết tay dòng họ do ông Vũ Đức Phồn (Đời 11 · Ngành II, Chi 2 · con thứ ba ông Vũ Thế Mỹ) biên tập và chép tay năm 1991</li><li>Bản dịch gia phả và các bản giao ước từ chữ Hán Nôm sang chữ Quốc ngữ của ông Vũ Đình Ngội (Đời 11 · Ngành II, Chi 2 · con trưởng ông Vũ Thế Mỹ)</li><li>Văn bia Cụ Thủy Tổ &amp; các bản giao ước Hán Nôm cổ truyền</li><li>Lời kể và tư liệu khảo cứu từ các bậc cao niên trong họ</li></ul></section></div><div class="fx-bar"><div class="fx-bar-t"><span>Gia Phả Vũ Tộc Thái Bình</span><span>Thứ tự: theo thân mẫu (chính thất → kế thất), rồi theo thứ tự sinh</span></div><button type="button" class="fx-up" onclick="window.scrollTo({top:0,behavior:'smooth'});"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg><span>Lên đầu trang</span></button></div></div></footer>
+<footer class="site-foot" aria-labelledby="fx-h"><div class="fx-in"><section class="rt-a" data-rating data-src="footer" data-key="vutoc_rating_v1" aria-labelledby="rt-a-q"><div class="rt-a__row"><div class="rt-a__ask"><h2 class="rt-a__title" id="rt-a-q">Bà con thấy trang gia phả thế nào?</h2></div><div class="rt-a__rate"><div class="rt-a__stars" data-stars role="group" aria-label="Chấm từ 1 đến 5 sao"><button type="button" class="rt-a__star" data-star aria-pressed="false" aria-label="1 sao: Rất khó dùng"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2l2.6 5.3 5.8.85-4.2 4.1 1 5.8L12 16.5l-5.2 2.75 1-5.8-4.2-4.1 5.8-.85z"/></svg></button><button type="button" class="rt-a__star" data-star aria-pressed="false" aria-label="2 sao: Còn hơi khó dùng"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2l2.6 5.3 5.8.85-4.2 4.1 1 5.8L12 16.5l-5.2 2.75 1-5.8-4.2-4.1 5.8-.85z"/></svg></button><button type="button" class="rt-a__star" data-star aria-pressed="false" aria-label="3 sao: Tạm được"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2l2.6 5.3 5.8.85-4.2 4.1 1 5.8L12 16.5l-5.2 2.75 1-5.8-4.2-4.1 5.8-.85z"/></svg></button><button type="button" class="rt-a__star" data-star aria-pressed="false" aria-label="4 sao: Hài lòng"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2l2.6 5.3 5.8.85-4.2 4.1 1 5.8L12 16.5l-5.2 2.75 1-5.8-4.2-4.1 5.8-.85z"/></svg></button><button type="button" class="rt-a__star" data-star aria-pressed="false" aria-label="5 sao: Rất hài lòng, tuyệt vời"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.2l2.6 5.3 5.8.85-4.2 4.1 1 5.8L12 16.5l-5.2 2.75 1-5.8-4.2-4.1 5.8-.85z"/></svg></button></div><p class="rt-a__label" data-label aria-live="polite"></p></div></div><div class="rt-a__reveal" data-reveal><div class="rt-a__reveal-in"><div class="rt-a__box"><div role="status"><p class="rt-a__thanks" data-thanks></p></div><form class="rt-a__note" data-note><input type="text" name="note" maxlength="100" autocomplete="off" enterkeyhint="send" placeholder="Nhắn gửi thêm (tùy chọn)…" aria-label="Nhắn gửi thêm, không bắt buộc"><button type="submit" class="rt-a__send">Gửi</button></form><p class="rt-a__sent" data-sent hidden>Lời nhắn đã được gửi.</p><button type="button" class="rt-a__redo" data-redo>Lỡ tay? Chấm lại</button></div></div></div></section><div class="fx-grid"><section class="fx-col fx-about"><p class="fx-eyebrow" id="fx-h">Về bản gia phả</p><p class="fx-lead">Trải qua thời gian thăng trầm, tư liệu xưa lưu truyền khó tránh khỏi những thiếu sót. Bà con nội ngoại gần xa khi có tin hiếu, tin hỷ, tin nhà sinh thêm con cháu, hoặc phát hiện thông tin chưa chuẩn xác, hãy bấm nút &quot;Báo tin&quot; (ở đầu trang hoặc trong mục Chi tiết của từng người) để người biên soạn cập nhật — cùng chung tay giúp gia phả dòng họ ngày càng đầy đủ và vẹn toàn.</p></section><section class="fx-col fx-byline"><p class="fx-eyebrow">Biên soạn</p><p class="fx-strong" id="fx-author" title="Người biên soạn">Vũ Phi Trường</p><p class="fx-sub">Đời 11 · Ngành III, Chi 2 · con trưởng ông Vũ Đức Linh</p><dl class="fx-facts"><div><dt>Khởi soạn</dt><dd>Tháng 9 năm 2026</dd></div></dl><div class="fx-secret-stat" id="fx-secret-stat" hidden></div></section><section class="fx-col fx-src"><p class="fx-eyebrow">Tư liệu</p><ul class="fx-list"><li>Gia phả viết tay dòng họ do ông Vũ Đức Phồn (Đời 11 · Ngành II, Chi 2 · con thứ ba ông Vũ Thế Mỹ) biên tập và chép tay năm 1991</li><li>Bản dịch gia phả và các bản giao ước từ chữ Hán Nôm sang chữ Quốc ngữ của ông Vũ Đình Ngội (Đời 11 · Ngành II, Chi 2 · con trưởng ông Vũ Thế Mỹ)</li><li>Văn bia Cụ Thủy Tổ &amp; các bản giao ước Hán Nôm cổ truyền</li><li>Lời kể và tư liệu khảo cứu từ các bậc cao niên trong họ</li></ul></section></div><div class="fx-bar"><div class="fx-bar-t"><span>Gia Phả Vũ Tộc Thái Bình</span><span>Thứ tự: theo thân mẫu (chính thất → kế thất), rồi theo thứ tự sinh</span></div><button type="button" class="fx-up" onclick="window.scrollTo({top:0,behavior:'smooth'});"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg><span>Lên đầu trang</span></button></div></div></footer>
 
 <a class="gp-fab" href="https://docs.google.com/forms/d/e/1FAIpQLSe9aXljUi011en7IK9iODC7ZKtOyqwLN68F51CzWOKvKKe6GQ/viewform" target="_blank" rel="noopener" aria-label="Nhà có tin hiếu, hỷ hay cháu mới chào đời? Báo cho dòng họ"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg><span>Báo tin</span></a>
 
