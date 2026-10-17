@@ -5279,7 +5279,9 @@ var AL=(function(){
 <script>
 (function(){
   var STAT_URL = 'https://api.visitorbadge.io/api/visitors?path=leo-tr16.github.io.giaphavutoc';
+  var RATING_URL = 'https://script.google.com/macros/s/AKfycbxhTfG-1MykBoh6P8whNM5PcSJTkO0BAoGgVhTmNDbOcTg5VFbTr2vMy-4TSI9-e_Gc/exec';
   var countVal = null;
+  var ratingVal = null;
   var isFetching = false;
 
   function fetchCount(cb){
@@ -5296,7 +5298,7 @@ var AL=(function(){
     fetch(STAT_URL)
       .then(function(r){ return r.text(); })
       .then(function(svg){
-        var m = svg.match(/VISITORS:\s*([\d,]+)/i) || svg.match(/<text[^>]*font-weight="bold"[^>]*>([^<]+)<\/text>/i);
+        var m = svg.match(/VISITORS:\s*([\d,]+)/i) || svg.match(/font-weight="bold"[^>]*>([^<]+)/i);
         countVal = m ? m[1] : 'Đã ghi nhận';
         isFetching = false;
         if(cb) cb(countVal);
@@ -5307,54 +5309,111 @@ var AL=(function(){
       });
   }
 
+  function fetchRating(cb){
+    if(ratingVal !== null){ if(cb) cb(ratingVal); return; }
+    if(!RATING_URL){ if(cb) cb(null); return; }
+    fetch(RATING_URL)
+      .then(function(r){ return r.json(); })
+      .then(function(d){ ratingVal = d; if(cb) cb(d); })
+      .catch(function(){ if(cb) cb(null); });
+  }
+
   try{ fetchCount(null); }catch(e){}
+  try{ setTimeout(function(){ fetchRating(null); }, 1200); }catch(e){}
 
   function showSecretStats(){
-    fetchCount(function(val){
+    var oldToast = document.querySelector('.gp-stat-toast');
+    if(oldToast) oldToast.remove();
+    var t = document.createElement('div');
+    t.className = 'gp-stat-toast';
+    
+    function renderToastHtml(val, rt){
+      var rtHtml = '';
+      if(rt && rt.total > 0){
+        rtHtml = '<div style="margin-top:4px;color:var(--gold-rule,#d5bd8a);font-size:13px;">⭐ Đánh giá: <b>' + rt.avg + ' / 5</b> (' + rt.total + ' lượt bà con)</div>';
+      } else if(rt === false){
+        rtHtml = '';
+      } else {
+        rtHtml = '<div style="margin-top:4px;color:var(--fx-soft,#b3b8c1);font-size:12.5px;">⭐ Đang đọc đánh giá…</div>';
+      }
+      return '<div class="gp-stat-body"><span>📊 Lượt truy cập gia phả: <b>' + (val || 'Đang tải…') + '</b></span>' + rtHtml + '</div>' +
+             '<button type="button" aria-label="Đóng" onclick="this.parentElement.remove()">✕</button>';
+    }
+    
+    t.innerHTML = renderToastHtml(countVal, ratingVal);
+    document.body.appendChild(t);
+    setTimeout(function(){ if(t && t.parentElement) t.remove(); }, 9000);
+
+    function syncAll(val, rt){
+      t.innerHTML = renderToastHtml(val, rt);
+      var rtText = '';
+      if(rt && rt.total > 0){
+        rtText = ' · ⭐ ' + rt.avg + '/5 (' + rt.total + ' lượt)';
+      }
       var box = document.getElementById('fx-secret-stat');
       var valEl = document.getElementById('fx-stat-val');
-      if(box && valEl){
-        valEl.textContent = val + ' lượt truy cập';
+      if(box && valEl && val){
+        valEl.innerHTML = val + ' lượt truy cập' + (rtText ? '<br><span style="color:var(--fx-gold,#d4b46e);font-size:12.5px;">⭐ Đánh giá: <b>' + rt.avg + '/5</b> (' + rt.total + ' lượt)</span>' : '');
         box.hidden = false;
       }
-      var oldToast = document.querySelector('.gp-stat-toast');
-      if(oldToast) oldToast.remove();
-      var t = document.createElement('div');
-      t.className = 'gp-stat-toast';
-      t.innerHTML = '<span>📊 Lượt truy cập gia phả: <b>' + val + '</b></span>' +
-                    '<button type="button" aria-label="Đóng" onclick="this.parentElement.remove()">✕</button>';
-      document.body.appendChild(t);
-      setTimeout(function(){ if(t && t.parentElement) t.remove(); }, 8000);
+    }
+
+    fetchCount(function(val){
+      syncAll(val, ratingVal);
+    });
+    fetchRating(function(rt){
+      syncAll(countVal || 'Đang tải…', rt);
     });
   }
+  window.showSecretStats = showSecretStats;
 
   function makeTripleClick(el){
     if(!el) return;
-    var clicks = 0, timer = null;
+    var clicks = 0, timer = null, lastTouch = 0;
     el.style.cursor = 'pointer';
-    el.addEventListener('click', function(e){
+    el.style.touchAction = 'manipulation';
+    el.style.userSelect = 'none';
+    el.style.webkitUserSelect = 'none';
+
+    function hit(e){
       clicks++;
       clearTimeout(timer);
-      if(clicks >= 3){
+      if(clicks >= 3 || (e && e.detail >= 3)){
         clicks = 0;
-        e.preventDefault();
+        if(e && e.cancelable) e.preventDefault();
         showSecretStats();
       } else {
-        timer = setTimeout(function(){ clicks = 0; }, 1200);
+        timer = setTimeout(function(){ clicks = 0; }, 1600);
       }
+    }
+
+    el.addEventListener('touchend', function(e){
+      lastTouch = Date.now();
+      hit(e);
+    }, {passive: false});
+
+    el.addEventListener('click', function(e){
+      if(Date.now() - lastTouch < 450) return;
+      if(e.button !== undefined && e.button !== 0) return;
+      hit(e);
     });
   }
 
   function init(){
     makeTripleClick(document.getElementById('fx-author'));
     makeTripleClick(document.querySelector('header h1'));
+    makeTripleClick(document.querySelector('.chi-sticky .brand'));
+    makeTripleClick(document.querySelector('header .eyebrow'));
+    if(location.hash === '#thong-ke' || location.hash === '#stats' || location.search.indexOf('stats') !== -1){
+      setTimeout(showSecretStats, 500);
+    }
   }
   if(document.readyState !== 'loading') init();
   else document.addEventListener('DOMContentLoaded', init);
 
   document.addEventListener('keydown', function(e){
-    if((e.ctrlKey && e.shiftKey && (e.key === 'S' || e.key === 's')) ||
-       (e.altKey && (e.key === 'S' || e.key === 's'))){
+    var key = e.key ? e.key.toLowerCase() : '';
+    if(((e.ctrlKey && e.shiftKey) || e.altKey || (e.ctrlKey && e.altKey)) && key === 's'){
       e.preventDefault();
       showSecretStats();
     }
@@ -5366,11 +5425,24 @@ var AL=(function(){
   var LABELS=['','Rất khó dùng','Còn hơi khó dùng','Tạm được','Hài lòng','Rất hài lòng, tuyệt vời'];
   var THANKS='Ban biên tập xin cảm ơn, kính chúc cả nhà mạnh khỏe bình an.';
   var KEY='vutoc_rating_v1', LATER='vutoc_rating_later_v1';
+  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbxhTfG-1MykBoh6P8whNM5PcSJTkO0BAoGgVhTmNDbOcTg5VFbTr2vMy-4TSI9-e_Gc/exec';
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   function load(k){try{return JSON.parse(localStorage.getItem(k));}catch(e){return null;}}
   function save(k,v){try{v?localStorage.setItem(k,JSON.stringify(v)):localStorage.removeItem(k);}catch(e){}}
   // Gửi về Google Analytics 4. GA4 cắt tham số ở 100 ký tự → ô nhắn giới hạn 100.
   function ga(name,p){try{if(typeof gtag==='function')gtag('event',name,p||{});}catch(e){}}
+  function sendSheet(stars, note){
+    try{
+      if(!SHEET_URL) return;
+      var dev = /Mobi|Android|iPhone/i.test(navigator.userAgent) ? 'Điện thoại' : 'Máy tính';
+      fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({stars: stars, message: note || '', device: dev})
+      }).catch(function(){});
+    }catch(e){}
+  }
 
   var all=[];   // mọi khối chấm sao trên trang (footer + hộp tự hiện) — chấm ở đâu, chỗ khác khoá theo
   function lockAll(n,from){all.forEach(function(r){if(r!==from)r.lock(n,true);});}
@@ -5412,6 +5484,7 @@ var AL=(function(){
         if(value)return;
         api.lock(i+1); save(KEY,{stars:i+1,t:Date.now()}); lockAll(i+1,api);
         ga('danh_gia_trang',{so_sao:i+1,value:i+1,nguon:src});
+        sendSheet(i+1, '');
         root.dispatchEvent(new CustomEvent('rt:rated',{bubbles:true}));
       });
     });
@@ -5423,6 +5496,7 @@ var AL=(function(){
       e.preventDefault();
       var t=form.note.value.trim(); if(!t){form.note.focus();return;}
       ga('danh_gia_trang',{so_sao:value,value:value,loi_nhan:t.slice(0,100),nguon:src});
+      sendSheet(value, t);
       form.hidden=true; sent.hidden=false;
       root.dispatchEvent(new CustomEvent('rt:sent',{bubbles:true}));
     });
