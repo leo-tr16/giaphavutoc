@@ -3106,7 +3106,7 @@
 /* hai dòng chú thích kéo sát lên chữ ký */
 .letter-paper-wrap .lp-sig-meta{margin-top:-18px;}
 @media (max-width:680px){
-  .letter-paper-wrap{--lt-edge:60px;--lt-tear:6px;}
+  .letter-paper-wrap{--lt-edge:60px;--lt-tear:0px;}
   .letter-paper-wrap .lp-sig-meta{margin-top:-4px;}
 }
 @media (prefers-color-scheme: dark){
@@ -3171,6 +3171,46 @@
   .letter-paper-wrap .lp-head,.letter-paper-wrap .lp-date,.letter-paper-wrap .lp-salute,.letter-paper-wrap .lp-body,
   .letter-paper-wrap .lp-sig-title,.letter-paper-wrap .lp-sig-name,.letter-paper-wrap .lp-sig-meta{mix-blend-mode:normal;text-shadow:none;-webkit-mask-image:none;mask-image:none;}
 }
+
+/* ═══ PA B — GIẤY CŨ VÀI NĂM: CÂN BẰNG QUANG HỌC ═══ */
+.letter-paper-wrap{
+  --lt-tear:0px;
+  --lt-ink:#3d2f24;--lt-ink-strong:#30241a;--lt-muted:#67533f;
+  --lt-bleed:0 0 .3px rgba(61,47,36,.35);
+  border-radius:3px;
+  filter:drop-shadow(0 1px 2px rgba(60,45,25,.10)) drop-shadow(0 10px 24px rgba(60,45,25,.12));
+}
+.letter-paper-wrap::before{
+  border-radius:3px;
+  background:
+    radial-gradient(ellipse 75% 60% at 50% 40%, rgba(255,252,243,.55), transparent 72%),
+    var(--lt-fiber) 0 0 / 220px 220px,
+    #f4ead3;
+  filter:none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,250,238,.6),
+    inset 0 0 80px rgba(190,150,84,.18),
+    inset 0 -40px 60px -40px rgba(160,120,60,.10);
+}
+/* nếp gấp ba của thư: 2 đường mờ (vệt tối + vệt sáng) */
+.letter-paper-wrap::after{
+  display:block;inset:0;z-index:-1;border:0;border-image:none;border-radius:3px;
+  background:
+    linear-gradient(180deg,transparent calc(33.33% - 1px),rgba(140,105,55,.10) calc(33.33% - 1px),rgba(255,252,242,.55) calc(33.33% + 1px),transparent calc(33.33% + 2px)),
+    linear-gradient(180deg,transparent calc(66.66% - 1px),rgba(140,105,55,.10) calc(66.66% - 1px),rgba(255,252,242,.55) calc(66.66% + 1px),transparent calc(66.66% + 2px));
+}
+.letter-paper-wrap .lp-head,.letter-paper-wrap .lp-date,.letter-paper-wrap .lp-salute,.letter-paper-wrap .lp-body,
+.letter-paper-wrap .lp-sig-title,.letter-paper-wrap .lp-sig-name,.letter-paper-wrap .lp-sig-meta{
+  -webkit-mask-image:none;mask-image:none;
+}
+@media (max-width:680px){
+  .letter-paper-wrap{padding-inline:24px;}
+  .letter-paper-wrap::before{box-shadow:inset 0 0 0 1px rgba(255,250,238,.6),inset 0 0 36px rgba(184,146,84,.14);}
+}
+@media (prefers-color-scheme:dark){
+  .letter-paper-wrap{filter:brightness(.86) drop-shadow(0 10px 24px rgba(0,0,0,.45));}
+}
+
 
 /* ════════ (19/10/2026) ĐÁNH GIÁ 1–5 SAO — CHÂN TRANG & HỘP TỰ HIỆN ════════
    build.py đã sinh HTML/JS cho khối đánh giá (h_rating, h_rating_popup) nhưng style.css chưa có CSS →
