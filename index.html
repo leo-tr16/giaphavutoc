@@ -3124,6 +3124,53 @@
   .letter-paper-wrap{filter:none;border:1px solid #c9b48a;}
   .letter-paper-wrap::before,.letter-paper-wrap::after{display:none;}
 }
+
+/* ════════ (19/10/2026 v7) MỰC THƯ "ĂN" VÀO GIẤY CŨ ════════
+   Chữ đen sắc nét nổi lên trên giấy ố → trông như in đè. Thư cổ viết mực sắt: lâu năm ngả nâu, thấm vào thớ giấy.
+   • Mực nâu sepia thay cho nâu đen: thân thư #4f3a28 (≈7,4:1 trên giấy; chỗ mực phai nhất trên vùng ố đậm nhất vẫn ≥ 4,5:1).
+   • mix-blend-mode:multiply → mực "nhuộm" theo giấy: chỗ giấy ố thì nét chữ ố theo, thấy cả thớ giấy trong nét.
+   • Nhoè mực rất nhẹ (text-shadow 0.6px) → mép nét mềm như mực thấm, không còn sắc lẹm như chữ màn hình.
+   • Chữ đậm / tiêu đề chỉ sậm hơn một bậc, không dùng đen; chữ T đầu thư, hoa văn, khung: vàng đất trầm. */
+.letter-paper-wrap{
+  --lt-ink:#4f3a28;
+  --lt-ink-strong:#45311f;
+  --lt-muted:#6b4f38;
+  --lt-accent:#8a6a45;
+  --lt-rule:rgba(122,90,58,.34);
+  --lt-bleed:0 0 .4px rgba(79,58,40,.6),0 0 1.2px rgba(110,80,50,.35);
+  --lt-fade:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='3' seed='21' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -.5 1.15'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+}
+.letter-paper-wrap .lp-head,
+.letter-paper-wrap .lp-date,
+.letter-paper-wrap .lp-salute,
+.letter-paper-wrap .lp-body,
+.letter-paper-wrap .lp-sig-title,
+.letter-paper-wrap .lp-sig-name,
+.letter-paper-wrap .lp-sig-meta{
+  mix-blend-mode:multiply;
+  text-shadow:var(--lt-bleed);
+  /* mực phai không đều: độ đậm nét dao động ~82–100% theo từng mảng */
+  -webkit-mask-image:var(--lt-fade);mask-image:var(--lt-fade);
+  -webkit-mask-size:420px 420px;mask-size:420px 420px;
+}
+.letter-paper-wrap .lp-title{font-weight:500;color:var(--lt-ink-strong);}
+.letter-paper-wrap .lp-salute{color:var(--lt-ink-strong);}
+.letter-paper-wrap .lp-body strong{font-weight:600;color:var(--lt-ink-strong);}
+.letter-paper-wrap .lp-sig-meta{color:var(--lt-muted);}
+/* chữ ký mực xanh: cũng thấm vào giấy, bớt "mới" */
+.letter-paper-wrap .lp-sig-img img{mix-blend-mode:multiply;opacity:.88;}
+.letter-paper-wrap .letter-inner-border,
+.letter-paper-wrap .letter-inner-border::after{border-color:var(--lt-rule);}
+@media (prefers-color-scheme: dark){
+  .letter-paper-wrap{
+    --lt-ink:#4f3a28; --lt-ink-strong:#45311f; --lt-muted:#6b4f38; --lt-accent:#8a6a45;
+    --lt-rule:rgba(122,90,58,.34);
+  }
+}
+@media print{
+  .letter-paper-wrap .lp-head,.letter-paper-wrap .lp-date,.letter-paper-wrap .lp-salute,.letter-paper-wrap .lp-body,
+  .letter-paper-wrap .lp-sig-title,.letter-paper-wrap .lp-sig-name,.letter-paper-wrap .lp-sig-meta{mix-blend-mode:normal;text-shadow:none;-webkit-mask-image:none;mask-image:none;}
+}
 </style>
 </head>
 <body class="is-tab-genealogy">
