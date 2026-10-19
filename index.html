@@ -3182,21 +3182,33 @@
 .rt-a__row{display:flex;align-items:center;justify-content:space-between;gap:12px 32px;flex-wrap:wrap;}
 .rt-a__title{margin:0;font-family:'Lora',serif;font-size:20px;font-weight:600;line-height:1.4;color:var(--fx-ink);text-wrap:wrap;}
 .rt-a__rate{display:flex;align-items:center;gap:6px 16px;flex-wrap:wrap;}
-.rt-a__stars,.rtp__stars{display:flex;gap:2px;}
+.rt-a__stars,.rtp__stars{display:flex;gap:0;}
 .rt-a__star,.rtp__star{
   appearance:none;-webkit-appearance:none;display:inline-flex;align-items:center;justify-content:center;
-  width:44px;height:44px;padding:0;margin:0;border:0;border-radius:10px;background:transparent;cursor:pointer;
-  -webkit-tap-highlight-color:transparent;transition:transform .15s ease;
+  width:44px;height:44px;padding:0;margin:0;border:0;border-radius:8px;background:transparent;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;color:rgba(212,180,110,.5);
+  transition:color .12s ease,background-color .12s ease;
 }
-.rt-a__star svg,.rtp__star svg{width:30px;height:30px;fill:transparent;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round;transition:fill .15s ease,color .15s ease;}
-.rt-a__star{color:#8d939d;}
-.rt-a__star.is-on{color:var(--fx-gold);}
-.rt-a__star.is-on svg,.rtp__star.is-on svg{fill:currentColor;}
-.rt-a__star:hover:not([aria-disabled]),.rtp__star:hover:not([aria-disabled]){transform:scale(1.08);}
-.rt-a__star:focus-visible{outline:2px solid var(--fx-gold);outline-offset:1px;}
+.rt-a__star svg,.rtp__star svg{
+  width:24px;height:24px;fill:transparent;stroke:currentColor;stroke-width:1.4;stroke-linejoin:round;
+  pointer-events:none;user-select:none;transform:translateZ(0);backface-visibility:hidden;
+  transition:fill .12s ease,stroke .12s ease,filter .12s ease;
+}
+.rt-a__star.is-on,.rtp__star.is-on{color:var(--fx-gold);}
+.rt-a__star.is-on svg,.rtp__star.is-on svg{fill:currentColor;filter:drop-shadow(0 0 3px rgba(212,180,110,.35));}
+.rt-a__star:hover:not([aria-disabled]),.rtp__star:hover:not([aria-disabled]){
+  background:rgba(212,180,110,.12);
+  color:var(--fx-gold);
+}
+.rt-a__star:focus-visible,.rtp__star:focus-visible{outline:2px solid var(--fx-gold);outline-offset:1px;}
 .rt-a__star[aria-disabled],.rtp__star[aria-disabled]{cursor:default;}
-.rt-a__label{margin:0;min-width:11em;font-size:14px;color:var(--fx-soft);}
-.rt-a__label.is-set{color:var(--fx-gold);font-weight:600;}
+.rt-a__label{
+  margin:0;width:160px;min-width:160px;height:24px;line-height:24px;text-align:left;
+  font-size:13.5px;font-weight:600;color:var(--fx-gold);white-space:nowrap;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .15s ease,visibility .15s ease;
+}
+.rt-a__label.is-set,.rt-a__label:not(:empty){opacity:1;visibility:visible;}
 
 /* phần lộ ra sau khi chấm: cảm ơn + ô nhắn 1 dòng + chấm lại */
 .rt-a__reveal,.rtp__reveal{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease;}
@@ -3277,48 +3289,22 @@ html.rtp-lock{overflow:hidden;}
 }
 @media print{ .rt-a,.rtp{display:none !important;} }
 
-/* ── (19/10/2026 v2) Dải đánh giá chân trang: bố cục căn giữa, gọn & trang nhã ──
-   v1 thô: câu hỏi dạt trái – sao dạt phải, khoảng trống lớn ở giữa; sao viền xám to, rời rạc.
-   v2: một cụm căn giữa — nhãn nhỏ vàng đồng → câu hỏi → hàng sao vàng mảnh, sát nhau → dòng gợi ý.
-   Nhãn mức độ luôn giữ chỗ (không xô dòng khi rê chuột). */
-.rt-a{margin:0 0 44px;padding:4px 0 36px;text-align:center;}
-.rt-a__row{flex-direction:column;align-items:center;justify-content:center;gap:12px;}
-.rt-a__ask::before{
-  content:'Ý kiến bà con';display:block;margin:0 0 10px;
-  font-size:12px;line-height:1.4;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--fx-gold);
-}
-.rt-a__title{font-size:19px;font-weight:500;letter-spacing:.005em;}
-.rt-a__rate{flex-direction:column;align-items:center;gap:4px;}
-.rt-a__stars{gap:0;}
-.rt-a__star{width:44px;height:44px;color:rgba(212,180,110,.55);}
-.rt-a__star svg{width:24px;height:24px;stroke-width:1.3;}
-.rt-a__star.is-on{color:var(--fx-gold);}
-.rt-a__label{min-width:0;min-height:1.6em;font-size:13px;line-height:1.6;color:var(--fx-dim);}
-.rt-a__label:empty::before{content:'Chạm vào ngôi sao để chấm điểm';}
-.rt-a__label.is-set{font-size:13.5px;}
+/* ── Dải đánh giá chân trang: câu hỏi + 5 sao trên MỘT hàng căn giữa.
+   Nhãn mức độ cố định vị trí (width 160px, opacity 0 khi rỗng), tuyệt đối không gây giật hàng hay xô lệch sao khi di chuột. ── */
+.rt-a{padding:0 0 28px;margin-bottom:40px;}
+.rt-a__ask::before{content:none;}
+.rt-a__row{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 20px;}
+.rt-a__title{font-family:'Be Vietnam Pro',sans-serif;font-size:15px;font-weight:500;letter-spacing:0;line-height:1.5;color:var(--fx-ink);}
+.rt-a__rate{display:inline-flex;flex-direction:row;align-items:center;gap:0 10px;position:relative;}
+.rt-a__stars{gap:0;flex:none;}
 .rt-a__box{align-items:center;padding-top:14px;}
 .rt-a__note:not([hidden]){max-width:440px;}
 @media (max-width:640px){
   .rt-a{margin-bottom:28px;padding-bottom:28px;}
-  .rt-a__row{align-items:center;}
-  .rt-a__title{font-size:17.5px;}
-  .rt-a__stars{margin-left:0;}
-}
-
-/* ── (19/10/2026 v3) Đánh giá gọn: chỉ câu hỏi + 5 sao trên MỘT hàng căn giữa; bỏ nhãn "Ý kiến bà con"
-   và dòng gợi ý. Nhãn mức độ ("Hài lòng"…) chỉ hiện khi rê chuột / đã chấm. ── */
-.rt-a{padding:0 0 28px;margin-bottom:40px;}
-.rt-a__ask::before{content:none;}
-.rt-a__row{flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 20px;}
-.rt-a__title{font-size:17px;}
-.rt-a__rate{flex-direction:row;gap:0 10px;}
-.rt-a__label:empty::before{content:none;}
-.rt-a__label{min-height:0;}
-.rt-a__label:empty{display:none;}
-@media (max-width:640px){
-  .rt-a__row{flex-direction:column;gap:6px;}
-  .rt-a__rate{flex-direction:column;gap:0;}
-  .rt-a__title{font-size:16.5px;}
+  .rt-a__row{flex-direction:column;align-items:center;gap:6px;}
+  .rt-a__rate{flex-direction:column;align-items:center;gap:0;}
+  .rt-a__title{font-size:15px;text-align:center;}
+  .rt-a__label{width:auto;min-width:0;text-align:center;height:auto;line-height:1.4;}
 }
 
 /* ── Lượt xem ở hàng cuối footer, cạnh "Lên đầu trang" (chỉ hiện khi đã lấy được số thật) ── */
@@ -3333,7 +3319,6 @@ html.rtp-lock{overflow:hidden;}
 /* ── © 2026 · Gia Phả…: dấu chấm giữa ngăn năm và tên; bỏ dấu "·" giữa các cụm ở hàng cuối
    (khoảng cách cột đã đủ ngăn; trên điện thoại dấu này rơi thành một dòng lẻ) ── */
 .fx-copy-sep{margin:0 .5em;color:var(--fx-dim);}
-.fx-bar-sep{display:none;}
 
 /* ── Câu hỏi đánh giá: cùng họ chữ Be Vietnam Pro với toàn bộ footer (trước dùng Lora serif → lạc tông) ── */
 .rt-a__title{font-family:'Be Vietnam Pro',sans-serif;font-size:15px;font-weight:500;letter-spacing:0;line-height:1.5;color:var(--fx-ink);}
