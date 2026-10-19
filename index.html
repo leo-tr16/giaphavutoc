@@ -3338,6 +3338,21 @@ html.rtp-lock{overflow:hidden;}
 /* ── Câu hỏi đánh giá: cùng họ chữ Be Vietnam Pro với toàn bộ footer (trước dùng Lora serif → lạc tông) ── */
 .rt-a__title{font-family:'Be Vietnam Pro',sans-serif;font-size:15px;font-weight:500;letter-spacing:0;line-height:1.5;color:var(--fx-ink);}
 @media (max-width:640px){ .rt-a__title{font-size:15px;} }
+
+/* ── Hàng cuối footer: MỘT cỡ chữ (12.5px), MỘT màu chữ mờ, cùng đường chân chữ.
+   Trước: © nhỏ hơn & lệch dòng (thẻ <small>), "Thứ tự…" to hơn, số lượt xem & nút "Lên đầu trang" đậm trắng nổi. ── */
+.fx-bar{align-items:center;font-size:12.5px;line-height:1.5;color:var(--fx-dim);}
+.fx-bar-t{align-items:baseline;column-gap:24px;}
+.fx-bar-t > *{font-size:inherit;line-height:inherit;color:inherit;}
+.fx-copy{font-size:inherit;}
+.fx-copy-sep{margin:0 .45em;}
+.fx-stats:not([hidden]){font-size:inherit;color:var(--fx-dim);}
+.fx-stat{gap:6px;}
+.fx-stat svg{width:14px;height:14px;}
+.fx-stat b{font-weight:500;color:var(--fx-soft);}
+.fx-up{font-size:inherit;font-weight:500;color:var(--fx-soft);padding:5px 12px 5px 9px;}
+.fx-up svg{width:13px;height:13px;}
+@media (max-width:640px){ .fx-bar{align-items:flex-start;} .fx-bar-t{row-gap:4px;} }
 </style>
 </head>
 <body class="is-tab-genealogy">
