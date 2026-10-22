@@ -1,12 +1,12 @@
 {
-  "name": "Gia Phả Họ Vũ — Thái Bình",
+  "name": "Gia Phả Vũ Tộc — Thái Bình",
   "short_name": "Gia Phả",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#142a46",
-  "theme_color": "#142a46",
   "lang": "vi",
+  "background_color": "#1f3a5f",
+  "theme_color": "#f4f5f7",
   "icons": [
     {
       "src": "icon-192.png",
