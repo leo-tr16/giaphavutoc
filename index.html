@@ -1767,17 +1767,20 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 260px;
-    height: 260px;
-    opacity: 0.035;
+    width: 280px;
+    max-width: 65%;
+    height: auto;
+    opacity: 0.055;
     pointer-events: none;
-    font-size: 140px;
-    color: #8b5a2b;
-    font-family: 'Playfair Display', serif;
     display: flex;
     align-items: center;
     justify-content: center;
     user-select: none;
+  }
+  .letter-paper-wrap .letter-watermark svg {
+    width: 100%;
+    height: auto;
+    display: block;
   }
   .lp-head {
     text-align: center;
@@ -2214,13 +2217,14 @@
       border-color:#4a3f2b;
       background-image:none;
     }
-    .letter-paper-wrap .letter-watermark{opacity:.05;color:#c9a65e;}
+    .letter-paper-wrap .letter-watermark{opacity:.06;}
   }
 
-  /* chữ 武 chìm: dùng font có chữ Hán thật (Playfair không có → trình duyệt tự lấy font hệ thống, mỗi máy một kiểu) */
-  .letter-paper-wrap .letter-watermark{
-    font-family:'Noto Serif TC','Songti TC','PMingLiU','Noto Serif CJK TC',serif;
-    font-weight:500;
+  /* Logo watermark chìm giữa trang thư */
+  .letter-paper-wrap .letter-watermark svg{
+    width:100%;
+    height:auto;
+    display:block;
   }
   .letter-paper-wrap .letter-inner-border{border-color:var(--lt-rule);}
   .letter-paper-wrap .letter-inner-border::after{border-color:var(--lt-rule);opacity:.7;}
@@ -3080,7 +3084,7 @@
              center / 100% 1px no-repeat;
 }
 .letter-paper-wrap .lp-rule::after{background:none;}
-.letter-paper-wrap .letter-watermark{color:#7a5424;opacity:.05;}
+.letter-paper-wrap .letter-watermark{opacity:.055;}
 /* Chế độ tối: giấy cũ dưới ánh đèn mờ — nâu sẫm, vẫn giữ loang & mép sậm */
 @media (prefers-color-scheme: dark){
   .letter-paper-wrap{
@@ -3153,7 +3157,7 @@
     background:none;border-color:transparent;box-shadow:none;
     filter:brightness(.88) drop-shadow(0 10px 24px rgba(0,0,0,.5));
   }
-  .letter-paper-wrap .letter-watermark{color:#7a5424;opacity:.05;}
+  .letter-paper-wrap .letter-watermark{opacity:.06;}
 }
 @media print{
   .letter-paper-wrap{filter:none;border:1px solid #c9b48a;}
@@ -4984,8 +4988,8 @@ body:not(.is-tab-genealogy) .pin-home,.is-standalone .pin-home{display:none;}
       <div class="ev-hero-aside">
         <div class="ev-today-card" data-al-today>
           <div class="ev-today-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18 6 6 0 0 1 0-12 3 3 0 0 0 0-6"/></svg><span>HÔM NAY (ÂM LỊCH)</span></div>
-          <div class="ev-today-lunar">Ngày 14 tháng 9 năm Bính Ngọ</div>
-          <div class="ev-today-solar">Thứ sáu, 23/10/2026 (dương lịch)</div>
+          <div class="ev-today-lunar">Ngày 15 tháng 9 năm Bính Ngọ</div>
+          <div class="ev-today-solar">Thứ bảy, 24/10/2026 (dương lịch)</div>
         </div>
       </div>
     </div>
@@ -5022,7 +5026,7 @@ body:not(.is-tab-genealogy) .pin-home,.is-standalone .pin-home{display:none;}
     <button type="button" class="page-back" data-tab="panel-genealogy"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span>Về Phả hệ</span></button>
 <article class="letter-paper-wrap">
   <div class="letter-inner-border"></div>
-  <div class="letter-watermark" aria-hidden="true">武</div>
+  <div class="letter-watermark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="1.5 8 97 85" role="img" aria-label="Gia Phả Vũ Tộc"><title>Gia Phả Vũ Tộc</title><path d="M50 45 C41.5 36.00 41.5 24.00 50 15 C58.5 24.00 58.5 36.00 50 45Z" fill="#b08a3c" transform="rotate(-68 50 52)"/><path d="M50 45 C41.5 36.00 41.5 24.00 50 15 C58.5 24.00 58.5 36.00 50 45Z" fill="#b08a3c" transform="rotate(-34 50 52)"/><path d="M50 45 C41.5 36.00 41.5 24.00 50 15 C58.5 24.00 58.5 36.00 50 45Z" fill="#b08a3c" transform="rotate(0 50 52)"/><path d="M50 45 C41.5 36.00 41.5 24.00 50 15 C58.5 24.00 58.5 36.00 50 45Z" fill="#b08a3c" transform="rotate(34 50 52)"/><path d="M50 45 C41.5 36.00 41.5 24.00 50 15 C58.5 24.00 58.5 36.00 50 45Z" fill="#b08a3c" transform="rotate(68 50 52)"/><path transform="translate(0 4)" d="M13 59 Q32 55 50 46.5 Q68 55 87 59 Q91 59 94.5 54.5 L90 63.5 L10 63.5 L5.5 54.5 Q9 59 13 59Z" fill="#b08a3c"/><rect x="17.6" y="71" width="4.8" height="11" rx="1" fill="#b08a3c"/><rect x="32.6" y="71" width="4.8" height="11" rx="1" fill="#b08a3c"/><rect x="47.6" y="71" width="4.8" height="11" rx="1" fill="#b08a3c"/><rect x="62.6" y="71" width="4.8" height="11" rx="1" fill="#b08a3c"/><rect x="77.6" y="71" width="4.8" height="11" rx="1" fill="#b08a3c"/><rect x="11" y="84" width="78" height="5" rx="1.5" fill="#b08a3c"/></svg></div>
   <div class="lp-head">
     <div class="lp-emblem" aria-hidden="true">❖</div>
     <h2 class="lp-title">Đôi dòng tâm sự</h2>
