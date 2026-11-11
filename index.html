@@ -3366,7 +3366,11 @@ body:not(.is-tab-genealogy) .pin-home,.is-standalone .pin-home{display:none;}
   box-shadow:0 0 0 1px #fffaf0,0 0 0 2px #c4a052,0 2px 8px rgba(30,58,95,.22);
   display:flex;align-items:center;justify-content:center;
 }
-.tim-mo-head-icon svg{width:18px;height:18px;color:#fef3c7;}
+.tim-mo-head-icon::after{
+  content:"";position:absolute;inset:2px;border-radius:50%;
+  border:1px solid rgba(253,230,138,.30);pointer-events:none;
+}
+.tim-mo-head-icon svg{width:18px;height:18px;color:#fef3c7;display:block;position:relative;z-index:1;}
 .tim-mo-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;}
 .tim-mo-item{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
@@ -4894,7 +4898,7 @@ body:not(.is-tab-genealogy) .pin-home,.is-standalone .pin-home{display:none;}
     </section>
     <section class="gio-sec tim-mo-sec" id="sec-tim-mo">
       <div class="gio-sec-head">
-        <div class="gio-head-icon tim-mo-head-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#gi-pin"/></svg></div>
+        <div class="tim-mo-head-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
         <div class="gio-head-main">
           <h3 class="gio-head-title gio-sec-title">Tìm mộ phần</h3>
           <p class="gio-head-sub">Chạm Chỉ đường để mở Google Maps.</p>
@@ -5013,8 +5017,9 @@ body:not(.is-tab-genealogy) .pin-home,.is-standalone .pin-home{display:none;}
         <div class="gd-body">
       <div class="gd-two">
         <div class="gd-box"><h4>📖 Lịch sử</h4><p>Lược sử Vũ Tộc Thái Bình: cội nguồn từ Cụ Thủy Tổ, Ngành trưởng, Ngũ Chi Phương, tộc ước và trục thời gian. Bên cạnh tên các cụ có nút <b>“Xem trên Phả hệ”</b> để mở đúng chỗ trên cây.</p></div>
-        <div class="gd-box"><h4>🗓️ Lịch giỗ</h4><p>Ngày <b>Thanh Minh</b> tụ họp toàn tộc và ngày giỗ các cụ (âm lịch). Chọn xem <b>“Theo tháng âm lịch”</b> hoặc <b>“Theo đời”</b>. Trang tự đổi ra ngày <b>dương lịch</b> của lần giỗ tới và đếm “còn mấy ngày”; tháng hiện tại được đánh dấu <b>“Tháng này”</b>. Mỗi dòng cụ hiển thị ngày giỗ, tên, năm mất và ngày dương lịch lần tới. Để tìm đường tới nơi an táng các cụ, cuộn xuống khu <b>“Tìm mộ phần”</b> ở cuối tab và bấm <b>“Chỉ đường”</b> để mở Google Maps dẫn đường tới nơi.</p></div>
+        <div class="gd-box"><h4>🗓️ Lịch giỗ</h4><p>Ngày <b>Thanh Minh</b> tụ họp toàn tộc và ngày giỗ các cụ (âm lịch). Chọn xem <b>“Theo tháng âm lịch”</b> hoặc <b>“Theo đời”</b>. Trang tự đổi ra ngày <b>dương lịch</b> của lần giỗ tới và đếm “còn mấy ngày”; tháng hiện tại được đánh dấu <b>“Tháng này”</b>. Mỗi dòng cụ hiển thị ngày giỗ, tên, năm mất và ngày dương lịch lần tới.</p></div>
       </div>
+      <div class="gd-box" style="margin-top:10px"><h4>📍 Tìm mộ phần & Chỉ đường Google Maps</h4><p>Ở cuối tab Lịch giỗ có khu riêng <b>“Tìm mộ phần”</b> lưu vị trí nơi an táng các cụ do Ban biên soạn cập nhật. Bà con chỉ cần chạm nút <b>“Chỉ đường”</b> cạnh tên cụ — điện thoại sẽ tự mở Google Maps dẫn đường chính xác về tận nơi (rất thuận tiện cho con cháu ở xa về quê dâng hương dịp Tết, Thanh minh).</p></div>
         </div>
       </details>
       <details class="gd-acc" id="gd-bao-tin" name="gd">
@@ -5042,7 +5047,7 @@ body:not(.is-tab-genealogy) .pin-home,.is-standalone .pin-home{display:none;}
         </div>
       </details>
       <details class="gd-acc" id="gd-hoi" name="gd">
-        <summary><span class="gd-ic" aria-hidden="true">💬</span><span class="gd-st"><b>Hỏi đáp thường gặp</b><small>7 câu hỏi bà con hay hỏi</small></span><svg class="gd-chev" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#gi-chev-d"/></svg></summary>
+        <summary><span class="gd-ic" aria-hidden="true">💬</span><span class="gd-st"><b>Hỏi đáp thường gặp</b><small>8 câu hỏi bà con hay hỏi</small></span><svg class="gd-chev" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#gi-chev-d"/></svg></summary>
         <div class="gd-body">
       <details class="gd-qa"><summary>Tôi tìm mãi không thấy tên mình hoặc bố mẹ mình?</summary><p>Thử gõ không dấu, gõ ít chữ hơn, hoặc gõ tên thường gọi. Nếu vẫn không có, có thể gia phả chép tay chưa ghi — xin bấm “Báo tin” để bổ sung.</p></details>
       <details class="gd-qa"><summary>Thông tin của nhà tôi bị sai thì làm sao?</summary><p>Mở “Chi tiết” của đúng người đó → bấm “Báo tin, đính chính”, ghi rõ chỗ sai và thông tin đúng.</p></details>
@@ -5050,6 +5055,7 @@ body:not(.is-tab-genealogy) .pin-home,.is-standalone .pin-home{display:none;}
       <details class="gd-qa"><summary>Thứ tự anh chị em trong gia đình được sắp xếp thế nào?</summary><p>Các con được xếp theo thứ tự sinh (anh/chị trước, em sau). Trường hợp cha có nhiều đời vợ (chính thất, kế thất) thì các con của bà cả xếp trước, kế đến các con của bà hai, bà ba — trong mỗi bà lại theo thứ tự năm sinh.</p></details>
       <details class="gd-qa"><summary>Ngày giỗ là âm lịch hay dương lịch?</summary><p>Ngày giỗ ghi theo âm lịch như gia phả gốc. Thẻ Lịch giỗ tự đổi sang dương lịch cho năm nay để tiện ghi lịch.</p></details>
       <details class="gd-qa"><summary>Đời của tôi là đời thứ mấy?</summary><p>Tìm tên mình (hoặc tên cha), nhìn nhãn “Đời …” trên thẻ. Con của người Đời 11 là Đời 12.</p></details>
+      <details class="gd-qa"><summary>Làm sao để tìm đường tới nơi an táng mộ các cụ?</summary><p>Bà con mở tab “Lịch giỗ”, cuộn xuống cuối cùng tại khu “Tìm mộ phần”. Tại tên của cụ mình muốn đến viếng, chạm nút “Chỉ đường” — điện thoại sẽ tự mở ứng dụng Google Maps dẫn đường tới tận nơi.</p></details>
       <details class="gd-qa"><summary>Gửi trang gia phả cho người thân thế nào?</summary><p>Gửi đường link trang (như link đang mở). Muốn gửi thẳng tới một người: mở “Chi tiết” của người đó → “Chia sẻ”.</p></details>
         </div>
       </details>
